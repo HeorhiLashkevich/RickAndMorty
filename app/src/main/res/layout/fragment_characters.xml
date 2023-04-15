@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.rickandmort.CharactersFragment">
-
+    tools:context="com.example.rickandmorty.ui.CharactersFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -13,9 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_700"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/character_search">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <SearchView
+        android:id="@+id/character_search"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </SearchView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
