@@ -12,10 +12,10 @@ class EpisodesViewHolder
 
     fun binding(item: EpisodeResult) {
         binding.run {
-            episodeName.text =  item.name
+            episodeName.text = item.name
             episodeCreated.text = item.created
             episode.text = item.episode
-                        episodeCharacters.text = item.characters[0]
+
 
         }
 //        Picasso.get().load(item.url).into(binding.episodeImage)

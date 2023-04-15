@@ -17,7 +17,6 @@ class EpisodesAdapter() : RecyclerView.Adapter<EpisodesViewHolder>() {
                 LayoutInflater.from(parent.context), parent, false
             )
         )
-
     }
 
     override fun getItemCount() = list.size

@@ -1,8 +1,8 @@
 package com.example.rickandmort.api
 
-data class LocationFromLocation(
+data class Locations(
     val info: Info,
-    val results: List<ResultLocation>
+    val results: ArrayList<LocationsResult>
 )
 data class InfoLocation(
     val count: Int,
@@ -10,7 +10,7 @@ data class InfoLocation(
     val pages: Int,
     val prev: Any
 )
-data class ResultLocation(
+data class LocationsResult(
     val created: String,
     val dimension: String,
     val id: Int,

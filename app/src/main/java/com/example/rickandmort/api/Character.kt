@@ -2,7 +2,7 @@ package com.example.rickandmort.api
 
 data class Characters(
     val info: Info,
-    val results: List<CharactersResult>
+    val results: ArrayList<CharactersResult>
 )
 
 data class Info(
