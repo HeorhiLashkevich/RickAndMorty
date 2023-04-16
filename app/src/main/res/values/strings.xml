@@ -3,4 +3,16 @@
     <string name="locations">Locations</string>
     <string name="characters">Characters</string>
     <string name="episodes">Episodes</string>
+    <string name="species">Species:</string>
+    <string name="name">Name:</string>
+    <string name="status">Status:</string>
+    <string name="gender">Gender:</string>
+    <string name="episode_name">Episode name:</string>
+    <string name="episode_number">Episode number:</string>
+    <string name="date_release">Date release:</string>
+    <string name="location_name">Location name:</string>
+    <string name="location_type">Location type:</string>
+    <string name="dimension">Dimension:</string>
+    <string name="episode_created">Episode created:</string>
+    <string name="episode_url">Episode URL:</string>
 </resources>

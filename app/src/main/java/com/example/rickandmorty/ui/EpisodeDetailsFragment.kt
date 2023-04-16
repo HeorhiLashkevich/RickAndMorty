@@ -6,55 +6,54 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
+import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
 import com.example.rickandmort.databinding.FragmentEpisodesBinding
-import com.example.rickandmorty.api.EpisodesResult
-import com.example.rickandmorty.ui.episodesadapter.EpisodesPagingAdapter
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import com.example.rickandmorty.api.CharactersResult
+import com.example.rickandmorty.ui.charactersadapter.CharactersAdapter
 
 
-class EpisodesFragment : Fragment() {
-
-    private lateinit var binding: FragmentEpisodesBinding
-    private val viewModel by viewModels<EpisodesViewModel>()
+class EpisodeDetailsFragment : Fragment() {
+    private lateinit var binding: FragmentEpisodeDetailsBinding
+    private val sharedViewModel: EpisodesViewModel by activityViewModels()
+    private val viewModel by viewModels<EpisodeDetailsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEpisodesBinding.inflate(inflater, container, false)
+        binding = FragmentEpisodeDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launch {
-            viewModel.flow.collectLatest {
-                initAdapter(it)
-            }
-        }
+//        binding.run {
+//            episodeName.text = sharedViewModel.episode.value?.name
+//            episodeNumber.text = sharedViewModel.episode.value?.episode
+//            episodeDateRelease.text = sharedViewModel.episode.value?.air_date
+//            episodeCreated.text = sharedViewModel.episode.value?.created
+//            episodeUrl.text = sharedViewModel.episode.value?.url
+//        }
     }
 
-    private suspend fun initAdapter(list: PagingData<EpisodesResult>) {
-        binding.recyclerEpisodes.run {
+    private suspend fun initAdapter(list: ArrayList<CharactersResult>) {
+        binding.recyclerEpisode.run {
             addItemDecoration()
             if (adapter == null) {
-                adapter = EpisodesPagingAdapter {
-//                    viewModel.getEpisode(id)
-                }
+                adapter = CharactersAdapter()
+
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
-            (adapter as? EpisodesPagingAdapter)?.submitData(list)
+            (adapter as? CharactersAdapter)?.setList(list)
         }
 
 
@@ -65,9 +64,11 @@ class EpisodesFragment : Fragment() {
         val itemMargin = RecyclerMargin()
         val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
         dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_drawable))
-        binding.recyclerEpisodes.run {
+        binding.recyclerEpisode.run {
             addItemDecoration(dividerItemDecoration)
             addItemDecoration(itemMargin)
         }
     }
+
+
 }

@@ -17,7 +17,7 @@ class EpisodesDataStore : PagingSource<Int, EpisodesResult>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, EpisodesResult> {
         return try {
-            val key = params.key ?: 0
+            val key = params.key ?: 1
             val response = repository.getEpisodes(params.loadSize, key)
             val nextKey = key + 1
 
@@ -27,8 +27,6 @@ class EpisodesDataStore : PagingSource<Int, EpisodesResult>() {
                 nextKey = nextKey
             )
         } catch (e: java.lang.Exception) {
-
-
             LoadResult.Error(e)
         }
     }

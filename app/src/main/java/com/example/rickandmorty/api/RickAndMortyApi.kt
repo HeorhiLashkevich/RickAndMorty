@@ -14,6 +14,11 @@ interface RickAndMortyApi {
 
     ): Response<Characters>
 
+    @GET("character/")
+    suspend fun getCharacter(
+        @Query("name") name: String? = null
+    ): Response<CharactersResult>
+
     @GET("episode")
     suspend fun getEpisodes(
         @Query("limit") limit: Int? = COUNT_ITEM,
@@ -25,6 +30,11 @@ interface RickAndMortyApi {
         @Query("limit") limit: Int? = COUNT_ITEM,
         @Query("page") page: Int? = 0
     ): Response<Locations>
+
+    @GET("episode/")
+    suspend fun getEpisode(
+        @Query("id") id: Int? = 0
+    ): Response<EpisodesResult>
 
 
 }

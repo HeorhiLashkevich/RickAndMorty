@@ -7,15 +7,22 @@
     tools:context="com.example.rickandmorty.ui.EpisodesFragment">
 
 
+    <SearchView
+        android:id="@+id/locations_search"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+    </SearchView>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_episodes"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_700"
+        android:layout_height="@dimen/dp_680"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/locations_search">
 
     </androidx.recyclerview.widget.RecyclerView>
 

@@ -1,11 +1,11 @@
 package com.example.rickandmorty.ui.locationsadapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickandmort.databinding.ItemLocationBinding
+import com.example.rickandmort.databinding.ItemLocationsBinding
 import com.example.rickandmorty.api.LocationsResult
 
 class LocationsViewHolder(
-    private val binding: ItemLocationBinding
+    private val binding: ItemLocationsBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: LocationsResult) {
         binding.run {

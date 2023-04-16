@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/const_episode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/const_episode_name"
+            android:layout_width="@dimen/const_episode_and_location_dp_160"
+            android:layout_height="@dimen/dp_40"
+            android:text="@string/episode_name"
+            android:textSize="@dimen/episode_and_location_sp_14">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/const_episode_number"
+            android:text="@string/episode_number"
+            android:layout_width="@dimen/const_episode_and_location_dp_160"
+            android:layout_height="@dimen/dp_40"
+            android:textSize="@dimen/episode_and_location_sp_14">
+        </TextView>
+
+        <TextView
+            android:id="@+id/const_episode_date_release"
+            android:text="@string/date_release"
+            android:layout_width="@dimen/const_episode_and_location_dp_160"
+            android:layout_height="@dimen/dp_40"
+            android:textSize="@dimen/episode_and_location_sp_14">
+
+        </TextView>
+        <TextView
+            android:id="@+id/const_episode_created"
+            android:layout_width="@dimen/const_episode_and_location_dp_160"
+            android:layout_height="@dimen/dp_40"
+            android:text="@string/episode_created"
+            android:textSize="@dimen/episode_and_location_sp_14">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/const_episode_url"
+            android:text="@string/episode_url"
+            android:layout_width="@dimen/const_episode_and_location_dp_160"
+            android:layout_height="@dimen/dp_40"
+            android:textSize="@dimen/episode_and_location_sp_14">
+        </TextView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/episode_edd"
+        app:layout_constraintStart_toEndOf="@+id/const_episode"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/episode_name"
+            android:layout_width="@dimen/episode_and_location_dp_250"
+            android:layout_height="@dimen/dp_40"
+            android:textSize="@dimen/episode_and_location_sp_14">
+
+        </TextView>
+
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/episode_number"
+            android:layout_width="@dimen/episode_and_location_dp_250"
+            android:layout_height="@dimen/dp_40"
+            android:textSize="@dimen/episode_and_location_sp_14">
+
+        </TextView>
+
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/episode_date_release"
+            android:layout_width="@dimen/episode_and_location_dp_250"
+            android:layout_height="@dimen/dp_40"
+            android:textSize="@dimen/episode_and_location_sp_14">
+        </TextView>
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/episode_created"
+            android:layout_width="@dimen/episode_and_location_dp_250"
+            android:layout_height="@dimen/dp_40"
+            android:textSize="@dimen/episode_and_location_sp_14">
+
+        </TextView>
+
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/episode_url"
+            android:layout_width="@dimen/episode_and_location_dp_250"
+            android:layout_height="@dimen/dp_40"
+            android:textSize="@dimen/episode_and_location_sp_14">
+        </TextView>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_episode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/episode_edd">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

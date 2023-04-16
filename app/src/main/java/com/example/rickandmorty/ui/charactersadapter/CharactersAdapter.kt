@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickandmort.databinding.ItemCharacterBinding
+import com.example.rickandmort.databinding.ItemCharactersBinding
 import com.example.rickandmorty.api.CharactersResult
 
 class CharactersAdapter() : RecyclerView.Adapter<CharactersViewHolder>() {
@@ -13,7 +13,7 @@ class CharactersAdapter() : RecyclerView.Adapter<CharactersViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
         return CharactersViewHolder(
-            ItemCharacterBinding.inflate(
+            ItemCharactersBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
