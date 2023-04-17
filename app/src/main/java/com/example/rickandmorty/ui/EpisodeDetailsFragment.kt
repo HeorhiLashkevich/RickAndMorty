@@ -7,22 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.paging.PagingData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
-import com.example.rickandmort.databinding.FragmentEpisodesBinding
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.charactersadapter.CharactersAdapter
+import com.example.rickandmorty.ui.episodesdetailsadapter.EpisodeDetailsAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class EpisodeDetailsFragment : Fragment() {
     private lateinit var binding: FragmentEpisodeDetailsBinding
-    private val sharedViewModel: EpisodesViewModel by activityViewModels()
-    private val viewModel by viewModels<EpisodeDetailsViewModel>()
+
+    private val viewModel: EpisodesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,25 +36,36 @@ class EpisodeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.run {
-//            episodeName.text = sharedViewModel.episode.value?.name
-//            episodeNumber.text = sharedViewModel.episode.value?.episode
-//            episodeDateRelease.text = sharedViewModel.episode.value?.air_date
-//            episodeCreated.text = sharedViewModel.episode.value?.created
-//            episodeUrl.text = sharedViewModel.episode.value?.url
-//        }
+
+        viewModel.characters.observe(viewLifecycleOwner) {
+            initAdapter(it)
+        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel.getCharacters()
+        }
+
+        viewModel.episode.observe(viewLifecycleOwner) {
+            binding.run {
+                episodeName.text = it.name
+                episodeNumber.text = it.episode
+                episodeDateRelease.text = it.air_date
+                episodeCreated.text = it.created
+                episodeUrl.text = it.url
+            }
+        }
+
+
     }
 
-    private suspend fun initAdapter(list: ArrayList<CharactersResult>) {
+    private fun initAdapter(list: ArrayList<CharactersResult>) {
         binding.recyclerEpisode.run {
             addItemDecoration()
             if (adapter == null) {
-                adapter = CharactersAdapter()
-
+                adapter = EpisodeDetailsAdapter()
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
-            (adapter as? CharactersAdapter)?.setList(list)
+            (adapter as? EpisodeDetailsAdapter)?.setList(list)
         }
 
 

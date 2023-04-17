@@ -21,6 +21,7 @@ object NetworkController {
         return retrofit.create((RickAndMortyApi::class.java))
     }
 
+
     private fun getOkHttpClient() =
         OkHttpClient.Builder()
             .addInterceptor(

@@ -15,4 +15,5 @@
     <string name="dimension">Dimension:</string>
     <string name="episode_created">Episode created:</string>
     <string name="episode_url">Episode URL:</string>
+    <string name="characters_from_episode">Characters from episode:</string>
 </resources>

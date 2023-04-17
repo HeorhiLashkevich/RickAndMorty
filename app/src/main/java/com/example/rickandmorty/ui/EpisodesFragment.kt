@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
@@ -19,11 +20,10 @@ import com.example.rickandmorty.ui.episodesadapter.EpisodesPagingAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
 class EpisodesFragment : Fragment() {
 
     private lateinit var binding: FragmentEpisodesBinding
-    private val viewModel by viewModels<EpisodesViewModel>()
+    private val viewModel: EpisodesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,15 +49,17 @@ class EpisodesFragment : Fragment() {
             addItemDecoration()
             if (adapter == null) {
                 adapter = EpisodesPagingAdapter {
-//                    viewModel.getEpisode(id)
+                    viewModel.getEpisode(it)
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.container, EpisodeDetailsFragment())
+                        .addToBackStack("")
+                        .commit()
                 }
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
             (adapter as? EpisodesPagingAdapter)?.submitData(list)
         }
-
-
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")

@@ -18,7 +18,7 @@ class CharactersViewHolder(
             characterSpecies.text = item.species
             characterGender.text = item.gender
             characterStatus.text = item.status
-            Picasso.get().load(item.image).into(binding.characterImage)
+            Picasso.get().load(item.image).into(characterImage)
         }
     }
 }
