@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.locationsadapter
+package com.example.rickandmorty.ui.locations
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.rickandmorty.api.LocationsResult

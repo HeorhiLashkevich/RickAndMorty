@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/const_character_name"
             android:layout_width="@dimen/dp_80"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_28"
             android:text="@string/name">
 
         </TextView>
@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/const_character_species"
             android:layout_width="@dimen/dp_80"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_28"
             android:text="@string/species">
 
         </TextView>
@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/const_character_status"
             android:layout_width="@dimen/dp_80"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_28"
             android:text="@string/status">
 
         </TextView>
@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/const_character_gender"
             android:layout_width="@dimen/dp_80"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_28"
             android:text="@string/gender">
 
         </TextView>
@@ -53,7 +53,7 @@
         <TextView
             android:id="@+id/character_name"
             android:layout_width="@dimen/dp_160"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_28"
             android:textColor="@color/purple_200"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -64,7 +64,7 @@
             android:id="@+id/character_species"
 
             android:layout_width="@dimen/dp_160"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_28"
             android:textColor="@color/purple_200"
             app:layout_constraintStart_toStartOf="@id/const_character"
             app:layout_constraintTop_toBottomOf="@id/character_name">
@@ -75,7 +75,7 @@
             android:id="@+id/character_status"
 
             android:layout_width="@dimen/dp_160"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_28"
             android:textColor="@color/purple_200"
             app:layout_constraintStart_toStartOf="@id/const_character"
             app:layout_constraintTop_toBottomOf="@id/character_species">
@@ -86,7 +86,7 @@
             android:id="@+id/character_gender"
 
             android:layout_width="@dimen/dp_160"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_28"
             android:textColor="@color/purple_200"
             app:layout_constraintStart_toStartOf="@id/const_character"
             app:layout_constraintTop_toBottomOf="@id/character_status">

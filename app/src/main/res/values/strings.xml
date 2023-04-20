@@ -16,4 +16,7 @@
     <string name="episode_created">Episode created:</string>
     <string name="episode_url">Episode URL:</string>
     <string name="characters_from_episode">Characters from episode:</string>
+    <string name="origin">Origin:</string>
+    <string name="type">Type:</string>
+
 </resources>

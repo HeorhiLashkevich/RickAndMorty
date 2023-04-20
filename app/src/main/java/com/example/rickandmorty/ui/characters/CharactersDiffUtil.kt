@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.charactersadapter
+package com.example.rickandmorty.ui.characters
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.rickandmorty.api.CharactersResult

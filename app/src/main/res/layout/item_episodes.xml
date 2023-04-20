@@ -14,9 +14,9 @@
         <TextView
             android:id="@+id/const_episode_name"
             android:layout_width="@dimen/const_episode_and_location_dp_160"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_28"
             android:text="@string/episode_name"
-            android:textSize="@dimen/episode_and_location_sp_14">
+            android:textSize="@dimen/episode_character_location_sp_14">
 
         </TextView>
 
@@ -24,16 +24,16 @@
             android:id="@+id/const_episode_number"
             android:text="@string/episode_number"
             android:layout_width="@dimen/const_episode_and_location_dp_160"
-            android:layout_height="@dimen/dp_40"
-            android:textSize="@dimen/episode_and_location_sp_14">
+            android:layout_height="@dimen/dp_28"
+            android:textSize="@dimen/episode_character_location_sp_14">
         </TextView>
 
         <TextView
             android:id="@+id/const_episode_date_release"
             android:text="@string/date_release"
             android:layout_width="@dimen/const_episode_and_location_dp_160"
-            android:layout_height="@dimen/dp_40"
-            android:textSize="@dimen/episode_and_location_sp_14">
+            android:layout_height="@dimen/dp_28"
+            android:textSize="@dimen/episode_character_location_sp_14">
 
         </TextView>
     </LinearLayout>
@@ -48,8 +48,8 @@
             android:textColor="@color/red"
             android:id="@+id/episode_name"
             android:layout_width="@dimen/episode_and_location_dp_250"
-            android:layout_height="@dimen/dp_40"
-            android:textSize="@dimen/episode_and_location_sp_14">
+            android:layout_height="@dimen/dp_28"
+            android:textSize="@dimen/episode_character_location_sp_14">
 
         </TextView>
 
@@ -57,8 +57,8 @@
             android:textColor="@color/red"
             android:id="@+id/episode_number"
             android:layout_width="@dimen/episode_and_location_dp_250"
-            android:layout_height="@dimen/dp_40"
-            android:textSize="@dimen/episode_and_location_sp_14">
+            android:layout_height="@dimen/dp_28"
+            android:textSize="@dimen/episode_character_location_sp_14">
 
         </TextView>
 
@@ -66,8 +66,8 @@
             android:textColor="@color/red"
             android:id="@+id/episode_date_release"
             android:layout_width="@dimen/episode_and_location_dp_250"
-            android:layout_height="@dimen/dp_40"
-            android:textSize="@dimen/episode_and_location_sp_14">
+            android:layout_height="@dimen/dp_28"
+            android:textSize="@dimen/episode_character_location_sp_14">
         </TextView>
     </LinearLayout>
 

@@ -1,9 +1,8 @@
-package com.example.rickandmorty.ui.episodesadapter
+package com.example.rickandmorty.ui.episodes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import com.example.rickandmort.databinding.ItemEpisodeBinding
 import com.example.rickandmort.databinding.ItemEpisodesBinding
 import com.example.rickandmorty.api.EpisodesResult
 

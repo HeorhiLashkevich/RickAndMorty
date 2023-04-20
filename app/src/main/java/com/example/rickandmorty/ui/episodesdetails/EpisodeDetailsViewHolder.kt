@@ -1,24 +1,30 @@
-package com.example.rickandmorty.ui.charactersadapter
+package com.example.rickandmorty.ui.episodesdetails
 
-import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.databinding.ItemCharactersBinding
 import com.example.rickandmorty.api.CharactersResult
 import com.squareup.picasso.Picasso
 
-class CharactersViewHolder(
+class EpisodeDetailsViewHolder(
     private val binding: ItemCharactersBinding
+
 ) : RecyclerView.ViewHolder(binding.root) {
 
-
-    @SuppressLint("SetTextI18n")
-    fun bind(item: CharactersResult) {
+    fun bind(
+        item: CharactersResult,
+        onItemClick: (id: Int) -> Unit
+    ) {
         binding.run {
             characterName.text = item.name
             characterSpecies.text = item.species
-            characterGender.text = item.gender
             characterStatus.text = item.status
+            characterGender.text = item.gender
             Picasso.get().load(item.image).into(characterImage)
+            itemView.setOnClickListener {
+                onItemClick(item.id)
+            }
+
         }
+
     }
 }

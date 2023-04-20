@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui
+package com.example.rickandmorty.ui.locations
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,66 +6,54 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
-import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
-import com.example.rickandmorty.api.CharactersResult
-import com.example.rickandmorty.ui.charactersadapter.CharactersAdapter
-import com.example.rickandmorty.ui.episodesdetailsadapter.EpisodeDetailsAdapter
-import kotlinx.coroutines.Dispatchers
+import com.example.rickandmort.databinding.FragmentLocationsBinding
+import com.example.rickandmorty.api.LocationsResult
+import com.example.rickandmorty.ui.RecyclerMargin
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+class LocationsFragment : Fragment() {
 
-class EpisodeDetailsFragment : Fragment() {
-    private lateinit var binding: FragmentEpisodeDetailsBinding
+    private lateinit var binding: FragmentLocationsBinding
 
-    private val viewModel: EpisodesViewModel by activityViewModels()
+    private val viewModel by viewModels<LocationsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEpisodeDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentLocationsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.characters.observe(viewLifecycleOwner) {
-            initAdapter(it)
-        }
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getCharacters()
-        }
-
-        viewModel.episode.observe(viewLifecycleOwner) {
-            binding.run {
-                episodeName.text = it.name
-                episodeNumber.text = it.episode
-                episodeDateRelease.text = it.air_date
-                episodeCreated.text = it.created
-                episodeUrl.text = it.url
+        lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                setList(it)
             }
         }
-
 
     }
 
-    private fun initAdapter(list: ArrayList<CharactersResult>) {
-        binding.recyclerEpisode.run {
+    private suspend fun setList(list: PagingData<LocationsResult>) {
+        binding.recyclerLocations.run {
             addItemDecoration()
             if (adapter == null) {
-                adapter = EpisodeDetailsAdapter()
+                adapter = LocationsPagingAdapter()
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
-            (adapter as? EpisodeDetailsAdapter)?.setList(list)
+            (adapter as? LocationsPagingAdapter)?.submitData(list)
         }
 
 
@@ -76,11 +64,9 @@ class EpisodeDetailsFragment : Fragment() {
         val itemMargin = RecyclerMargin()
         val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
         dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_drawable))
-        binding.recyclerEpisode.run {
+        binding.recyclerLocations?.run {
             addItemDecoration(dividerItemDecoration)
             addItemDecoration(itemMargin)
         }
     }
-
-
 }

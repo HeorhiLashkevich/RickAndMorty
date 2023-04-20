@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui
+package com.example.rickandmorty.ui.characters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentCharactersBinding
 import com.example.rickandmorty.api.CharactersResult
-import com.example.rickandmorty.ui.charactersadapter.CharactersPagingAdapter
+import com.example.rickandmorty.ui.RecyclerMargin
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -41,13 +41,13 @@ class CharactersFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.flow.collectLatest {
-                setList(it)
+                initAdapter(it)
             }
         }
     }
 
 
-    private suspend fun setList(list: PagingData<CharactersResult>) {
+    private suspend fun initAdapter(list: PagingData<CharactersResult>) {
 
         binding.recyclerCharacters.run {
             addItemDecoration()

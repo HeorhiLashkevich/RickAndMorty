@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.episodesdetailsadapter
+package com.example.rickandmorty.ui.characters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,15 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.databinding.ItemCharactersBinding
 import com.example.rickandmorty.api.CharactersResult
 
-class EpisodeDetailsAdapter:RecyclerView.Adapter<EpisodeDetailsViewHolder>() {
+class CharactersAdapter() : RecyclerView.Adapter<CharactersViewHolder>() {
     private var list = arrayListOf<CharactersResult>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeDetailsViewHolder {
-        return EpisodeDetailsViewHolder(
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
+        return CharactersViewHolder(
             ItemCharactersBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }
@@ -23,7 +22,7 @@ class EpisodeDetailsAdapter:RecyclerView.Adapter<EpisodeDetailsViewHolder>() {
     override fun getItemCount() = list.size
 
 
-    override fun onBindViewHolder(holder: EpisodeDetailsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
         holder.bind(list[position])
     }
 
@@ -31,5 +30,7 @@ class EpisodeDetailsAdapter:RecyclerView.Adapter<EpisodeDetailsViewHolder>() {
     fun setList(list: ArrayList<CharactersResult>) {
         this.list = list
         notifyDataSetChanged()
+
     }
+
 }

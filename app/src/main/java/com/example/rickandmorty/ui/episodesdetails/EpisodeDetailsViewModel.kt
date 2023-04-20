@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui
+package com.example.rickandmorty.ui.episodesdetails
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui
+package com.example.rickandmorty.ui.episodes
 
 
 import androidx.lifecycle.MutableLiveData
@@ -22,7 +22,7 @@ class EpisodesViewModel(
 ) : ViewModel() {
     val episode = MutableLiveData<EpisodesResult>()
     var characters = MutableLiveData<ArrayList<CharactersResult>>()
-//    var charactersIds = episode.value?.let { getCharactersIds(it.characters) }
+     var charactersIds = ArrayList<Int>()
 
 
     val flow = Pager(
@@ -35,36 +35,39 @@ class EpisodesViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val response = NetworkController.getRickAndMortyApi().getEpisode(id)
             if (response.isSuccessful) {
+
                 episode.postValue(response.body())
+                charactersIds = response.body()?.let { getCharactersIds(it.characters) }!!
+
+
             }
         }
     }
-
-    suspend fun getCharacters() {
+    private fun getCharactersIds(list: List<String>): ArrayList<Int> {
+        val charactersIds = arrayListOf<Int>()
         viewModelScope.launch(Dispatchers.IO) {
-            val array = arrayListOf<CharactersResult>()
-            val response = NetworkController.getRickAndMortyApi().getCharacter(1)
-            if (response.isSuccessful) {
-                response.body()?.let { array.add(it) }
+            for (i in list.indices) {
+                when (list[i].length) {
+                    (43) -> charactersIds.add(list[i].takeLast(1).toInt())
+                    (44) -> charactersIds.add(list[i].takeLast(2).toInt())
+                    (45) -> charactersIds.add(list[i].takeLast(3).toInt())
+                }
             }
-            characters.postValue(array)
+        }
+        return charactersIds
+    }
+
+    fun getCharacters(list: ArrayList<Int>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            episode.value?.let { getCharactersIds(it.characters) }
+            val response = NetworkController.getRickAndMortyApi().getMultiCharacters(list)
+            if (response.isSuccessful) {
+                characters.postValue(response.body())
+            }
         }
 
     }
 
-
-//    private fun getCharactersIds(list: List<String>) {
-//        val arrayOfIds = arrayListOf<Int>()
-//        for (i in 0..list.size) {
-//            when (list[i].length) {
-//                (43) -> arrayOfIds.add(list[i].takeLast(1).toInt())
-//                (44) -> arrayOfIds.add(list[i].takeLast(2).toInt())
-//                (45) -> arrayOfIds.add(list[i].takeLast(3).toInt())
-//            }
-//        }
-//
-//
-//    }
 
 }
 

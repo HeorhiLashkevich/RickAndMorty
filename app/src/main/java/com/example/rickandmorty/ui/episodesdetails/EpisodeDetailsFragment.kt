@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui
+package com.example.rickandmorty.ui.episodesdetails
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,22 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
-import com.example.rickandmort.databinding.FragmentEpisodesBinding
-import com.example.rickandmorty.api.EpisodesResult
-import com.example.rickandmorty.ui.episodesadapter.EpisodesPagingAdapter
-import kotlinx.coroutines.flow.collectLatest
+import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
+import com.example.rickandmorty.api.CharactersResult
+import com.example.rickandmorty.ui.episodes.EpisodesViewModel
+import com.example.rickandmorty.ui.RecyclerMargin
+import com.example.rickandmorty.ui.characterddetails.CharactersDetailsFragment
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class EpisodesFragment : Fragment() {
 
-    private lateinit var binding: FragmentEpisodesBinding
+class EpisodeDetailsFragment : Fragment() {
+    private lateinit var binding: FragmentEpisodeDetailsBinding
+
     private val viewModel: EpisodesViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -30,36 +31,47 @@ class EpisodesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEpisodesBinding.inflate(inflater, container, false)
+        binding = FragmentEpisodeDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launch {
-            viewModel.flow.collectLatest {
-                initAdapter(it)
+
+        viewModel.characters.observe(viewLifecycleOwner) {
+            initAdapter(it)
+        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel.getCharacters(viewModel.charactersIds)
+        }
+
+        viewModel.episode.observe(viewLifecycleOwner) {
+            binding.run {
+                episodeName.text = it.name
+                episodeNumber.text = it.episode
+                episodeDateRelease.text = it.air_date
+                episodeCreated.text = it.created
+                episodeUrl.text = it.url
             }
         }
     }
 
-    private suspend fun initAdapter(list: PagingData<EpisodesResult>) {
-        binding.recyclerEpisodes.run {
+    private fun initAdapter(list: ArrayList<CharactersResult>) {
+        binding.recyclerEpisode.run {
             addItemDecoration()
             if (adapter == null) {
-                adapter = EpisodesPagingAdapter {
-                    viewModel.getEpisode(it)
+                adapter = EpisodeDetailsAdapter {
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.container, EpisodeDetailsFragment())
+                        .replace(R.id.container, CharactersDetailsFragment())
                         .addToBackStack("")
                         .commit()
                 }
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
-            (adapter as? EpisodesPagingAdapter)?.submitData(list)
+            (adapter as? EpisodeDetailsAdapter)?.setList(list)
         }
+
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -67,9 +79,11 @@ class EpisodesFragment : Fragment() {
         val itemMargin = RecyclerMargin()
         val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
         dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_drawable))
-        binding.recyclerEpisodes.run {
+        binding.recyclerEpisode.run {
             addItemDecoration(dividerItemDecoration)
             addItemDecoration(itemMargin)
         }
     }
+
+
 }

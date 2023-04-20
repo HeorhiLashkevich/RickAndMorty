@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.rickandmort.R
+import com.example.rickandmorty.ui.characters.CharactersFragment
+import com.example.rickandmorty.ui.episodes.EpisodesFragment
+import com.example.rickandmorty.ui.locations.LocationsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 

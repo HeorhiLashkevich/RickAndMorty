@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="episode_and_location_sp_14">14sp</dimen>
+    <dimen name="episode_character_location_sp_14">14sp</dimen>
     <dimen name="dp_160">160dp</dimen>
     <dimen name="dp_310">310dp</dimen>
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_700">700dp</dimen>
-    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_28">28dp</dimen>
     <dimen name="dp_130">130dp</dimen>
     <dimen name="dp_680">680dp</dimen>
     <dimen name="dp_50">50dp</dimen>
@@ -15,5 +15,7 @@
     <dimen name="episode_and_location_dp_250">250dp</dimen>
     <dimen name="dp_530">530dp</dimen>
     <dimen name="dp_120">120dp</dimen>
+    <dimen name="character_dp_20">20dp</dimen>
+    <dimen name="url_sp_12">12sp</dimen>
 
 </resources>

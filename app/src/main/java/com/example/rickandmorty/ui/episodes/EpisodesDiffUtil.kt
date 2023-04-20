@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.episodesadapter
+package com.example.rickandmorty.ui.episodes
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.rickandmorty.api.EpisodesResult

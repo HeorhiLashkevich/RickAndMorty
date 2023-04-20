@@ -1,6 +1,7 @@
 package com.example.rickandmorty.api
 
-import com.example.rickandmorty.ui.COUNT_ITEM
+
+import com.example.rickandmorty.ui.characters.COUNT_ITEM
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,9 +18,14 @@ interface RickAndMortyApi {
 
     @GET("character/{id}")
     suspend fun getCharacter(
-        @Path("id") id: Int? = 0,
+        @Path("id") id: Int? = 0
 
-        ): Response<CharactersResult>
+    ): Response<CharactersResult>
+
+    @GET("character/{id}")
+    suspend fun getMultiCharacters(
+        @Path("id") id: ArrayList<Int>? = null
+        ): Response<ArrayList<CharactersResult>>
 
     @GET("episode")
     suspend fun getEpisodes(

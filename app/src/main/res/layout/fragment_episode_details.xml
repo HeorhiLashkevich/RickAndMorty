@@ -7,136 +7,135 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
-        android:id="@+id/const_episode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/const_episode_name"
+        android:layout_width="@dimen/const_episode_and_location_dp_160"
+        android:layout_height="@dimen/dp_28"
+        android:text="@string/episode_name"
+        android:textSize="@dimen/episode_character_location_sp_14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+    </TextView>
 
-        <TextView
-            android:id="@+id/const_episode_name"
-            android:layout_width="@dimen/const_episode_and_location_dp_160"
-            android:layout_height="@dimen/dp_40"
-            android:text="@string/episode_name"
-            android:textSize="@dimen/episode_and_location_sp_14">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/const_episode_number"
-            android:layout_width="@dimen/const_episode_and_location_dp_160"
-            android:layout_height="@dimen/dp_40"
-            android:text="@string/episode_number"
-            android:textSize="@dimen/episode_and_location_sp_14" />
-
-        <TextView
-            android:id="@+id/const_episode_date_release"
-            android:layout_width="@dimen/const_episode_and_location_dp_160"
-            android:layout_height="@dimen/dp_40"
-            android:text="@string/date_release"
-            android:textSize="@dimen/episode_and_location_sp_14">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/const_episode_created"
-            android:layout_width="@dimen/const_episode_and_location_dp_160"
-            android:layout_height="@dimen/dp_40"
-            android:text="@string/episode_created"
-            android:textSize="@dimen/episode_and_location_sp_14">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/const_episode_url"
-            android:layout_width="@dimen/const_episode_and_location_dp_160"
-            android:layout_height="@dimen/dp_40"
-            android:text="@string/episode_url"
-            android:textSize="@dimen/episode_and_location_sp_14" />
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/episode_edd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/const_episode"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <TextView
-            android:id="@+id/episode_name"
-            android:layout_width="@dimen/episode_and_location_dp_250"
-            android:layout_height="@dimen/dp_40"
-            android:textColor="@color/red"
-            android:textSize="@dimen/episode_and_location_sp_14">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/episode_number"
-            android:layout_width="@dimen/episode_and_location_dp_250"
-            android:layout_height="@dimen/dp_40"
-            android:textColor="@color/red"
-            android:textSize="@dimen/episode_and_location_sp_14">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/episode_date_release"
-            android:layout_width="@dimen/episode_and_location_dp_250"
-            android:layout_height="@dimen/dp_40"
-            android:textColor="@color/red"
-            android:textSize="@dimen/episode_and_location_sp_14">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/episode_created"
-            android:layout_width="@dimen/episode_and_location_dp_250"
-            android:layout_height="@dimen/dp_40"
-            android:textColor="@color/red"
-            android:textSize="@dimen/episode_and_location_sp_14">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/episode_url"
-            android:layout_width="@dimen/episode_and_location_dp_250"
-            android:layout_height="@dimen/dp_40"
-            android:textColor="@color/red"
-            android:textSize="@dimen/episode_and_location_sp_14">
-
-        </TextView>
-    </LinearLayout>
     <TextView
-        android:id="@+id/con_episode_characters"
-        android:text="@string/characters_from_episode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/const_episode"
-        app:layout_constraintStart_toStartOf="parent">
+        android:id="@+id/const_episode_number"
+        android:layout_width="@dimen/const_episode_and_location_dp_160"
+        android:layout_height="@dimen/dp_28"
+        android:text="@string/episode_number"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/const_episode_name" />
+
+    <TextView
+        android:id="@+id/const_episode_date_release"
+        android:layout_width="@dimen/const_episode_and_location_dp_160"
+        android:layout_height="@dimen/dp_28"
+        android:text="@string/date_release"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/const_episode_number">
 
     </TextView>
+
+    <TextView
+        android:id="@+id/const_episode_created"
+        android:layout_width="@dimen/const_episode_and_location_dp_160"
+        android:layout_height="@dimen/dp_28"
+        android:text="@string/episode_created"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/const_episode_date_release">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/const_episode_url"
+        android:layout_width="@dimen/const_episode_and_location_dp_160"
+        android:layout_height="@dimen/dp_28"
+        android:text="@string/episode_url"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/const_episode_created" />
+
+
+    <TextView
+        android:id="@+id/episode_name"
+        android:layout_width="@dimen/episode_and_location_dp_250"
+        android:layout_height="@dimen/dp_28"
+        android:textColor="@color/red"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintStart_toEndOf="@id/const_episode_name"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/episode_number"
+        android:layout_width="@dimen/episode_and_location_dp_250"
+        android:layout_height="@dimen/dp_28"
+        android:textColor="@color/red"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintStart_toEndOf="@id/const_episode_number"
+        app:layout_constraintTop_toBottomOf="@id/episode_name">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/episode_date_release"
+        android:layout_width="@dimen/episode_and_location_dp_250"
+        android:layout_height="@dimen/dp_28"
+        android:textColor="@color/red"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintStart_toEndOf="@id/const_episode_date_release"
+        app:layout_constraintTop_toBottomOf="@id/episode_number">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/episode_created"
+        android:layout_width="@dimen/episode_and_location_dp_250"
+        android:layout_height="@dimen/dp_28"
+        android:textColor="@color/red"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintStart_toEndOf="@id/const_episode_created"
+        app:layout_constraintTop_toBottomOf="@id/episode_date_release">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/episode_url"
+        android:layout_width="@dimen/episode_and_location_dp_250"
+        android:layout_height="@dimen/dp_28"
+        android:textColor="@color/red"
+        android:textSize="@dimen/url_sp_12"
+        app:layout_constraintStart_toEndOf="@id/const_episode_url"
+        app:layout_constraintTop_toBottomOf="@id/episode_created"
+        tools:ignore="SmallSp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/characters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/characters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/const_episode_url">
+
+    </TextView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_episode"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_530"
-        android:layout_marginTop="@dimen/dp_120"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/con_episode_characters"
-        tools:ignore="NotSibling">
+        app:layout_constraintTop_toBottomOf="@+id/characters">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
