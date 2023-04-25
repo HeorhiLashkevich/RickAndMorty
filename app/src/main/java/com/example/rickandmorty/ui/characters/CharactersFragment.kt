@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +16,8 @@ import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentCharactersBinding
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
+import com.example.rickandmorty.ui.characterddetails.CharactersDetailsFragment
+import com.example.rickandmorty.ui.episodesdetails.KEY_FROM_EPISODE_TO_CHARACTER
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -48,11 +49,20 @@ class CharactersFragment : Fragment() {
 
 
     private suspend fun initAdapter(list: PagingData<CharactersResult>) {
-
         binding.recyclerCharacters.run {
+            val charactersDetailsFragment = CharactersDetailsFragment()
             addItemDecoration()
             if (adapter == null) {
-                adapter = CharactersPagingAdapter()
+                adapter = CharactersPagingAdapter {
+                    val bundle = Bundle()
+                    bundle.putInt(KEY_FROM_EPISODE_TO_CHARACTER, it)
+                    charactersDetailsFragment.arguments = bundle
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.container, charactersDetailsFragment)
+                        .addToBackStack("")
+                        .commit()
+
+                }
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
@@ -64,26 +74,35 @@ class CharactersFragment : Fragment() {
 //        }
     }
 
-    private  fun addItemDecoration() {
+
+//    private fun sendBundle(id: Int) {
+//        val bundle = Bundle()
+//        bundle.putInt(KEY_FROM_EPISODE_TO_CHARACTER, id)
+//        val charactersDetailsFragment = CharactersDetailsFragment()
+//        charactersDetailsFragment.arguments = bundle
+//    }
+
+
+    private fun addItemDecoration() {
         val itemMargin = RecyclerMargin()
         val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
-        setProgressBarAccordingToLoadState()
+//        setProgressBarAccordingToLoadState()
         dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_drawable))
-        binding?.recyclerCharacters?.run {
+        binding.recyclerCharacters.run {
             addItemDecoration(dividerItemDecoration)
             addItemDecoration(itemMargin)
         }
     }
 
-    private fun setProgressBarAccordingToLoadState() {
-        lifecycleScope.launch {
-            CharactersPagingAdapter().loadStateFlow.collectLatest {
-                binding.run {
-                    determinateBar.isVisible = it.append is LoadState.Loading
-                }
-
-            }
-        }
-    }
+//    private fun setProgressBarAccordingToLoadState() {
+//        lifecycleScope.launch {
+//            CharactersPagingAdapter().loadStateFlow.collectLatest {
+//                binding.run {
+//                    determinateBar.isVisible = it.append is LoadState.Loading
+//                }
+//
+//            }
+//        }
+//    }
 }
 

@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
 import com.example.rickandmorty.api.CharactersResult
-import com.example.rickandmorty.ui.episodes.EpisodesViewModel
 import com.example.rickandmorty.ui.RecyclerMargin
 import com.example.rickandmorty.ui.characterddetails.CharactersDetailsFragment
+import com.example.rickandmorty.ui.episodes.EpisodesViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
+public const val KEY_FROM_EPISODE_TO_CHARACTER = "characterId"
 class EpisodeDetailsFragment : Fragment() {
     private lateinit var binding: FragmentEpisodeDetailsBinding
 
@@ -38,11 +38,12 @@ class EpisodeDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.characters.observe(viewLifecycleOwner) {
-            initAdapter(it)
-        }
+
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getCharacters(viewModel.charactersIds)
+        }
+        viewModel.characters.observe(viewLifecycleOwner) {
+            initAdapter(it)
         }
 
         viewModel.episode.observe(viewLifecycleOwner) {
@@ -61,6 +62,7 @@ class EpisodeDetailsFragment : Fragment() {
             addItemDecoration()
             if (adapter == null) {
                 adapter = EpisodeDetailsAdapter {
+                    sendBundle(it)
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.container, CharactersDetailsFragment())
                         .addToBackStack("")
@@ -73,7 +75,12 @@ class EpisodeDetailsFragment : Fragment() {
         }
 
     }
-
+    private fun sendBundle(id: Int) {
+        val bundle = Bundle()
+        bundle.putInt(KEY_FROM_EPISODE_TO_CHARACTER, id)
+        val charactersDetailsFragment = CharactersDetailsFragment()
+        charactersDetailsFragment.arguments = bundle
+    }
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun addItemDecoration() {
         val itemMargin = RecyclerMargin()

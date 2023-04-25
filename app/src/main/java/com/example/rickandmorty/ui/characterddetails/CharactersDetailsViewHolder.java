@@ -9,15 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rickandmort.R;
 
 public class CharactersDetailsViewHolder extends RecyclerView.ViewHolder {
-    TextView locationName,locationType,locationDimension;
-
-
+    TextView episodeName,episodeNumber,episodeDateRelease;
 
     public CharactersDetailsViewHolder(@NonNull View itemView) {
         super(itemView);
-        locationName = itemView.findViewById(R.id.location_name);
-        locationType = itemView.findViewById(R.id.location_type);
-        locationDimension = itemView.findViewById(R.id.location_dimension);
+        episodeName = itemView.findViewById(R.id.episode_name);
+        episodeNumber = itemView.findViewById(R.id.episode_number);
+        episodeDateRelease = itemView.findViewById(R.id.episode_date_release);
 
     }
 }

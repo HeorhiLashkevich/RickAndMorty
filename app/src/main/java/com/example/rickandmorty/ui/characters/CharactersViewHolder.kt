@@ -1,6 +1,5 @@
 package com.example.rickandmorty.ui.characters
 
-import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.databinding.ItemCharactersBinding
 import com.example.rickandmorty.api.CharactersResult
@@ -10,8 +9,6 @@ class CharactersViewHolder(
     private val binding: ItemCharactersBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-
-    @SuppressLint("SetTextI18n")
     fun bind(item: CharactersResult) {
         binding.run {
             characterName.text = item.name
@@ -19,6 +16,9 @@ class CharactersViewHolder(
             characterGender.text = item.gender
             characterStatus.text = item.status
             Picasso.get().load(item.image).into(characterImage)
+
         }
     }
+
+
 }

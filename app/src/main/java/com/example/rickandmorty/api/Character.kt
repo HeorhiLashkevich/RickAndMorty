@@ -33,3 +33,4 @@ data class CharactersResult(
     val type: String,
     val url: String
 )
+

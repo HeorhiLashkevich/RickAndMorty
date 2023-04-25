@@ -35,7 +35,6 @@ class EpisodesViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val response = NetworkController.getRickAndMortyApi().getEpisode(id)
             if (response.isSuccessful) {
-
                 episode.postValue(response.body())
                 charactersIds = response.body()?.let { getCharactersIds(it.characters) }!!
 
@@ -45,7 +44,6 @@ class EpisodesViewModel(
     }
     private fun getCharactersIds(list: List<String>): ArrayList<Int> {
         val charactersIds = arrayListOf<Int>()
-        viewModelScope.launch(Dispatchers.IO) {
             for (i in list.indices) {
                 when (list[i].length) {
                     (43) -> charactersIds.add(list[i].takeLast(1).toInt())
@@ -53,7 +51,6 @@ class EpisodesViewModel(
                     (45) -> charactersIds.add(list[i].takeLast(3).toInt())
                 }
             }
-        }
         return charactersIds
     }
 

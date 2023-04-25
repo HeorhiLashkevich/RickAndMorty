@@ -6,14 +6,10 @@ import androidx.paging.PagingDataAdapter
 import com.example.rickandmort.databinding.ItemCharactersBinding
 import com.example.rickandmorty.api.CharactersResult
 
-class CharactersPagingAdapter:PagingDataAdapter<CharactersResult, CharactersViewHolder>(
-    CharactersDiffUtil()
-) {
+class CharactersPagingAdapter(
+    private val onCharacterClick: (id: Int) -> Unit
+) : PagingDataAdapter<CharactersResult, CharactersViewHolder>(CharactersDiffUtil()) {
 
-
-    override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
         return CharactersViewHolder(
@@ -21,6 +17,16 @@ class CharactersPagingAdapter:PagingDataAdapter<CharactersResult, CharactersView
                 LayoutInflater.from(parent.context), parent, false
             )
         )
+    }
+
+    override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
+
+        getItem(position)?.let { id ->
+            holder.bind(id)
+            holder.itemView.setOnClickListener {
+                onCharacterClick(id.id)
+            }
+        }
     }
 
 }

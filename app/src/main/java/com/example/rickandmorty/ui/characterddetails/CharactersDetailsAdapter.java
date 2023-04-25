@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rickandmort.R;
+import com.example.rickandmorty.api.EpisodesResult;
 import com.example.rickandmorty.api.LocationsResult;
 
 import java.util.List;
@@ -15,23 +16,23 @@ import java.util.List;
 public class CharactersDetailsAdapter extends RecyclerView.Adapter<CharactersDetailsViewHolder> {
 
 
-    List<LocationsResult> items;
+    List<EpisodesResult> items;
 
-    public CharactersDetailsAdapter(List<LocationsResult> items) {
+    public CharactersDetailsAdapter(List<EpisodesResult> items) {
         this.items = items;
     }
 
     @NonNull
     @Override
     public CharactersDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CharactersDetailsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_locations, parent, false));
+        return new CharactersDetailsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_episodes, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull CharactersDetailsViewHolder holder, int position) {
-        holder.locationName.setText(items.get(position).getName());
-        holder.locationType.setText(items.get(position).getType());
-        holder.locationDimension.setText(items.get(position).getDimension());
+      holder.episodeName.setText(items.get(position).getName());
+      holder.episodeNumber.setText(items.get(position).getEpisode());
+      holder.episodeDateRelease.setText(items.get(position).getAir_date());
     }
 
     @Override

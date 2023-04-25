@@ -2,12 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
 
 
     <TextView
         android:id="@+id/name_character_const_"
         android:layout_width="@dimen/const_episode_and_location_dp_160"
+        android:layout_marginTop="@dimen/dp_8"
         android:layout_height="@dimen/character_dp_20"
         android:text="@string/name"
         android:textSize="@dimen/episode_character_location_sp_14"
@@ -18,9 +20,11 @@
 
     <TextView
         android:id="@+id/name_character"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
+        android:layout_marginTop="@dimen/dp_8"
         android:layout_height="@dimen/character_dp_20"
-        android:textSize="@dimen/episode_character_location_sp_14"
+        android:gravity="center"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/name_character_const_"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,6 +34,7 @@
     <TextView
         android:id="@+id/gender_character_const"
         android:layout_width="@dimen/const_episode_and_location_dp_160"
+        android:layout_marginTop="@dimen/dp_8"
         android:layout_height="@dimen/character_dp_20"
         android:text="@string/gender"
         android:textSize="@dimen/episode_character_location_sp_14"
@@ -40,18 +45,22 @@
 
     <TextView
         android:id="@+id/gender_character"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
         android:layout_height="@dimen/character_dp_20"
-        android:textSize="@dimen/episode_character_location_sp_14"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="center"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/gender_character_const"
         app:layout_constraintTop_toBottomOf="@id/name_character">
 
     </TextView>
+
     <TextView
         android:id="@+id/origin_character_const"
         android:layout_width="@dimen/const_episode_and_location_dp_160"
         android:layout_height="@dimen/character_dp_20"
+        android:layout_marginTop="@dimen/dp_8"
         android:text="@string/origin"
         android:textSize="@dimen/episode_character_location_sp_14"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,18 +70,22 @@
 
     <TextView
         android:id="@+id/origin_character"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
+        android:layout_marginTop="@dimen/dp_8"
         android:layout_height="@dimen/character_dp_20"
+        android:gravity="center"
         android:textSize="@dimen/episode_character_location_sp_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/origin_character_const"
         app:layout_constraintTop_toBottomOf="@id/gender_character_const">
 
     </TextView>
+
     <TextView
         android:id="@+id/status_character_const"
         android:layout_width="@dimen/const_episode_and_location_dp_160"
         android:layout_height="@dimen/character_dp_20"
+        android:layout_marginTop="@dimen/dp_8"
         android:text="@string/status"
         android:textSize="@dimen/episode_character_location_sp_14"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,19 +95,23 @@
 
     <TextView
         android:id="@+id/status_character"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
         android:layout_height="@dimen/character_dp_20"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp_8"
         android:textSize="@dimen/episode_character_location_sp_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/status_character_const"
         app:layout_constraintTop_toBottomOf="@id/origin_character">
 
     </TextView>
+
     <TextView
-        android:id="@+id/type_character_const"
+        android:id="@+id/location_character_const"
         android:layout_width="@dimen/const_episode_and_location_dp_160"
+        android:layout_marginTop="@dimen/dp_8"
         android:layout_height="@dimen/character_dp_20"
-        android:text="@string/type"
+        android:text="@string/location"
         android:textSize="@dimen/episode_character_location_sp_14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_character_const">
@@ -102,23 +119,60 @@
     </TextView>
 
     <TextView
-        android:id="@+id/type_character"
-        android:layout_width="0dp"
+        android:id="@+id/location_character"
+        android:layout_width="250dp"
         android:layout_height="@dimen/character_dp_20"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="center"
         android:textSize="@dimen/episode_character_location_sp_14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/type_character_const"
+        app:layout_constraintStart_toEndOf="@id/location_character_const"
         app:layout_constraintTop_toBottomOf="@id/status_character">
 
     </TextView>
+    <TextView
+        android:id="@+id/species_character_const"
+        android:layout_width="@dimen/const_episode_and_location_dp_160"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_height="@dimen/character_dp_20"
+        android:text="@string/species"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/location_character_const">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/species_character"
+        android:layout_width="250dp"
+        android:layout_height="@dimen/character_dp_20"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="center"
+        android:textSize="@dimen/episode_character_location_sp_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/species_character_const"
+        app:layout_constraintTop_toBottomOf="@id/location_character">
+
+    </TextView>
+    <TextView
+        android:id="@+id/character_episodes"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dp_8"
+        android:text="@string/episodes"
+        app:layout_constraintTop_toBottomOf="@id/species_character"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/episodes_from_character_recycler"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/type_character"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/character_episodes">
 
     </androidx.recyclerview.widget.RecyclerView>
 

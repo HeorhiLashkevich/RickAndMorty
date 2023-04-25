@@ -16,6 +16,7 @@
             android:id="@+id/const_character_name"
             android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_28"
+            android:layout_marginTop="@dimen/dp_8"
             android:text="@string/name">
 
         </TextView>
@@ -24,14 +25,17 @@
             android:id="@+id/const_character_species"
             android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_28"
+            android:layout_marginTop="@dimen/dp_8"
             android:text="@string/species">
 
         </TextView>
 
         <TextView
             android:id="@+id/const_character_status"
+
             android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_28"
+            android:layout_marginTop="@dimen/dp_8"
             android:text="@string/status">
 
         </TextView>
@@ -40,6 +44,7 @@
             android:id="@+id/const_character_gender"
             android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_28"
+            android:layout_marginTop="@dimen/dp_8"
             android:text="@string/gender">
 
         </TextView>
@@ -52,6 +57,8 @@
 
         <TextView
             android:id="@+id/character_name"
+            android:layout_marginTop="@dimen/dp_8"
+
             android:layout_width="@dimen/dp_160"
             android:layout_height="@dimen/dp_28"
             android:textColor="@color/purple_200"
@@ -62,6 +69,7 @@
 
         <TextView
             android:id="@+id/character_species"
+            android:layout_marginTop="@dimen/dp_8"
 
             android:layout_width="@dimen/dp_160"
             android:layout_height="@dimen/dp_28"
@@ -73,6 +81,7 @@
 
         <TextView
             android:id="@+id/character_status"
+            android:layout_marginTop="@dimen/dp_8"
 
             android:layout_width="@dimen/dp_160"
             android:layout_height="@dimen/dp_28"
@@ -84,7 +93,7 @@
 
         <TextView
             android:id="@+id/character_gender"
-
+            android:layout_marginTop="@dimen/dp_8"
             android:layout_width="@dimen/dp_160"
             android:layout_height="@dimen/dp_28"
             android:textColor="@color/purple_200"
@@ -95,9 +104,11 @@
 
         <ImageView
             android:id="@+id/character_image"
-            android:layout_width="@dimen/dp_160"
-            android:layout_height="@dimen/dp_160"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:textColor="@color/purple_200"
+            app:layout_constraintBottom_toBottomOf="@id/character_gender"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/character_name"
             app:layout_constraintTop_toTopOf="parent">
 
