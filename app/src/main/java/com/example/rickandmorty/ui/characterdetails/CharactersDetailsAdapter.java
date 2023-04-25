@@ -1,6 +1,5 @@
-package com.example.rickandmorty.ui.characterddetails;
+package com.example.rickandmorty.ui.characterdetails;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rickandmort.R;
 import com.example.rickandmorty.api.EpisodesResult;
-import com.example.rickandmorty.api.LocationsResult;
 
 import java.util.List;
 

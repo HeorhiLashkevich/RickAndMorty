@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.characterddetails;
+package com.example.rickandmorty.ui.characterdetails;
 
 import android.view.View;
 import android.widget.TextView;

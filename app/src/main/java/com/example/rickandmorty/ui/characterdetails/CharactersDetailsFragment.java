@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.characterddetails;
+package com.example.rickandmorty.ui.characterdetails;
 
 import static com.example.rickandmorty.ui.episodesdetails.EpisodeDetailsFragmentKt.KEY_FROM_EPISODE_TO_CHARACTER;
 
@@ -24,7 +24,6 @@ import com.example.rickandmorty.api.CharactersResult;
 import com.example.rickandmorty.api.EpisodesResult;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class CharactersDetailsFragment extends Fragment {
@@ -62,38 +61,41 @@ public class CharactersDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        viewModel.getIds(characterID);
+        viewModel.getIdsEpisodes(characterID);
+        viewModel.getEpisodesForCharacterDetails();
         viewModel.getCharacterValue(characterID).observe(getViewLifecycleOwner(), new Observer<CharactersResult>() {
             @Override
             public void onChanged(CharactersResult charactersResult) {
-//                binding.nameCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getName());
-//                binding.genderCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getGender());
-//                binding.originCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getOrigin().getName());
-//                binding.statusCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getStatus());
-//                binding.locationCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getLocation().getName());
-//                binding.speciesCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getSpecies());
+                binding.nameCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getName());
+                binding.genderCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getGender());
+                binding.originCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getOrigin().getName());
+                binding.statusCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getStatus());
+                binding.locationCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getLocation().getName());
+                binding.speciesCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getSpecies());
 
             }
         });
-
-        viewModel.getEpisodeStrings(characterID).observe(getViewLifecycleOwner(), new Observer<ArrayList<Integer>>() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onChanged(ArrayList<Integer> integers) {
-                binding.nameCharacter.setText(String.valueOf( viewModel.episodes.getValue().get(1)));
-//                binding.genderCharacter.setText(String.valueOf( viewModel.episodes.getValue().get(0)));
-//                binding.originCharacter.setText(String.valueOf( viewModel.episodes.getValue().get(2)));
-                binding.statusCharacter.setText(String.valueOf(integers.size()) );
-                binding.locationCharacter.setText(String.valueOf( viewModel.episodes.getValue().size()));
-//                binding.speciesCharacter.setText(integers.get(5).toString());
-            }
-        });
-
-
-
-
-
-        viewModel.getEpisodesForCharacterDetails(characterID).observe(getViewLifecycleOwner(), new Observer<ArrayList<EpisodesResult>>() {
+//                viewModel.getEpisodeIds(characterID).observe(getViewLifecycleOwner(), new Observer<ArrayList<Integer>>() {
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            public void onChanged(ArrayList<Integer> integers) {
+//                binding.nameCharacter.setText(String.valueOf(viewModel.episodes.getValue().get(0)));
+//                binding.statusCharacter.setText(String.valueOf(integers.size()));
+//                binding.locationCharacter.setText(String.valueOf(viewModel.episodes.getValue().size()));
+////                binding.genderCharacter.setText(String.valueOf(viewModel.episodes.getValue().get(1)));
+////                binding.originCharacter.setText(String.valueOf( viewModel.episodes.getValue().get(2)));
+////                binding.speciesCharacter.setText(integers.get(5).toString());
+//            }
+//        });
+//        viewModel.getEpisodeStrings(characterID).observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+//            @Override
+//            public void onChanged(List<String> stringList) {
+//                binding.nameCharacter.setText(stringList.get(0));
+//                binding.genderCharacter.setText(stringList.get(1));
+//                binding.originCharacter.setText(stringList.get(2));
+//            }
+//        });
+        viewModel.getEpisodesForCharacterDetails().observe(getViewLifecycleOwner(), new Observer<ArrayList<EpisodesResult>>() {
             @Override
             public void onChanged(ArrayList<EpisodesResult> episodesResults) {
                 recyclerView = view.findViewById(R.id.episodes_from_character_recycler);
@@ -103,6 +105,7 @@ public class CharactersDetailsFragment extends Fragment {
                 recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
             }
         });
+
 
     }
 

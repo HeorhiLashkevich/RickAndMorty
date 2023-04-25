@@ -38,7 +38,6 @@ class EpisodesViewModel(
                 episode.postValue(response.body())
                 charactersIds = response.body()?.let { getCharactersIds(it.characters) }!!
 
-
             }
         }
     }

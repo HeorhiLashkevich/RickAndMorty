@@ -26,8 +26,6 @@ interface RickAndMortyApi {
         @Path("id") id: Int? = 0
     ): Observable<Response<CharactersResult>>
 
-
-
     @GET("episode")
     suspend fun getEpisodes(
         @Query("limit") limit: Int? = COUNT_ITEM,

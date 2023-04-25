@@ -22,16 +22,6 @@ object NetworkController {
             .build()
         return retrofit.create((RickAndMortyApi::class.java))
     }
-//    fun getRickAndMortyApiWithRx(): RickAndMortyApi {
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl(BASE_URL)
-//            .client(getOkHttpClient())
-//
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//        return retrofit.create((RickAndMortyApi::class.java))
-//    }
-
 
     private fun getOkHttpClient() =
         OkHttpClient.Builder()

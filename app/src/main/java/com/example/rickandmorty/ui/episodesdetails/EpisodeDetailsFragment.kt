@@ -15,7 +15,7 @@ import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
-import com.example.rickandmorty.ui.characterddetails.CharactersDetailsFragment
+import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
 import com.example.rickandmorty.ui.episodes.EpisodesViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,11 +39,12 @@ class EpisodeDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getCharacters(viewModel.charactersIds)
-        }
+
         viewModel.characters.observe(viewLifecycleOwner) {
             initAdapter(it)
+        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel.getCharacters(viewModel.charactersIds)
         }
 
         viewModel.episode.observe(viewLifecycleOwner) {
