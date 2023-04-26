@@ -14,8 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentLocationsBinding
+import com.example.rickandmorty.KEY_FROM_EPISODE_TO_CHARACTER
+import com.example.rickandmorty.KEY_FROM_LOCATION_TO_LOCATIONDETAILS
 import com.example.rickandmorty.api.LocationsResult
 import com.example.rickandmorty.ui.RecyclerMargin
+import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
+import com.example.rickandmorty.ui.locationdetails.LocationsDetailsFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -48,8 +52,18 @@ class LocationsFragment : Fragment() {
     private suspend fun setList(list: PagingData<LocationsResult>) {
         binding.recyclerLocations.run {
             addItemDecoration()
+            val locationsDetailsFragment = LocationsDetailsFragment()
+
             if (adapter == null) {
-                adapter = LocationsPagingAdapter()
+                adapter = LocationsPagingAdapter{
+                    val bundle = Bundle()
+                    bundle.putInt(KEY_FROM_LOCATION_TO_LOCATIONDETAILS, it)
+                    locationsDetailsFragment.arguments = bundle
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.container, locationsDetailsFragment)
+                        .addToBackStack("")
+                        .commit()
+                }
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }

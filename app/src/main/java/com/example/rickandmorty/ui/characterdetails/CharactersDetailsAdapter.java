@@ -5,14 +5,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.rickandmort.R;
 import com.example.rickandmorty.api.EpisodesResult;
-
 import java.util.List;
 
 public class CharactersDetailsAdapter extends RecyclerView.Adapter<CharactersDetailsViewHolder> {
-
 
     List<EpisodesResult> items;
 

@@ -17,6 +17,7 @@ class CharactersViewHolder(
             characterStatus.text = item.status
             Picasso.get().load(item.image).into(characterImage)
 
+
         }
     }
 

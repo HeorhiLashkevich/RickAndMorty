@@ -1,14 +1,11 @@
 package com.example.rickandmorty.ui.characterdetails;
 
-import static com.example.rickandmorty.ui.episodesdetails.EpisodeDetailsFragmentKt.KEY_FROM_EPISODE_TO_CHARACTER;
-
-import android.annotation.SuppressLint;
+import static com.example.rickandmorty.ConstansKt.KEY_FROM_EPISODE_TO_CHARACTER;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,7 +27,7 @@ public class CharactersDetailsFragment extends Fragment {
 
     private CharactersDetailsViewModel viewModel;
     private FragmentCharacterDetailsBinding binding;
-    private int characterID;
+    private int characterId;
     private CharactersDetailsAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -40,19 +37,16 @@ public class CharactersDetailsFragment extends Fragment {
 
     @Override
     public void onAttach(@NonNull Context context) {
-
         super.onAttach(context);
         viewModel = new ViewModelProvider(this, getDefaultViewModelProviderFactory())
                 .get(CharactersDetailsViewModel.class);
-
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            characterID = getArguments().getInt(KEY_FROM_EPISODE_TO_CHARACTER, 0);
+            characterId = getArguments().getInt(KEY_FROM_EPISODE_TO_CHARACTER, 0);
         }
 
 
@@ -60,16 +54,15 @@ public class CharactersDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        viewModel.getCharacterValue(characterID).observe(getViewLifecycleOwner(), new Observer<CharactersResult>() {
+        viewModel.getCharacterValue(characterId).observe(getViewLifecycleOwner(), new Observer<CharactersResult>() {
             @Override
             public void onChanged(CharactersResult charactersResult) {
-                binding.nameCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getName());
-                binding.genderCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getGender());
-                binding.originCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getOrigin().getName());
-                binding.statusCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getStatus());
-                binding.locationCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getLocation().getName());
-                binding.speciesCharacter.setText(viewModel.getCharacterValue(characterID).getValue().getSpecies());
+                binding.nameCharacter.setText(viewModel.getCharacterValue(characterId).getValue().getName());
+                binding.genderCharacter.setText(viewModel.getCharacterValue(characterId).getValue().getGender());
+                binding.originCharacter.setText(viewModel.getCharacterValue(characterId).getValue().getOrigin().getName());
+                binding.statusCharacter.setText(viewModel.getCharacterValue(characterId).getValue().getStatus());
+                binding.locationCharacter.setText(viewModel.getCharacterValue(characterId).getValue().getLocation().getName());
+                binding.speciesCharacter.setText(viewModel.getCharacterValue(characterId).getValue().getSpecies());
 
             }
         });
@@ -83,7 +76,7 @@ public class CharactersDetailsFragment extends Fragment {
                 recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
             }
         });
-        viewModel.getIdsEpisodes(characterID);
+        viewModel.getIdsEpisodes(characterId);
 //        viewModel.getEpisodesForCharacterDetails();
 
 

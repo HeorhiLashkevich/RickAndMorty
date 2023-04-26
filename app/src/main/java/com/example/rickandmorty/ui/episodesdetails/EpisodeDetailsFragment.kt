@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
+import com.example.rickandmorty.KEY_FROM_EPISODE_TO_CHARACTER
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
 import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
@@ -21,7 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-public const val KEY_FROM_EPISODE_TO_CHARACTER = "characterId"
+// const val KEY_FROM_EPISODE_TO_CHARACTER = "characterId"
 
 class EpisodeDetailsFragment : Fragment() {
     private lateinit var binding: FragmentEpisodeDetailsBinding

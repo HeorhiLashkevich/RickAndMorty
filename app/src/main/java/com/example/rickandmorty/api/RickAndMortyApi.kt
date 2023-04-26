@@ -20,12 +20,6 @@ interface RickAndMortyApi {
 
     ): Response<Characters>
 
-
-    @GET("character/{id}")
-    fun getCharacter(
-        @Path("id") id: Int? = 0
-    ): Observable<Response<CharactersResult>>
-
     @GET("episode")
     suspend fun getEpisodes(
         @Query("limit") limit: Int? = COUNT_ITEM,
@@ -37,10 +31,7 @@ interface RickAndMortyApi {
     suspend fun getMultiCharacters(
         @Path("id") id: ArrayList<Int>? = null
     ): Response<ArrayList<CharactersResult>>
-    @GET("episode/{id}")
-    fun getMultiEpisodes(
-        @Path("id") id: ArrayList<Int>? = null
-    ): Observable<Response<ArrayList<EpisodesResult>>>
+
 
     @GET("location")
     suspend fun getLocations(
@@ -52,6 +43,27 @@ interface RickAndMortyApi {
     suspend fun getEpisode(
         @Path("id") id: Int? = 0
     ): Response<EpisodesResult>
+
+
+    @GET("character/{id}")
+    fun getCharacter(
+        @Path("id") id: Int? = 0
+    ): Observable<Response<CharactersResult>>
+
+    @GET("episode/{id}")
+    fun getMultiEpisodes(
+        @Path("id") id: ArrayList<Int>? = null
+    ): Observable<Response<ArrayList<EpisodesResult>>>
+
+    @GET("location/{id}")
+    fun getLocationForDetails(
+        @Path("id") id: Int? = 0
+    ): Observable<Response<LocationsResult>>
+
+    @GET("character/{id}")
+    fun getMultiCharactersForLocationDetails(
+        @Path("id") id: ArrayList<Int>? = null
+    ): Observable<Response<ArrayList<CharactersResult>>>
 
 
 }

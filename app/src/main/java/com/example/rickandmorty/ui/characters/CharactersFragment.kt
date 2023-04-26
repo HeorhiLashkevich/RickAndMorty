@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentCharactersBinding
+import com.example.rickandmorty.KEY_FROM_EPISODE_TO_CHARACTER
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
 import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
-import com.example.rickandmorty.ui.episodesdetails.KEY_FROM_EPISODE_TO_CHARACTER
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -72,15 +72,6 @@ class CharactersFragment : Fragment() {
 //            CharactersPagingAdapter().refresh()
 //        }
     }
-
-
-//    private fun sendBundle(id: Int) {
-//        val bundle = Bundle()
-//        bundle.putInt(KEY_FROM_EPISODE_TO_CHARACTER, id)
-//        val charactersDetailsFragment = CharactersDetailsFragment()
-//        charactersDetailsFragment.arguments = bundle
-//    }
-
 
     private fun addItemDecoration() {
         val itemMargin = RecyclerMargin()

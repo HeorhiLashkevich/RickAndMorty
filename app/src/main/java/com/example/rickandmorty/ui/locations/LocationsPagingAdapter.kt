@@ -7,12 +7,11 @@ import com.example.rickandmort.databinding.ItemLocationsBinding
 import com.example.rickandmorty.api.LocationsResult
 
 
-class LocationsPagingAdapter : PagingDataAdapter<LocationsResult, LocationsViewHolder>(
-    LocationsDiffUtil()
-) {
-    override fun onBindViewHolder(holder: LocationsViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
-    }
+class LocationsPagingAdapter(
+    private val onLocationClick: (id: Int) -> Unit
+
+) : PagingDataAdapter<LocationsResult, LocationsViewHolder>(LocationsDiffUtil()) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationsViewHolder {
         return LocationsViewHolder(
@@ -20,6 +19,15 @@ class LocationsPagingAdapter : PagingDataAdapter<LocationsResult, LocationsViewH
                 LayoutInflater.from(parent.context), parent, false
             )
         )
+    }
+
+    override fun onBindViewHolder(holder: LocationsViewHolder, position: Int) {
+        getItem(position)?.let { id ->
+            holder.bind(id)
+            holder.itemView.setOnClickListener {
+                onLocationClick(id.id)
+            }
+        }
     }
 
 }

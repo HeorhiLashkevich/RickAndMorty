@@ -128,8 +128,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_episode"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_50"
-        android:layout_height="500dp"
+        android:layout_height="420dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
