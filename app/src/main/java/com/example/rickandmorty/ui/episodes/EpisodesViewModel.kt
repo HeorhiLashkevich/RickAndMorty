@@ -22,7 +22,7 @@ class EpisodesViewModel(
 ) : ViewModel() {
     val episode = MutableLiveData<EpisodesResult>()
     var characters = MutableLiveData<ArrayList<CharactersResult>>()
-     var charactersIds = ArrayList<Int>()
+    var charactersIds = ArrayList<Int>()
 
 
     val flow = Pager(
@@ -35,25 +35,28 @@ class EpisodesViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val response = NetworkController.getRickAndMortyApi().getEpisode(id)
             if (response.isSuccessful) {
-                episode.postValue(response.body())
                 charactersIds = response.body()?.let { getCharactersIds(it.characters) }!!
+                episode.postValue(response.body())
+                getCharacters(charactersIds)
 
             }
         }
     }
+
+
     private fun getCharactersIds(list: List<String>): ArrayList<Int> {
         val charactersIds = arrayListOf<Int>()
-            for (i in list.indices) {
-                when (list[i].length) {
-                    (43) -> charactersIds.add(list[i].takeLast(1).toInt())
-                    (44) -> charactersIds.add(list[i].takeLast(2).toInt())
-                    (45) -> charactersIds.add(list[i].takeLast(3).toInt())
-                }
+        for (i in list.indices) {
+            when (list[i].length) {
+                (43) -> charactersIds.add(list[i].takeLast(1).toInt())
+                (44) -> charactersIds.add(list[i].takeLast(2).toInt())
+                (45) -> charactersIds.add(list[i].takeLast(3).toInt())
             }
+        }
         return charactersIds
     }
 
-    fun getCharacters(list: ArrayList<Int>) {
+    private fun getCharacters(list: ArrayList<Int>) {
         viewModelScope.launch(Dispatchers.IO) {
             episode.value?.let { getCharactersIds(it.characters) }
             val response = NetworkController.getRickAndMortyApi().getMultiCharacters(list)

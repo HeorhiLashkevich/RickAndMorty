@@ -1,22 +1,15 @@
 package com.example.rickandmorty.ui.characterdetails;
 
 import android.annotation.SuppressLint;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.rickandmorty.api.CharactersResult;
 import com.example.rickandmorty.api.EpisodesResult;
 import com.example.rickandmorty.api.NetworkController;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
 import io.reactivex.schedulers.Schedulers;
 import kotlin.text.StringsKt;
 

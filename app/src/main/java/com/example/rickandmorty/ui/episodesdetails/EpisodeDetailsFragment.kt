@@ -17,14 +17,17 @@ import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
 import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
 import com.example.rickandmorty.ui.episodes.EpisodesViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 public const val KEY_FROM_EPISODE_TO_CHARACTER = "characterId"
+
 class EpisodeDetailsFragment : Fragment() {
     private lateinit var binding: FragmentEpisodeDetailsBinding
 
     private val viewModel: EpisodesViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,13 +41,8 @@ class EpisodeDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         viewModel.characters.observe(viewLifecycleOwner) {
             initAdapter(it)
-        }
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getCharacters(viewModel.charactersIds)
         }
 
         viewModel.episode.observe(viewLifecycleOwner) {
@@ -63,9 +61,12 @@ class EpisodeDetailsFragment : Fragment() {
             addItemDecoration()
             if (adapter == null) {
                 adapter = EpisodeDetailsAdapter {
-                    sendBundle(it)
+                    val bundle = Bundle()
+                    bundle.putInt(KEY_FROM_EPISODE_TO_CHARACTER, it)
+                    val charactersDetailsFragment = CharactersDetailsFragment()
+                    charactersDetailsFragment.arguments = bundle
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.container, CharactersDetailsFragment())
+                        .replace(R.id.container, charactersDetailsFragment)
                         .addToBackStack("")
                         .commit()
                 }
@@ -76,12 +77,7 @@ class EpisodeDetailsFragment : Fragment() {
         }
 
     }
-    private fun sendBundle(id: Int) {
-        val bundle = Bundle()
-        bundle.putInt(KEY_FROM_EPISODE_TO_CHARACTER, id)
-        val charactersDetailsFragment = CharactersDetailsFragment()
-        charactersDetailsFragment.arguments = bundle
-    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun addItemDecoration() {
         val itemMargin = RecyclerMargin()

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodesBinding
 import com.example.rickandmorty.api.EpisodesResult
+import com.example.rickandmorty.api.NetworkController
 import com.example.rickandmorty.ui.RecyclerMargin
 import com.example.rickandmorty.ui.episodesdetails.EpisodeDetailsFragment
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -73,3 +76,5 @@ class EpisodesFragment : Fragment() {
         }
     }
 }
+
+
