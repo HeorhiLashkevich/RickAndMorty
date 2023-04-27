@@ -12,7 +12,6 @@ class EpisodeDetailsAdapter(
 ) : RecyclerView.Adapter<EpisodeDetailsViewHolder>() {
     private var list = arrayListOf<CharactersResult>()
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeDetailsViewHolder {
         return EpisodeDetailsViewHolder(
             ItemCharactersBinding.inflate(
@@ -22,7 +21,6 @@ class EpisodeDetailsAdapter(
             )
         )
     }
-
     override fun getItemCount() = list.size
 
 

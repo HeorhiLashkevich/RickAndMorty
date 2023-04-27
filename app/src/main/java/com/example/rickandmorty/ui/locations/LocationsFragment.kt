@@ -14,11 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentLocationsBinding
-import com.example.rickandmorty.KEY_FROM_EPISODE_TO_CHARACTER
-import com.example.rickandmorty.KEY_FROM_LOCATION_TO_LOCATIONDETAILS
+import com.example.rickandmorty.KEY_TO_LOCATION_DETAILS
 import com.example.rickandmorty.api.LocationsResult
 import com.example.rickandmorty.ui.RecyclerMargin
-import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
 import com.example.rickandmorty.ui.locationdetails.LocationsDetailsFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -57,7 +55,7 @@ class LocationsFragment : Fragment() {
             if (adapter == null) {
                 adapter = LocationsPagingAdapter{
                     val bundle = Bundle()
-                    bundle.putInt(KEY_FROM_LOCATION_TO_LOCATIONDETAILS, it)
+                    bundle.putInt(KEY_TO_LOCATION_DETAILS, it)
                     locationsDetailsFragment.arguments = bundle
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.container, locationsDetailsFragment)

@@ -1,5 +1,6 @@
 package com.example.rickandmorty
 
 
-const val KEY_FROM_EPISODE_TO_CHARACTER = "characterId"
-const val KEY_FROM_LOCATION_TO_LOCATIONDETAILS = "locationId"
+const val KEY_TO_CHARACTER_DETAILS = "characterId"
+const val KEY_TO_LOCATION_DETAILS = "locationId"
+const val KEY_TO_EPISODE_DETAILS = "episodeId"

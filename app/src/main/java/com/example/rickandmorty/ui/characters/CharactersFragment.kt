@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentCharactersBinding
-import com.example.rickandmorty.KEY_FROM_EPISODE_TO_CHARACTER
+import com.example.rickandmorty.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
 import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
@@ -54,7 +54,7 @@ class CharactersFragment : Fragment() {
             if (adapter == null) {
                 adapter = CharactersPagingAdapter {
                     val bundle = Bundle()
-                    bundle.putInt(KEY_FROM_EPISODE_TO_CHARACTER, it)
+                    bundle.putInt(KEY_TO_CHARACTER_DETAILS, it)
                     charactersDetailsFragment.arguments = bundle
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.container, charactersDetailsFragment)

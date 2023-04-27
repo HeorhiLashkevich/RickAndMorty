@@ -20,9 +20,7 @@ const val COUNT_ITEM_EPISODES = 11
 
 class EpisodesViewModel(
 ) : ViewModel() {
-    val episode = MutableLiveData<EpisodesResult>()
-    var characters = MutableLiveData<ArrayList<CharactersResult>>()
-    var charactersIds = ArrayList<Int>()
+//    val episode = MutableLiveData<EpisodesResult>()
 
 
     val flow = Pager(
@@ -31,41 +29,15 @@ class EpisodesViewModel(
         EpisodesDataStore()
     }.flow.cachedIn(viewModelScope)
 
-    fun getEpisode(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = NetworkController.getRickAndMortyApi().getEpisode(id)
-            if (response.isSuccessful) {
-                charactersIds = response.body()?.let { getCharactersIds(it.characters) }!!
-                episode.postValue(response.body())
-                getCharacters(charactersIds)
-
-            }
-        }
-    }
-
-
-    private fun getCharactersIds(list: List<String>): ArrayList<Int> {
-        val charactersIds = arrayListOf<Int>()
-        for (i in list.indices) {
-            when (list[i].length) {
-                (43) -> charactersIds.add(list[i].takeLast(1).toInt())
-                (44) -> charactersIds.add(list[i].takeLast(2).toInt())
-                (45) -> charactersIds.add(list[i].takeLast(3).toInt())
-            }
-        }
-        return charactersIds
-    }
-
-    private fun getCharacters(list: ArrayList<Int>) {
-        viewModelScope.launch(Dispatchers.IO) {
-            episode.value?.let { getCharactersIds(it.characters) }
-            val response = NetworkController.getRickAndMortyApi().getMultiCharacters(list)
-            if (response.isSuccessful) {
-                characters.postValue(response.body())
-            }
-        }
-
-    }
+//    fun getEpisode(id: Int) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val response = NetworkController.getRickAndMortyApi().getEpisode(id)
+//            if (response.isSuccessful) {
+//                episode.postValue(response.body())
+//
+//            }
+//        }
+//    }
 
 
 }

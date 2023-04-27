@@ -8,12 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.rickandmort.R;
 
+
 public class LocationsDetailsViewHolder extends RecyclerView.ViewHolder {
+
     TextView characterName,characterSpecies, characterGender, characterStatus;
     ImageView characterImage;
 
     public LocationsDetailsViewHolder(@NonNull View itemView) {
         super(itemView);
+
         characterName = itemView.findViewById(R.id.character_name);
         characterSpecies = itemView.findViewById(R.id.character_species);
         characterGender = itemView.findViewById(R.id.character_gender);

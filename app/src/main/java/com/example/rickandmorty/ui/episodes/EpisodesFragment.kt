@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -15,9 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodesBinding
+import com.example.rickandmorty.KEY_TO_CHARACTER_DETAILS
+import com.example.rickandmorty.KEY_TO_EPISODE_DETAILS
 import com.example.rickandmorty.api.EpisodesResult
 import com.example.rickandmorty.api.NetworkController
 import com.example.rickandmorty.ui.RecyclerMargin
+import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
 import com.example.rickandmorty.ui.episodesdetails.EpisodeDetailsFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -26,7 +30,8 @@ import kotlinx.coroutines.launch
 class EpisodesFragment : Fragment() {
 
     private lateinit var binding: FragmentEpisodesBinding
-    private val viewModel: EpisodesViewModel by activityViewModels()
+    private val viewModel: EpisodesViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,9 +57,12 @@ class EpisodesFragment : Fragment() {
             addItemDecoration()
             if (adapter == null) {
                 adapter = EpisodesPagingAdapter {
-                    viewModel.getEpisode(it)
+                    val bundle = Bundle()
+                    bundle.putInt(KEY_TO_EPISODE_DETAILS, it)
+                    val episodeDetailsFragment = EpisodeDetailsFragment()
+                    episodeDetailsFragment.arguments = bundle
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.container, EpisodeDetailsFragment())
+                        .replace(R.id.container, episodeDetailsFragment)
                         .addToBackStack("")
                         .commit()
                 }
