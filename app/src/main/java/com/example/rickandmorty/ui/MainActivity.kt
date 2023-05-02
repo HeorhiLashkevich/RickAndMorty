@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+//        CharactersDataBase.initDataBase(this)
         loadFragment(CharactersFragment())
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.setOnItemSelectedListener {
@@ -31,7 +32,9 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(LocationsFragment())
                     true
                 }
-                else -> {false}
+                else -> {
+                    false
+                }
             }
         }
     }

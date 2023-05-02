@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rickandmort.R;
 
 
-public class LocationsDetailsViewHolder extends RecyclerView.ViewHolder {
+public class LocationDetailsViewHolder extends RecyclerView.ViewHolder {
 
     TextView characterName,characterSpecies, characterGender, characterStatus;
     ImageView characterImage;
 
-    public LocationsDetailsViewHolder(@NonNull View itemView) {
+    public LocationDetailsViewHolder(@NonNull View itemView) {
         super(itemView);
 
         characterName = itemView.findViewById(R.id.character_name);

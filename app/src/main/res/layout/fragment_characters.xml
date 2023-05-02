@@ -7,46 +7,51 @@
     tools:context="com.example.rickandmorty.ui.characters.CharactersFragment">
 
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/character_search"
         android:layout_width="300dp"
         android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </SearchView>
+        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.SearchView>
 
 
-    <ProgressBar
-        android:id="@+id/determinateBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_characters"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:layout_marginStart="190dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:progress="25"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_marginTop="40dp"
-        android:id="@+id/swipe_characters"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/character_search">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_characters"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
+<!--    <ProgressBar-->
+<!--        android:id="@+id/determinateBar"-->
+<!--        style="@android:style/Widget.ProgressBar.Horizontal"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="190dp"-->
+<!--        android:layout_marginTop="350dp"-->
+<!--        android:progress="25"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
-        </androidx.recyclerview.widget.RecyclerView>
+
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:id="@+id/swipe_characters"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/character_search">-->
 
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

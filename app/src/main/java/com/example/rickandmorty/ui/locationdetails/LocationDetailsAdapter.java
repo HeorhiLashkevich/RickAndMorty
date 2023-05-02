@@ -15,28 +15,25 @@ import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
-public class LocationsDetailsAdapter extends RecyclerView.Adapter<LocationsDetailsViewHolder> {
+public class LocationDetailsAdapter extends RecyclerView.Adapter<LocationDetailsViewHolder> {
     List<CharactersResult> list;
     private final PublishSubject<CharactersResult> mViewClickSubject = PublishSubject.create();
-
     public Observable<CharactersResult> getViewClickedObservable() {
         return mViewClickSubject.observeOn(Schedulers.io());
     }
 
-
-    public LocationsDetailsAdapter(List<CharactersResult> items) {
+    public LocationDetailsAdapter(List<CharactersResult> items) {
         this.list = items;
 
     }
-
     @NonNull
     @Override
-    public LocationsDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new LocationsDetailsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_characters, parent, false));
+    public LocationDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new LocationDetailsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_characters, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LocationsDetailsViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull LocationDetailsViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.characterName.setText(list.get(position).getName());
         holder.characterSpecies.setText(list.get(position).getSpecies());
         holder.characterGender.setText(list.get(position).getGender());
@@ -50,7 +47,6 @@ public class LocationsDetailsAdapter extends RecyclerView.Adapter<LocationsDetai
         });
 
     }
-
 
     @Override
     public int getItemCount() {

@@ -6,12 +6,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.api.CharactersResult
 
 import com.example.rickandmorty.api.EpisodesResult
-import com.example.rickandmorty.api.NetworkController
 import com.example.rickandmorty.api.RickAndMortyApi
+import com.example.rickandmorty.di.NetworkController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class EpisodeDetailsViewModel(
+
+    private val api: RickAndMortyApi
 ) : ViewModel() {
 
     var characters = MutableLiveData<ArrayList<CharactersResult>>()
@@ -20,7 +23,7 @@ class EpisodeDetailsViewModel(
 
     fun getEpisode(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = NetworkController.getRickAndMortyApi().getEpisode(id)
+            val response = api.getEpisode(id)
             if (response.isSuccessful) {
                 charactersIds = response.body()?.let { getCharactersIds(it.characters) }!!
                 episode.postValue(response.body())
@@ -45,7 +48,7 @@ class EpisodeDetailsViewModel(
     private fun getCharacters(list: ArrayList<Int>) {
         viewModelScope.launch(Dispatchers.IO) {
             episode.value?.let { getCharactersIds(it.characters) }
-            val response = NetworkController.getRickAndMortyApi().getMultiCharacters(list)
+            val response = api.getMultiCharacters(list)
             if (response.isSuccessful) {
                 characters.postValue(response.body())
             }

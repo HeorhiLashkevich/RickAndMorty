@@ -3,10 +3,12 @@ package com.example.rickandmorty.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.rickandmorty.api.LocationsResult
+import javax.inject.Inject
 
-class LocationsDataStore : PagingSource<Int, LocationsResult>() {
+class LocationsDataStore @Inject constructor(
+    private val repository: LocationsRepository
+) : PagingSource<Int, LocationsResult>() {
 
-    private val repository = LocationsRepository()
 
     override fun getRefreshKey(state: PagingState<Int, LocationsResult>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -18,7 +20,7 @@ class LocationsDataStore : PagingSource<Int, LocationsResult>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, LocationsResult> {
         return try {
             val key = params.key ?: 1
-            val response = repository.getEpisodes(params.loadSize, key)
+            val response = repository.getLocations(params.loadSize, key)
             val nextKey = key + 1
 
             LoadResult.Page(

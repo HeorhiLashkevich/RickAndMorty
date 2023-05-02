@@ -1,36 +1,45 @@
 package com.example.rickandmorty.ui.episodes
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodesBinding
-import com.example.rickandmorty.KEY_TO_CHARACTER_DETAILS
+import com.example.rickandmorty.App
 import com.example.rickandmorty.KEY_TO_EPISODE_DETAILS
 import com.example.rickandmorty.api.EpisodesResult
-import com.example.rickandmorty.api.NetworkController
 import com.example.rickandmorty.ui.RecyclerMargin
-import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
 import com.example.rickandmorty.ui.episodesdetails.EpisodeDetailsFragment
-import kotlinx.coroutines.Dispatchers
+import com.example.rickandmorty.ui.locations.LocationsModelProvider
+import com.example.rickandmorty.ui.locations.LocationsViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class EpisodesFragment : Fragment() {
 
     private lateinit var binding: FragmentEpisodesBinding
-    private val viewModel: EpisodesViewModel by viewModels()
+//    private val viewModel: EpisodesViewModel by viewModels()
+    @Inject
+    lateinit var viewModelProvider: EpisodesModelProvider
+    private lateinit var viewModel: EpisodesViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        App.appComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelProvider).get(EpisodesViewModel::class.java)
+    }
 
 
     override fun onCreateView(

@@ -1,12 +1,14 @@
 package com.example.rickandmorty.ui.locations
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,18 +16,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentLocationsBinding
+import com.example.rickandmorty.App
 import com.example.rickandmorty.KEY_TO_LOCATION_DETAILS
 import com.example.rickandmorty.api.LocationsResult
 import com.example.rickandmorty.ui.RecyclerMargin
-import com.example.rickandmorty.ui.locationdetails.LocationsDetailsFragment
+import com.example.rickandmorty.ui.characters.CharactersModelProvider
+import com.example.rickandmorty.ui.characters.CharactersViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class LocationsFragment : Fragment() {
 
     private lateinit var binding: FragmentLocationsBinding
 
-    private val viewModel by viewModels<LocationsViewModel>()
+//    private val viewModel by viewModels<LocationsViewModel>()
+    @Inject
+    lateinit var viewModelProvider: LocationsModelProvider
+    private lateinit var viewModel: LocationsViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        App.appComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelProvider).get(LocationsViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,17 +64,18 @@ class LocationsFragment : Fragment() {
     private suspend fun setList(list: PagingData<LocationsResult>) {
         binding.recyclerLocations.run {
             addItemDecoration()
-            val locationsDetailsFragment = LocationsDetailsFragment()
+//            val locationDetailsFragment =
+//                LocationDetailsFragment()
 
             if (adapter == null) {
                 adapter = LocationsPagingAdapter{
                     val bundle = Bundle()
                     bundle.putInt(KEY_TO_LOCATION_DETAILS, it)
-                    locationsDetailsFragment.arguments = bundle
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.container, locationsDetailsFragment)
-                        .addToBackStack("")
-                        .commit()
+//                    locationDetailsFragment.arguments = bundle
+//                    parentFragmentManager.beginTransaction()
+//                        .replace(R.id.container, locationDetailsFragment)
+//                        .addToBackStack("")
+//                        .commit()
                 }
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

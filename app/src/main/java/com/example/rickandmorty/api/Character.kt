@@ -1,5 +1,7 @@
 package com.example.rickandmorty.api
 
+import com.google.gson.annotations.SerializedName
+
 data class Characters(
     val info: Info,
     val results: ArrayList<CharactersResult>

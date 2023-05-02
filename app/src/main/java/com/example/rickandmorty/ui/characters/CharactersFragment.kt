@@ -1,11 +1,13 @@
 package com.example.rickandmorty.ui.characters
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,18 +15,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentCharactersBinding
+import com.example.rickandmorty.App
 import com.example.rickandmorty.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
-import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class CharactersFragment : Fragment() {
+class CharactersFragment() : Fragment() {
 
     private lateinit var binding: FragmentCharactersBinding
-    private val viewModel by viewModels<CharactersViewModel>()
+//    private val viewModel by viewModels<CharactersViewModel>()
+
+    @Inject
+    lateinit var viewModelProvider: CharactersModelProvider
+    private lateinit var viewModel: CharactersViewModel
 
 
     override fun onCreateView(
@@ -36,6 +43,13 @@ class CharactersFragment : Fragment() {
         return binding.root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        App.appComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelProvider).get(CharactersViewModel::class.java)
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,23 +58,50 @@ class CharactersFragment : Fragment() {
                 initAdapter(it)
             }
         }
+
+
+//        binding.characterSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+//            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                lifecycleScope.launch {
+//                    filterFirsOfSecondName(newText)
+//                }
+//                return true
+//            }
+//
+//        })
+//    }
+//
+//    private suspend fun filterFirsOfSecondName(query: String?) {
+//        if (query != null) {
+//            viewModel.getBySearchedName(query)
+////            initAdapter(viewModel.listOfCharacters.value as PagingData<CharactersResult>)
+//
+//        }
+////        if (viewModel.listOfCharacters.value?.results!!.isNotEmpty()) {
+////
+////        }
+//
     }
 
 
     private suspend fun initAdapter(list: PagingData<CharactersResult>) {
         binding.recyclerCharacters.run {
-            val charactersDetailsFragment = CharactersDetailsFragment()
+//            val charactersDetailsFragment = CharactersDetailsFragment()
             addItemDecoration()
             if (adapter == null) {
                 adapter = CharactersPagingAdapter {
                     val bundle = Bundle()
                     bundle.putInt(KEY_TO_CHARACTER_DETAILS, it)
-                    charactersDetailsFragment.arguments = bundle
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.container, charactersDetailsFragment)
-                        .addToBackStack("")
-                        .commit()
-
+//                    charactersDetailsFragment.arguments = bundle
+//                    parentFragmentManager.beginTransaction()
+//                        .replace(R.id.container, charactersDetailsFragment)
+//                        .addToBackStack("")
+//                        .commit()
                 }
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -73,6 +114,8 @@ class CharactersFragment : Fragment() {
 //        }
     }
 
+
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun addItemDecoration() {
         val itemMargin = RecyclerMargin()
         val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
@@ -84,6 +127,9 @@ class CharactersFragment : Fragment() {
         }
     }
 
+}
+
+
 //    private fun setProgressBarAccordingToLoadState() {
 //        lifecycleScope.launch {
 //            CharactersPagingAdapter().loadStateFlow.collectLatest {
@@ -94,5 +140,5 @@ class CharactersFragment : Fragment() {
 //            }
 //        }
 //    }
-}
+
 
