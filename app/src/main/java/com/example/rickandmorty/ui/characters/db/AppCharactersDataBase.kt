@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.example.rickandmorty.ui.characters.charactersDao.CharactersDao
 
 
-@Database(entities = [CharactersRoom::class], version = 4)
+@Database(entities = [CharactersEntity::class], version = 4)
 @TypeConverters(TypeConverter::class)
 abstract class AppCharactersDataBase : RoomDatabase() {
 

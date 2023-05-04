@@ -1,8 +1,9 @@
 package com.example.rickandmorty
 
 import android.app.Application
-import com.example.rickandmorty.di.ApplicationComponent
-import com.example.rickandmorty.di.DaggerApplicationComponent
+import com.example.rickandmorty.di.components.ApplicationComponent
+import com.example.rickandmorty.di.components.DaggerApplicationComponent
+
 
 class App : Application() {
     override fun onCreate() {

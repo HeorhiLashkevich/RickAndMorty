@@ -17,17 +17,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.rickandmort.R;
 import com.example.rickandmort.databinding.FragmentCharacterDetailsBinding;
 import com.example.rickandmorty.App;
-import com.example.rickandmorty.CharactersItemClickListener;
+import com.example.rickandmorty.util.CharactersItemClickListener;
 import com.example.rickandmorty.api.CharactersResult;
 import com.example.rickandmorty.api.EpisodesResult;
-import com.example.rickandmorty.ui.base.BaseViewModelFactory;
 import com.example.rickandmorty.ui.episodesdetails.EpisodeDetailsFragment;
 import com.example.rickandmorty.ui.locationdetails.LocationDetailsFragment;
 import java.util.ArrayList;
@@ -77,9 +75,21 @@ public class CharactersDetailsFragment extends Fragment implements CharactersIte
 
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    binding.charactersDetailsBackButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View arg0) {
+            assert getFragmentManager() != null;
+            if (getFragmentManager().getBackStackEntryCount() != 0) {
+                getFragmentManager().popBackStack();
+            }
+        }
+
+    });
+
         viewModel.getCharacterValue(characterId).observe(getViewLifecycleOwner(), new Observer<CharactersResult>() {
             @Override
             public void onChanged(CharactersResult charactersResult) {

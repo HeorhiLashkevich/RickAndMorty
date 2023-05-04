@@ -3,7 +3,6 @@ package com.example.rickandmorty.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.rickandmorty.api.CharactersResult
-import com.example.rickandmorty.ui.characters.db.CharactersRoom
 import javax.inject.Inject
 
 class CharactersDataSource @Inject constructor(

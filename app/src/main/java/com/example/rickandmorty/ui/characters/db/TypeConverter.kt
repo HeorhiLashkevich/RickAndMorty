@@ -32,7 +32,7 @@ class TypeConverter {
     }
 
 
-        @TypeConverter
+    @TypeConverter
     fun fromLocation(location: Location?): String? {
         if (location == null) {
             return null
@@ -51,6 +51,7 @@ class TypeConverter {
         val type: Type = object : TypeToken<Location?>() {}.type
         return gson.fromJson<Location>(location, type)
     }
+
     @TypeConverter
     fun fromOrigin(origin: Origin?): String? {
         if (origin == null) {
@@ -71,7 +72,6 @@ class TypeConverter {
         val type: Type = object : TypeToken<Origin?>() {}.type
         return gson.fromJson<Origin>(origin, type)
     }
-
 
 
 }

@@ -1,4 +1,4 @@
-package com.example.rickandmorty.di
+package com.example.rickandmorty.di.modules
 
 import android.util.Log
 import com.example.rickandmorty.BASE_URL

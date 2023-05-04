@@ -1,6 +1,7 @@
 package com.example.rickandmorty.repository
 
 import com.example.rickandmorty.api.Characters
+import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.api.RickAndMortyApi
 
 import retrofit2.Response
@@ -13,7 +14,10 @@ class CharactersRepository @Inject constructor(
     suspend fun getCharacters(count: Int, page: Int): Response<Characters> {
         return api.getCharacters(limit = count, page = page)
     }
-//api.getCharacters(limit = count, page = page)
+
+    suspend fun getSearchedCharactersByName(name: String): Response<ArrayList<CharactersResult>> {
+        return api.getSearchedCharactersByName(name)
+    }
 
 //    suspend fun insertCharacter(list: ArrayList<CharactersRoom>) {
 //        CharactersDataBase.characterDao?.insertAllCharacters(list)
@@ -37,9 +41,7 @@ class CharactersRepository @Inject constructor(
 //    }
 
 
-//    suspend fun getSearchedCharactersByName(name: String): Response<ArrayList<CharactersResult>> {
-//        return NetworkController.getRickAndMortyApi().getSearchedCharactersByName(name)
-//    }
+
 //
 //    suspend fun getCharactersByStatus(
 //        status: String

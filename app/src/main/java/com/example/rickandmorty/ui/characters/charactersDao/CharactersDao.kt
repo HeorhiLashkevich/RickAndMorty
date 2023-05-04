@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.rickandmorty.ui.characters.db.CharactersRoom
+import com.example.rickandmorty.ui.characters.db.CharactersEntity
 import kotlinx.coroutines.flow.Flow
 
 
@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.Flow
 interface CharactersDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllCharacters(charactersRoom: ArrayList<CharactersRoom>)
+    suspend fun insertAllCharacters(charactersEntity: ArrayList<CharactersEntity>)
 
 //    @Query("SELECT * FROM characters")
-//    fun getAllCharacters(): Flow<ArrayList<CharactersRoom>>
+//    fun getAllCharacters(): ArrayList<CharactersEntity>
 //
 //    @Query("SELECT * FROM items WHERE characters LIKE :searchQuery")
 //    fun searchDatabase(searchQuery: String): Flow<ArrayList<CharactersRoom>>

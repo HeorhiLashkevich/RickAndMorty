@@ -20,5 +20,6 @@
     <string name="type">Type:</string>
     <string name="location">Location:</string>
     <string name="location_created">Location created:</string>
+    <string name="back_button">back button</string>
 
 </resources>

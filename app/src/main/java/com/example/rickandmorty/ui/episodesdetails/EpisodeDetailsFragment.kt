@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,9 +19,6 @@ import com.example.rickandmorty.KEY_TO_EPISODE_DETAILS
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
 import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
-import com.example.rickandmorty.ui.characters.CharactersModelProvider
-import com.example.rickandmorty.ui.characters.CharactersViewModel
-import com.example.rickandmorty.ui.episodes.EpisodesViewModel
 import javax.inject.Inject
 
 
@@ -61,6 +57,12 @@ class EpisodeDetailsFragment : Fragment() {
 
         viewModel. characters.observe(viewLifecycleOwner) {
             initAdapter(it)
+        }
+        binding.episodeDetailsBackButton.setOnClickListener{
+            assert(fragmentManager != null)
+            if (requireFragmentManager().backStackEntryCount != 0) {
+                requireFragmentManager().popBackStack()
+            }
         }
 
         viewModel.episode.observe(viewLifecycleOwner) {

@@ -9,13 +9,27 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.rickandmorty.COUNT_ITEM_CHARACTERS
 import com.example.rickandmorty.api.CharactersResult
-import com.example.rickandmorty.api.RickAndMortyApi
+
 import com.example.rickandmorty.repository.CharactersDataSource
+import com.example.rickandmorty.ui.characters.charactersDao.CharactersDao
+import javax.inject.Inject
 
 
 class CharactersViewModel(
     dataSource: CharactersDataSource
 ) : ViewModel() {
+    @Inject
+    lateinit var charactersDao: CharactersDao
+
+    var allCharactersList: MutableLiveData<ArrayList<CharactersResult>> = MutableLiveData()
+    fun getCharactersObserver(): MutableLiveData<ArrayList<CharactersResult>>{
+        return allCharactersList
+    }
+
+//    fun getAllCharacters(){
+//        val list = charactersDao.getAllCharacters()
+//        allCharactersList.postValue(list)
+//    }
 
     val flow = Pager(
         PagingConfig(
@@ -25,6 +39,7 @@ class CharactersViewModel(
     ) {
         dataSource
     }.flow.cachedIn(viewModelScope)
+
 
 
 //    fun getBySearchedName(name: String) {

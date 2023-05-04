@@ -4,7 +4,6 @@ import static com.example.rickandmorty.ConstansKt.KEY_TO_CHARACTER_DETAILS;
 import static com.example.rickandmorty.ConstansKt.KEY_TO_LOCATION_DETAILS;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,11 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rickandmort.R;
 import com.example.rickandmort.databinding.FragmentLocationDetailsBinding;
 import com.example.rickandmorty.App;
-import com.example.rickandmorty.LocationItemClickListener;
+import com.example.rickandmorty.util.LocationItemClickListener;
 import com.example.rickandmorty.api.CharactersResult;
 import com.example.rickandmorty.api.LocationsResult;
 import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment;
-import com.example.rickandmorty.ui.characterdetails.CharactersDetailsViewModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -60,6 +57,16 @@ public class LocationDetailsFragment extends Fragment implements LocationItemCli
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.locationsDetailsBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                assert getFragmentManager() != null;
+                if (getFragmentManager().getBackStackEntryCount() != 0) {
+                    getFragmentManager().popBackStack();
+                }
+            }
+
+        });
         viewModel.getCurrentLocation(locationId).observe(getViewLifecycleOwner(), new Observer<LocationsResult>() {
             @Override
             public void onChanged(LocationsResult locationsResult) {

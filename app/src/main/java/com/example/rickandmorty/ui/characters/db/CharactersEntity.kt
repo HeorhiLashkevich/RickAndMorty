@@ -9,7 +9,7 @@ import com.example.rickandmorty.api.Location
 import com.example.rickandmorty.api.Origin
 
 @Entity(tableName = "characters")
-data class CharactersRoom(
+data class  CharactersEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long? = 0,
     @ColumnInfo(name = "created")
