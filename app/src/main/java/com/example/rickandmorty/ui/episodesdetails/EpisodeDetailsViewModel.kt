@@ -7,13 +7,10 @@ import com.example.rickandmorty.api.CharactersResult
 
 import com.example.rickandmorty.api.EpisodesResult
 import com.example.rickandmorty.api.RickAndMortyApi
-import com.example.rickandmorty.di.NetworkController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class EpisodeDetailsViewModel(
-
     private val api: RickAndMortyApi
 ) : ViewModel() {
 

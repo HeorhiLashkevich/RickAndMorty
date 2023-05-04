@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetworkController {
+class NetworkModule {
     @Provides
     @Singleton
     fun getRickAndMortyApi(): RickAndMortyApi {
@@ -28,6 +28,7 @@ class NetworkController {
         return retrofit.create((RickAndMortyApi::class.java))
     }
 
+    @Singleton
     private fun getOkHttpClient() =
         OkHttpClient.Builder()
             .addInterceptor(

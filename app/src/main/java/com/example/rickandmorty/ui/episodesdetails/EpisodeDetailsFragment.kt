@@ -1,29 +1,44 @@
 package com.example.rickandmorty.ui.episodesdetails
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
+import com.example.rickandmorty.App
 import com.example.rickandmorty.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.KEY_TO_EPISODE_DETAILS
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
+import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
+import com.example.rickandmorty.ui.characters.CharactersModelProvider
+import com.example.rickandmorty.ui.characters.CharactersViewModel
+import com.example.rickandmorty.ui.episodes.EpisodesViewModel
+import javax.inject.Inject
 
 
 class EpisodeDetailsFragment : Fragment() {
     private lateinit var binding: FragmentEpisodeDetailsBinding
     private var episodeId = 0
-    private val viewModel: EpisodeDetailsViewModel by viewModels()
 
+    @Inject
+    lateinit var viewModelProvider: EpisodeDetailsModelProvider
+    private lateinit var viewModel: EpisodeDetailsViewModel
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        App.appComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelProvider).get(EpisodeDetailsViewModel::class.java)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -44,7 +59,7 @@ class EpisodeDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.characters.observe(viewLifecycleOwner) {
+        viewModel. characters.observe(viewLifecycleOwner) {
             initAdapter(it)
         }
 
@@ -67,12 +82,12 @@ class EpisodeDetailsFragment : Fragment() {
                 adapter = EpisodeDetailsAdapter {
                     val bundle = Bundle()
                     bundle.putInt(KEY_TO_CHARACTER_DETAILS, it)
-//                    val charactersDetailsFragment = CharactersDetailsFragment()
-//                    charactersDetailsFragment.arguments = bundle
-//                    parentFragmentManager.beginTransaction()
-//                        .replace(R.id.container, charactersDetailsFragment)
-//                        .addToBackStack("")
-//                        .commit()
+                    val charactersDetailsFragment = CharactersDetailsFragment()
+                    charactersDetailsFragment.arguments = bundle
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.container, charactersDetailsFragment)
+                        .addToBackStack("")
+                        .commit()
                 }
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

@@ -17,8 +17,6 @@ class CharactersViewModel(
     dataSource: CharactersDataSource
 ) : ViewModel() {
 
-    var listOfCharacters = MutableLiveData<ArrayList<CharactersResult>>()
-
     val flow = Pager(
         PagingConfig(
             pageSize = COUNT_ITEM_CHARACTERS,

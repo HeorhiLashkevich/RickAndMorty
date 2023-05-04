@@ -1,6 +1,5 @@
 package com.example.rickandmorty.ui.episodes
 
-import com.example.rickandmorty.api.RickAndMortyApi
 import com.example.rickandmorty.repository.EpisodesDataStore
 import com.example.rickandmorty.ui.base.BaseViewModelFactory
 import javax.inject.Inject

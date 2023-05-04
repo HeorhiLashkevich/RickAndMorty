@@ -19,6 +19,7 @@ import com.example.rickandmorty.App
 import com.example.rickandmorty.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.ui.RecyclerMargin
+import com.example.rickandmorty.ui.characterdetails.CharactersDetailsFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,8 +28,6 @@ import javax.inject.Inject
 class CharactersFragment() : Fragment() {
 
     private lateinit var binding: FragmentCharactersBinding
-//    private val viewModel by viewModels<CharactersViewModel>()
-
     @Inject
     lateinit var viewModelProvider: CharactersModelProvider
     private lateinit var viewModel: CharactersViewModel
@@ -91,17 +90,17 @@ class CharactersFragment() : Fragment() {
 
     private suspend fun initAdapter(list: PagingData<CharactersResult>) {
         binding.recyclerCharacters.run {
-//            val charactersDetailsFragment = CharactersDetailsFragment()
+            val charactersDetailsFragment = CharactersDetailsFragment()
             addItemDecoration()
             if (adapter == null) {
                 adapter = CharactersPagingAdapter {
                     val bundle = Bundle()
                     bundle.putInt(KEY_TO_CHARACTER_DETAILS, it)
-//                    charactersDetailsFragment.arguments = bundle
-//                    parentFragmentManager.beginTransaction()
-//                        .replace(R.id.container, charactersDetailsFragment)
-//                        .addToBackStack("")
-//                        .commit()
+                    charactersDetailsFragment.arguments = bundle
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.container, charactersDetailsFragment)
+                        .addToBackStack("")
+                        .commit()
                 }
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
