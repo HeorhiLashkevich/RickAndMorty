@@ -1,21 +1,17 @@
 package com.example.rickandmorty.di.modules
 
-import android.content.Context
-import com.example.rickandmorty.ui.characters.charactersDao.CharactersDao
-import com.example.rickandmorty.ui.characters.db.AppCharactersDataBase
-import com.example.rickandmorty.ui.characters.db.CharactersDataBase
-import com.example.rickandmorty.ui.characters.db.MyApplication
-import dagger.Module
-import dagger.Provides
+import com.example.rickandmorty.data.local.dao.CharactersDao
+import com.example.rickandmorty.data.local.AppCharactersDataBase
+import com.example.rickandmorty.present.characters.db.MyApplication
 import javax.inject.Singleton
 
 
-@Module
+
 class DataBaseModule(private val application: MyApplication) {
 
     @Singleton
-    @Provides
-    fun getCharacterDao(appCharactersDataBase: AppCharactersDataBase):CharactersDao{
+//    @Provides
+    fun getCharacterDao(appCharactersDataBase: AppCharactersDataBase): CharactersDao {
         return appCharactersDataBase.gerCharactersDao()
     }
 
@@ -26,7 +22,7 @@ class DataBaseModule(private val application: MyApplication) {
 //    }
 //    @Singleton
 //    @Provides
-//    private fun provideAppContext():Context{
+//     fun provideAppContext():Context{
 //        return  application.applicationContext
 //    }
 }

@@ -1,57 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.example.rickandmorty.ui.characters.CharactersFragment">
 
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/character_search"
+        android:id="@+id/characterSearch"
         android:layout_width="300dp"
         android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.SearchView>
+        app:layout_constraintTop_toTopOf="parent">
 
+    </androidx.appcompat.widget.SearchView>
 
+    <Button
+        android:id="@+id/toCharacterSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/characterSearch"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </Button>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_characters"
+        android:id="@+id/recyclerCharacters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/character_search">
+        app:layout_constraintTop_toBottomOf="@id/characterSearch">
 
     </androidx.recyclerview.widget.RecyclerView>
-<!--    <ProgressBar-->
-<!--        android:id="@+id/determinateBar"-->
-<!--        style="@android:style/Widget.ProgressBar.Horizontal"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="190dp"-->
-<!--        android:layout_marginTop="350dp"-->
-<!--        android:progress="25"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:ignore="MissingConstraints" />-->
-
-
-<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
-<!--        android:id="@+id/swipe_characters"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/character_search">-->
-
-
-<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

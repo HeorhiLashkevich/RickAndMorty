@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.rickandmort.R
-import com.example.rickandmorty.ui.characters.CharactersFragment
-import com.example.rickandmorty.ui.episodes.EpisodesFragment
-import com.example.rickandmorty.ui.locations.LocationsFragment
+import com.example.rickandmorty.present.characters.CharactersFragment
+import com.example.rickandmorty.present.characters.db.CharactersDataBaseRepository
+import com.example.rickandmorty.present.episodes.EpisodesFragment
+import com.example.rickandmorty.present.locations.LocationsFragment
+
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -15,7 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        CharactersDataBase.initDataBase(this)
+
+        CharactersDataBaseRepository.initDataBase(this)
         loadFragment(CharactersFragment())
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.setOnItemSelectedListener {
@@ -40,8 +43,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, fragment)
+            .addToBackStack("")
+            .commit()
     }
 }

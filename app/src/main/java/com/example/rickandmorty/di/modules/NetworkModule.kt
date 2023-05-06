@@ -2,7 +2,7 @@ package com.example.rickandmorty.di.modules
 
 import android.util.Log
 import com.example.rickandmorty.BASE_URL
-import com.example.rickandmorty.api.RickAndMortyApi
+import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
