@@ -5,6 +5,9 @@ import com.example.rickandmorty.COUNT_ITEM_CHARACTERS
 import com.example.rickandmorty.COUNT_ITEM_EPISODES
 import com.example.rickandmorty.COUNT_ITEM_LOCATIONS
 import com.example.rickandmorty.api.*
+import com.example.rickandmorty.data.model.EpisodeEntity
+import com.example.rickandmorty.data.model.PagedResponse
+import com.example.rickandmorty.data.remove.service.model.EpisodesResult
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.GET
@@ -63,7 +66,7 @@ interface RickAndMortyApi {
     suspend fun getEpisodes(
         @Query("limit") limit: Int? = COUNT_ITEM_EPISODES,
         @Query("page") page: Int? = 0
-    ): Response<Episodes>
+    ): Response<PagedResponse<EpisodeEntity>>
 
     @GET("episode/{id}")
     suspend fun getEpisode(

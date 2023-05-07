@@ -1,5 +1,6 @@
 package com.example.rickandmorty.present.locations
 
+import com.example.rickandmorty.data.local.paging.datasource.LocationsDataStore
 import com.example.rickandmorty.ui.base.BaseViewModelFactory
 import javax.inject.Inject
 

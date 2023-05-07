@@ -1,4 +1,4 @@
-package com.example.rickandmorty.data
+package com.example.rickandmorty.data.repository
 
 import com.example.rickandmorty.api.Locations
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi

@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.rickandmort.R
 import com.example.rickandmorty.present.characters.CharactersFragment
-import com.example.rickandmorty.present.characters.db.CharactersDataBaseRepository
 import com.example.rickandmorty.present.episodes.EpisodesFragment
 import com.example.rickandmorty.present.locations.LocationsFragment
 
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        CharactersDataBaseRepository.initDataBase(this)
+//        CharactersDataBaseModule.initDataBase(this)
         loadFragment(CharactersFragment())
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.setOnItemSelectedListener {

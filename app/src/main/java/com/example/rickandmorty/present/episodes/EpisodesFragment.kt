@@ -17,7 +17,7 @@ import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodesBinding
 import com.example.rickandmorty.App
 import com.example.rickandmorty.KEY_TO_EPISODE_DETAILS
-import com.example.rickandmorty.api.EpisodesResult
+import com.example.rickandmorty.data.model.EpisodeEntity
 import com.example.rickandmorty.present.episodesdetails.EpisodeDetailsFragment
 import com.example.rickandmorty.utils.RecyclerMargin
 import kotlinx.coroutines.flow.collectLatest
@@ -52,13 +52,11 @@ class EpisodesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
-            viewModel.flow.collectLatest {
-                initAdapter(it)
-            }
+            viewModel.flow.collectLatest(::initAdapter)
         }
     }
 
-    private suspend fun initAdapter(list: PagingData<EpisodesResult>) {
+    private suspend fun initAdapter(list: PagingData<EpisodeEntity>) {
         binding.recyclerEpisodes.run {
             addItemDecoration()
             if (adapter == null) {

@@ -20,7 +20,6 @@ import com.example.rickandmorty.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.utils.RecyclerMargin
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment
-import com.example.rickandmorty.present.characters.chechDb.CharactersSearchFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -60,12 +59,12 @@ class CharactersFragment() : Fragment() {
                 initAdapter(it)
             }
         }
-        binding.toCharacterSearch.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.container, CharactersSearchFragment())
-                .addToBackStack("")
-                .commit()
-        }
+//        binding.toCharacterSearch.setOnClickListener {
+//            parentFragmentManager.beginTransaction()
+//                .replace(R.id.container, CharactersSearchFragment())
+//                .addToBackStack("")
+//                .commit()
+//        }
 
 
 //        binding.characterSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener,

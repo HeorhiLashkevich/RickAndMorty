@@ -3,6 +3,8 @@ package com.example.rickandmorty
 import android.app.Application
 import com.example.rickandmorty.di.components.ApplicationComponent
 import com.example.rickandmorty.di.components.DaggerApplicationComponent
+import com.example.rickandmorty.di.modules.ContextModule
+import com.example.rickandmorty.di.modules.DataBaseModule
 
 
 class App : Application() {
@@ -12,7 +14,9 @@ class App : Application() {
     }
 
     private fun initAppComponent() {
-        appComponent = DaggerApplicationComponent.builder()
+        appComponent =  DaggerApplicationComponent.builder()
+            .contextModule(ContextModule(this))
+            .dataBaseModule(DataBaseModule)
             .build()
     }
 

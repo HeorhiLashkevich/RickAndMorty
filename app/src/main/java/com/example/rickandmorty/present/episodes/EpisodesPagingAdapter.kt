@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.example.rickandmort.databinding.ItemEpisodesBinding
-import com.example.rickandmorty.api.EpisodesResult
+import com.example.rickandmorty.data.local.paging.datasource.EpisodesDiffUtil
+import com.example.rickandmorty.data.model.EpisodeEntity
 
 class EpisodesPagingAdapter(
     private val onClick: (id: Int) -> Unit
-) : PagingDataAdapter<EpisodesResult, EpisodesViewHolder>(EpisodesDiffUtil()) {
+) : PagingDataAdapter<EpisodeEntity, EpisodesViewHolder>(EpisodesDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodesViewHolder {
         return EpisodesViewHolder(

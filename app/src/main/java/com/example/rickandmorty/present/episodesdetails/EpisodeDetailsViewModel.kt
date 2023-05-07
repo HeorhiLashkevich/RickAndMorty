@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.api.CharactersResult
 
-import com.example.rickandmorty.api.EpisodesResult
+import com.example.rickandmorty.data.remove.service.model.EpisodesResult
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

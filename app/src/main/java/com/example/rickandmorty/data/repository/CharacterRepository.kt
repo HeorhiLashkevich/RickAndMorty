@@ -1,16 +1,18 @@
-package com.example.rickandmorty.repository
+package com.example.rickandmorty.data.repository
 
 import com.example.rickandmorty.api.Characters
 import com.example.rickandmorty.api.CharactersResult
+import com.example.rickandmorty.data.model.CharactersEntity
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
-import com.example.rickandmorty.data.local.model.CharactersEntity
-import com.example.rickandmorty.present.characters.db.CharactersDataBaseRepository
+import com.example.rickandmorty.di.modules.DataBaseModule
+
 
 import retrofit2.Response
 import javax.inject.Inject
 
 class CharactersRepository @Inject constructor(
     private val api: RickAndMortyApi,
+//   private val dataBaseModule: DataBaseModule
 //    private val charactersDao: CharactersDao
 ) {
 
@@ -19,7 +21,8 @@ class CharactersRepository @Inject constructor(
     }
 
     suspend fun insertCharacter(list: List<CharactersEntity>) {
-        CharactersDataBaseRepository.characterDao?.insertAllCharacters(list) as List<CharactersEntity>
+//        dataBaseModule.characterDao?.insertAll(list)
+//        DataBaseModule.characterDao?.insertAll(list) as List<*>
     }
 
 //    suspend fun getAllCharacters(): List<CharactersEntity> {

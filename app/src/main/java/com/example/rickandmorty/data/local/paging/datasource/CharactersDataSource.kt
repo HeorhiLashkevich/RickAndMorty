@@ -1,9 +1,9 @@
-package com.example.rickandmorty.present.characters
+package com.example.rickandmorty.data.local.paging.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.rickandmorty.api.CharactersResult
-import com.example.rickandmorty.repository.CharactersRepository
+import com.example.rickandmorty.data.repository.CharactersRepository
 import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
@@ -24,9 +24,7 @@ class CharactersDataSource @Inject constructor(
         return try {
             val key = params.key ?: 1
             val response = repository.getCharacters(params.loadSize, key)
-//            repository.insertCharacter(response.body()?.results as List<CharactersEntity>)
             val nextKey = key + 1
-//            CharactersDataBaseRepisitory.characterDao?.insertAllCharacters(response.body()?.results as ArrayList<CharactersEntity>)
             LoadResult.Page(
                 data = response.body()?.results as ArrayList<CharactersResult>,
                 prevKey = null,

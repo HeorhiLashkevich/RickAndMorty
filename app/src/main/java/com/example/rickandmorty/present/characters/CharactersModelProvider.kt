@@ -1,5 +1,6 @@
 package com.example.rickandmorty.present.characters
 
+import com.example.rickandmorty.data.local.paging.datasource.CharactersDataSource
 import com.example.rickandmorty.ui.base.BaseViewModelFactory
 import javax.inject.Inject
 
@@ -7,6 +8,8 @@ import javax.inject.Inject
 
 class CharactersModelProvider @Inject constructor(
     private val dataSource: CharactersDataSource,
+//    private val api: RickAndMortyApi,
+//    private val db: AppCharactersDataBase
 ) :
     BaseViewModelFactory<CharactersViewModel>(CharactersViewModel::class.java) {
     override fun createViewModel(): CharactersViewModel {

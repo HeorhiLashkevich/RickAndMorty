@@ -1,4 +1,4 @@
-package com.example.rickandmorty.present.characters
+package com.example.rickandmorty.data.local.paging.datasource
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.rickandmorty.api.CharactersResult

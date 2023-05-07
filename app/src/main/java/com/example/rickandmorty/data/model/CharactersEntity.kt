@@ -1,4 +1,4 @@
-package com.example.rickandmorty.data.local.model
+package com.example.rickandmorty.data.model
 
 
 import androidx.room.ColumnInfo
@@ -37,6 +37,7 @@ data class  CharactersEntity(
     @ColumnInfo(name = "type")
     val type: String,
     @ColumnInfo(name = "url")
-    val url: String
+    val url: String,
+    var page: Int?
 )
 

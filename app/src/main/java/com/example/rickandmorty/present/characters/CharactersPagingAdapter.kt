@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.example.rickandmort.databinding.ItemCharactersBinding
 import com.example.rickandmorty.api.CharactersResult
+import com.example.rickandmorty.data.local.paging.datasource.CharactersDiffUtil
 
 class CharactersPagingAdapter(
     private val onCharacterClick: (id: Int) -> Unit

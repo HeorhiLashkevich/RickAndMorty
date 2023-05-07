@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.databinding.ItemCharactersBinding
-import com.example.rickandmorty.data.local.model.CharactersEntity
+import com.example.rickandmorty.api.CharactersResult
 
 class CharSearchAdapter (
 ) : RecyclerView.Adapter<CharSearchViewHolder>() {
-    private var list = listOf<CharactersEntity>()
+    private var list = listOf<CharactersResult>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharSearchViewHolder {
         return CharSearchViewHolder(
@@ -28,7 +28,7 @@ class CharSearchAdapter (
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<CharactersEntity>) {
+    fun setList(list: List<CharactersResult>) {
         this.list = list
         notifyDataSetChanged()
     }

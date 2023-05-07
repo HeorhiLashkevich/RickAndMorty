@@ -6,6 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.rickandmorty.COUNT_ITEM_LOCATIONS
+import com.example.rickandmorty.data.local.paging.datasource.LocationsDataStore
 
 
 class LocationsViewModel(

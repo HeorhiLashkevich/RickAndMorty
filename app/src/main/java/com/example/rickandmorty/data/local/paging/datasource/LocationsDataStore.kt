@@ -1,9 +1,9 @@
-package com.example.rickandmorty.present.locations
+package com.example.rickandmorty.data.local.paging.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.rickandmorty.api.LocationsResult
-import com.example.rickandmorty.data.LocationsRepository
+import com.example.rickandmorty.data.repository.LocationsRepository
 import javax.inject.Inject
 
 class LocationsDataStore @Inject constructor(

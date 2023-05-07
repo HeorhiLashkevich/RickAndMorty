@@ -27,7 +27,7 @@ import com.example.rickandmorty.App;
 import com.example.rickandmorty.present.episodesdetails.EpisodeDetailsFragment;
 import com.example.rickandmorty.present.locationdetails.LocationDetailsFragment;
 import com.example.rickandmorty.api.CharactersResult;
-import com.example.rickandmorty.api.EpisodesResult;
+import com.example.rickandmorty.data.remove.service.model.EpisodesResult;
 import com.example.rickandmorty.utils.CharactersItemClickListener;
 
 import java.util.ArrayList;

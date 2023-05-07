@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.rickandmort.R;
-import com.example.rickandmorty.api.CharactersResult;
-import com.example.rickandmorty.api.EpisodesResult;
+import com.example.rickandmorty.data.remove.service.model.EpisodesResult;
 import java.util.List;
 
 import io.reactivex.Observable;
