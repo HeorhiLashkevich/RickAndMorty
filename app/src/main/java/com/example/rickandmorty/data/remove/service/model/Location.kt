@@ -1,4 +1,6 @@
-package com.example.rickandmorty.api
+package com.example.rickandmorty.data.remove.service.model
+
+import com.example.rickandmorty.api.Info
 
 data class Locations(
     val info: Info,

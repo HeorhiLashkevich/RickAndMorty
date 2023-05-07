@@ -7,19 +7,19 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.rickandmorty.data.local.AppDataBase
-import com.example.rickandmorty.data.model.EpisodeEntity
+import com.example.rickandmorty.data.model.LocationsEntity
 import com.example.rickandmorty.data.model.PageKey
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 
 @OptIn(ExperimentalPagingApi::class)
-class EpisodeRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
-    RemoteMediator<Int, EpisodeEntity>() {
-    private val episodeDao = db.getEpisodesDao()
+class LocationsRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
+    RemoteMediator<Int, LocationsEntity>() {
+    private val locationsDao = db.getLocationsDao()
     private val keyDao = db.getPageKeyDao()
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, EpisodeEntity>
+        state: PagingState<Int, LocationsEntity>
     ): MediatorResult {
         return try {
             val loadKey = when (loadType) {
@@ -30,7 +30,7 @@ class EpisodeRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
                     val lastItem = state.lastItemOrNull()
                     val remoteKey: PageKey? = db.withTransaction {
                         if (lastItem?.id != null) {
-                            keyDao.getNextPageKey(lastItem.id)
+                            keyDao.getNextPageKey(lastItem.id.toInt())
                         } else null
                     }
 
@@ -46,20 +46,20 @@ class EpisodeRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
                 }
             }
 
-            val response = service.getEpisodes(loadKey ?: 1)
+            val response = service.getLocations(loadKey ?: 1)
             val resBody = response.body()
             val pageInfo = resBody?.pageInfo
-            val episodes = resBody?.results
+            val locations = resBody?.results
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    episodeDao.clearAll()
+                    locationsDao.clearAll()
                     keyDao.clearAll()
                 }
-                episodes?.forEach {
+                locations?.forEach {
                     it.page = loadKey
                     keyDao.insertOrReplace(PageKey(it.id.toLong(), pageInfo?.next))
                 }
-                episodes?.let { episodeDao.insertAll(it) }
+                locations?.let { locationsDao.insertAll(it) }
             }
 
             MediatorResult.Success(
@@ -69,5 +69,4 @@ class EpisodeRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
             MediatorResult.Error(e)
         }
     }
-
 }

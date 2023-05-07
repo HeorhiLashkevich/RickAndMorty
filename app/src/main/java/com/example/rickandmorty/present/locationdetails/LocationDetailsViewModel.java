@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rickandmorty.api.CharactersResult;
-import com.example.rickandmorty.api.LocationsResult;
+import com.example.rickandmorty.data.remove.service.model.LocationsResult;
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi;
 import java.util.ArrayList;
 import java.util.List;

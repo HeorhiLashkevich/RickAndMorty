@@ -1,14 +1,15 @@
 package com.example.rickandmorty.data.local.paging.datasource
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.rickandmorty.api.LocationsResult
+import com.example.rickandmorty.data.model.LocationsEntity
+import com.example.rickandmorty.data.remove.service.model.LocationsResult
 
-class LocationsDiffUtil : DiffUtil.ItemCallback<LocationsResult>() {
-    override fun areItemsTheSame(oldItem: LocationsResult, newItem: LocationsResult): Boolean {
+class LocationsDiffUtil : DiffUtil.ItemCallback<LocationsEntity>() {
+    override fun areItemsTheSame(oldItem: LocationsEntity, newItem: LocationsEntity): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: LocationsResult, newItem: LocationsResult): Boolean {
+    override fun areContentsTheSame(oldItem: LocationsEntity, newItem: LocationsEntity): Boolean {
         return oldItem == newItem
     }
 }

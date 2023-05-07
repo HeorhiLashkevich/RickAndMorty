@@ -3,6 +3,8 @@ package com.example.rickandmorty.data.repository
 import com.example.rickandmorty.api.Characters
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.data.model.CharactersEntity
+import com.example.rickandmorty.data.model.EpisodeEntity
+import com.example.rickandmorty.data.model.PagedResponse
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 import com.example.rickandmorty.di.modules.DataBaseModule
 
@@ -16,7 +18,7 @@ class CharactersRepository @Inject constructor(
 //    private val charactersDao: CharactersDao
 ) {
 
-    suspend fun getCharacters(count: Int, page: Int): Response<Characters> {
+    suspend fun getCharacters(count: Int, page: Int): Response<PagedResponse<CharactersEntity>> {
         return api.getCharacters(limit = count, page = page)
     }
 

@@ -7,13 +7,15 @@ import com.example.rickandmorty.data.model.CharactersEntity
 @Dao
 interface CharactersDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun insertAll(characters: List<CharactersEntity>)
+    suspend fun insertAll(characters: List<CharactersEntity>)
 
     @Query("SELECT * FROM characters")
     fun pagingSource(): PagingSource<Int, CharactersEntity>
 
     @Query("DELETE FROM characters")
-     fun clearAll()
+    suspend fun clearAll()
+
+
 //    @Query("SELECT * FROM characters WHERE :name IS NULL OR name = :name")
 //    fun getPagingSource(
 //        name: String?
@@ -39,7 +41,6 @@ interface CharactersDao {
 //    suspend fun deleteByName(name: String)
 
 
-
 //    @Query("SELECT * FROM characters WHERE id LIKE :query")
 //    fun pagingSource(query: Int): PagingSource<Int, CharactersEntity>
 //
@@ -48,7 +49,6 @@ interface CharactersDao {
 //
 //    @Query("SELECT * FROM characters WHERE name LIKE :name")
 //     fun findByName(name: String): List<CharactersEntity>
-
 
 
 //    @Query("SELECT * FROM characters")

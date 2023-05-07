@@ -12,7 +12,7 @@ interface PageKeyDao {
     suspend fun insertOrReplace( pageKey: PageKey)
 
     @Query("SELECT * FROM pageKey WHERE id LIKE :id")
-    fun getNextPageKey(id: Int?): PageKey?
+    fun getNextPageKey(id: Int): PageKey?
 
     @Query("DELETE FROM pageKey")
     suspend fun clearAll()

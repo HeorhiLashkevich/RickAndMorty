@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.example.rickandmorty.data.model.EpisodeEntity
 
 @Dao
-interface EpisodeDao {
+interface EpisodesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(episodes: List<EpisodeEntity>)
 

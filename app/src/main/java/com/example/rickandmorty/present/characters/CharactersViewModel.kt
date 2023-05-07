@@ -10,13 +10,16 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.rickandmorty.COUNT_ITEM_CHARACTERS
 import com.example.rickandmorty.api.CharactersResult
+import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.local.paging.datasource.CharactersDataSource
+import com.example.rickandmorty.data.remove.mediator.CharactersRemoteMediator
+import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 
 
 class CharactersViewModel(
-    private val dataSource: CharactersDataSource,
-//    private val service: RickAndMortyApi,
-//    private val db: AppCharactersDataBase
+//    private val dataSource: CharactersDataSource,
+    service: RickAndMortyApi,
+    db: AppDataBase
 ) : ViewModel() {
     var characters = MutableLiveData<List<CharactersResult>>()
 
@@ -26,10 +29,12 @@ class CharactersViewModel(
             pageSize = COUNT_ITEM_CHARACTERS,
             prefetchDistance = 20
         ),
-//        remoteMediator = CharactersRemoteMediator(service, db)
+        remoteMediator = CharactersRemoteMediator(service, db)
 
     ) {
-        dataSource
+                db.getCharactersDao().pagingSource() 
+
+//        dataSource
 //        db.gerCharactersDao().pagingSource()
     }.flow.cachedIn(viewModelScope)
 

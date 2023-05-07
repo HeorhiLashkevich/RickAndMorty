@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.example.rickandmort.databinding.ItemLocationsBinding
-import com.example.rickandmorty.api.LocationsResult
+import com.example.rickandmorty.data.remove.service.model.LocationsResult
 import com.example.rickandmorty.data.local.paging.datasource.LocationsDiffUtil
+import com.example.rickandmorty.data.model.LocationsEntity
 
 
 class LocationsPagingAdapter(
     private val onLocationClick: (id: Int) -> Unit
 
-) : PagingDataAdapter<LocationsResult, LocationsViewHolder>(LocationsDiffUtil()) {
+) : PagingDataAdapter<LocationsEntity, LocationsViewHolder>(LocationsDiffUtil()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationsViewHolder {

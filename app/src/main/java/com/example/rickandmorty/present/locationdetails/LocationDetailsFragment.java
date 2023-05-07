@@ -25,7 +25,7 @@ import com.example.rickandmort.databinding.FragmentLocationDetailsBinding;
 import com.example.rickandmorty.App;
 import com.example.rickandmorty.utils.LocationItemClickListener;
 import com.example.rickandmorty.api.CharactersResult;
-import com.example.rickandmorty.api.LocationsResult;
+import com.example.rickandmorty.data.remove.service.model.LocationsResult;
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment;
 
 import java.util.ArrayList;

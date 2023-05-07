@@ -17,13 +17,13 @@ import javax.inject.Inject
 
 class EpisodesViewModel @Inject constructor(
      service: RickAndMortyApi,
-    db: AppDataBase,
+    db: AppDataBase
 //    dataSource: EpisodesDataSource
 ) : ViewModel() {
 
     @OptIn(ExperimentalPagingApi::class)
     val flow = Pager(
-        PagingConfig(pageSize = COUNT_ITEM_EPISODES, initialLoadSize = COUNT_ITEM_EPISODES),
+        PagingConfig(pageSize = COUNT_ITEM_EPISODES, initialLoadSize = 20),
         remoteMediator = EpisodeRemoteMediator(service, db)
     ) {
         db.getEpisodesDao().pagingSource()

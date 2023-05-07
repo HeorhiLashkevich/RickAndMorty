@@ -2,12 +2,13 @@ package com.example.rickandmorty.present.locations
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.databinding.ItemLocationsBinding
-import com.example.rickandmorty.api.LocationsResult
+import com.example.rickandmorty.data.model.LocationsEntity
+import com.example.rickandmorty.data.remove.service.model.LocationsResult
 
 class LocationsViewHolder(
     private val binding: ItemLocationsBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: LocationsResult) {
+    fun bind(item: LocationsEntity) {
         binding.run {
             locationName.text = item.name
             locationType.text = item.type

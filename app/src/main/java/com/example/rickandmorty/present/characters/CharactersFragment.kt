@@ -18,6 +18,7 @@ import com.example.rickandmort.databinding.FragmentCharactersBinding
 import com.example.rickandmorty.App
 import com.example.rickandmorty.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.api.CharactersResult
+import com.example.rickandmorty.data.model.CharactersEntity
 import com.example.rickandmorty.utils.RecyclerMargin
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment
 import kotlinx.coroutines.flow.collectLatest
@@ -96,7 +97,7 @@ class CharactersFragment() : Fragment() {
     }
 
 
-    private suspend fun initAdapter(list: PagingData<CharactersResult>) {
+    private suspend fun initAdapter(list: PagingData<CharactersEntity>) {
         binding.recyclerCharacters.run {
             val charactersDetailsFragment =
                 CharactersDetailsFragment()

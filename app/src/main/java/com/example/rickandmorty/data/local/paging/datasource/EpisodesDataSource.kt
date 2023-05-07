@@ -20,7 +20,7 @@ class EpisodesDataSource@Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, EpisodeEntity> {
         return try {
             val key = params.key ?: 1
-            val response = repository.getEpisodes(params.loadSize, key)
+            val response = repository.getEpisodes(params.loadSize)
             val nextKey = key + 1
 
             LoadResult.Page(

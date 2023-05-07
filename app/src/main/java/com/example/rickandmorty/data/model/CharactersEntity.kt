@@ -38,6 +38,7 @@ data class  CharactersEntity(
     val type: String,
     @ColumnInfo(name = "url")
     val url: String,
+    @ColumnInfo(name = "page")
     var page: Int?
 )
 

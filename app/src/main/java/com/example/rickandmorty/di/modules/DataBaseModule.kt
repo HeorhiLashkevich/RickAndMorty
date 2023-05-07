@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Room
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.local.dao.CharactersDao
-import com.example.rickandmorty.data.local.dao.EpisodeDao
+import com.example.rickandmorty.data.local.dao.EpisodesDao
+import com.example.rickandmorty.data.local.dao.LocationsDao
 import com.example.rickandmorty.data.local.dao.PageKeyDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
+
 @Module
 object DataBaseModule {
     @Singleton
@@ -22,7 +24,6 @@ object DataBaseModule {
         )
             .fallbackToDestructiveMigration()
             .build()
-//
 
     }
 
@@ -31,16 +32,20 @@ object DataBaseModule {
     fun provideCharactersDao(database: AppDataBase): CharactersDao {
         return database.getCharactersDao()
     }
+
     @Provides
 
-    fun provideEpisodesDao(database: AppDataBase): EpisodeDao {
+    fun provideEpisodesDao(database: AppDataBase): EpisodesDao {
         return database.getEpisodesDao()
     }
 
-
     @Provides
-
     fun providePageKeyDao(database: AppDataBase): PageKeyDao {
         return database.getPageKeyDao()
+    }
+
+    @Provides
+    fun provideLocationsDao(database: AppDataBase): LocationsDao {
+        return database.getLocationsDao()
     }
 }
