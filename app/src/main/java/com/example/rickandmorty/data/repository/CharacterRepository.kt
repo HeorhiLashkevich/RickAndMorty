@@ -19,7 +19,7 @@ class CharactersRepository @Inject constructor(
 ) {
 
     suspend fun getCharacters(count: Int, page: Int): Response<PagedResponse<CharactersEntity>> {
-        return api.getCharacters(limit = count, page = page)
+        return api.getCharacters( page = page)
     }
 
     suspend fun insertCharacter(list: List<CharactersEntity>) {

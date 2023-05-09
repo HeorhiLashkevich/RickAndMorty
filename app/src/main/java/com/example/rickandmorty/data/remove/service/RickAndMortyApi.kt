@@ -24,7 +24,7 @@ interface RickAndMortyApi {
 
     @GET("character")
     suspend fun getCharacters(
-        @Query("limit") limit: Int? = COUNT_ITEM_CHARACTERS,
+//        @Query("limit") limit: Int? = COUNT_ITEM_CHARACTERS,
         @Query("page") page: Int? = 0,
 
 

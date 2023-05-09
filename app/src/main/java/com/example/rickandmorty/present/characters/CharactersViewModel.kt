@@ -17,8 +17,8 @@ import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 
 class CharactersViewModel(
 //    private val dataSource: CharactersDataSource,
-    service: RickAndMortyApi,
-    db: AppDataBase
+    private val service: RickAndMortyApi,
+    private val db: AppDataBase
 ) : ViewModel() {
     var characters = MutableLiveData<List<CharactersResult>>()
 
@@ -26,12 +26,12 @@ class CharactersViewModel(
     val flow = Pager(
         config = PagingConfig(
             pageSize = COUNT_ITEM_CHARACTERS,
-            prefetchDistance = 20
+            prefetchDistance = 3
         ),
         remoteMediator = CharactersRemoteMediator(service, db)
 
     ) {
-                db.getCharactersDao().pagingSource() 
+        db.getCharactersDao().pagingSource()
 
 //        dataSource
 //        db.gerCharactersDao().pagingSource()

@@ -8,14 +8,15 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.model.LocationsEntity
-import com.example.rickandmorty.data.model.PageKey
+import com.example.rickandmorty.data.model.CharactersPageKey
+import com.example.rickandmorty.data.model.LocationsPageKey
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 
 @OptIn(ExperimentalPagingApi::class)
 class LocationsRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
     RemoteMediator<Int, LocationsEntity>() {
     private val locationsDao = db.getLocationsDao()
-    private val keyDao = db.getPageKeyDao()
+    private val keyDao = db.getLocationsPageKeyDao()
 
     override suspend fun load(
         loadType: LoadType,
@@ -28,9 +29,9 @@ class LocationsRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase)
                     return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
                     val lastItem = state.lastItemOrNull()
-                    val remoteKey: PageKey? = db.withTransaction {
+                    val remoteKey: LocationsPageKey? = db.withTransaction {
                         if (lastItem?.id != null) {
-                            keyDao.getNextPageKey(lastItem.id.toInt())
+                            keyDao.getNextPageKey(lastItem.id)
                         } else null
                     }
 
@@ -57,7 +58,7 @@ class LocationsRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase)
                 }
                 locations?.forEach {
                     it.page = loadKey
-                    keyDao.insertOrReplace(PageKey(it.id, pageInfo?.next))
+                    keyDao.insertOrReplace(LocationsPageKey(it.id, pageInfo?.next))
                 }
                 locations?.let { locationsDao.insertAll(it) }
             }

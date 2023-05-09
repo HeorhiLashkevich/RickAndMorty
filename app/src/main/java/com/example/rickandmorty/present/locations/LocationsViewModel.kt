@@ -8,14 +8,15 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.rickandmorty.utils.COUNT_ITEM_LOCATIONS
 import com.example.rickandmorty.data.local.AppDataBase
+import com.example.rickandmorty.data.local.paging.datasource.LocationsDataStore
 import com.example.rickandmorty.data.local.paging.remotemediator.LocationsRemoteMediator
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 
 
 class LocationsViewModel(
-//    dataSource: LocationsDataStore
-    db: AppDataBase,
-    api: RickAndMortyApi
+    private val dataSource: LocationsDataStore,
+   private val db: AppDataBase,
+   private  val api: RickAndMortyApi
 ) : ViewModel() {
 
     @OptIn(ExperimentalPagingApi::class)

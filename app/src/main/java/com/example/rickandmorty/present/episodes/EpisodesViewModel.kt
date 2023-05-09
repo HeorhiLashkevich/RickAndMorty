@@ -9,20 +9,21 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.rickandmorty.utils.COUNT_ITEM_EPISODES
 import com.example.rickandmorty.data.local.AppDataBase
+import com.example.rickandmorty.data.local.paging.datasource.EpisodesDataSource
 import com.example.rickandmorty.data.local.paging.remotemediator.EpisodeRemoteMediator
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 import javax.inject.Inject
 
 
 class EpisodesViewModel @Inject constructor(
-     service: RickAndMortyApi,
-    db: AppDataBase
-//    dataSource: EpisodesDataSource
+    service: RickAndMortyApi,
+    private val db: AppDataBase,
+    private val dataSource: EpisodesDataSource
 ) : ViewModel() {
 
     @OptIn(ExperimentalPagingApi::class)
     val flow = Pager(
-        PagingConfig(pageSize = COUNT_ITEM_EPISODES, initialLoadSize = 20),
+        PagingConfig(pageSize = COUNT_ITEM_EPISODES, prefetchDistance = 3),
         remoteMediator = EpisodeRemoteMediator(service, db)
     ) {
         db.getEpisodesDao().pagingSource()

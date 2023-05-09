@@ -37,17 +37,28 @@ object DataBaseModule {
     }
 
     @Provides
-    fun providePageKeyDao(database: AppDataBase): PageKeyDao {
-        return database.getPageKeyDao()
-    }
-
-    @Provides
     fun provideLocationsDao(database: AppDataBase): LocationsDao {
         return database.getLocationsDao()
     }
 
     @Provides
-    fun provideRemoteKeyDao(database: AppDataBase): RemoteKeysDao {
-        return database.getRemoteKeyDao()
+    fun provideCharactersPageKeyDao(database: AppDataBase): CharactersPageKeyDao {
+        return database.getCharactersPageKeyDao()
+    }
+
+    @Provides
+    fun provideEpisodesPageKeyDao(database: AppDataBase): EpisodesPageKeyDao {
+        return database.getEpisodesPageKeyDao()
+    }
+
+    @Provides
+    fun provideLocationsPageKeyDao(database: AppDataBase): LocationsPageKeyDao {
+        return database.getLocationsPageKeyDao()
     }
 }
+
+//    @Provides
+//    fun provideRemoteKeyDao(database: AppDataBase): RemoteKeysDao {
+//        return database.getRemoteKeyDao()
+//    }
+//}
