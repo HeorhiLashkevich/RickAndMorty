@@ -21,7 +21,10 @@ class LocationsViewModel(
 
     @OptIn(ExperimentalPagingApi::class)
     val flow = Pager(
-        PagingConfig(pageSize = COUNT_ITEM_LOCATIONS, initialLoadSize = COUNT_ITEM_LOCATIONS),
+        PagingConfig(pageSize = COUNT_ITEM_LOCATIONS,
+            initialLoadSize = 40,
+            prefetchDistance = 40
+        ),
         remoteMediator = LocationsRemoteMediator(api, db)
     ) {
         db.getLocationsDao().pagingSource()

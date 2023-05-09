@@ -12,9 +12,9 @@ class RecyclerMargin: RecyclerView.ItemDecoration() {
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect.bottom = 30
-        outRect.top = 30
-        outRect.left = 30
-        outRect.right = 30
+        outRect.bottom = 0
+        outRect.top = 0
+        outRect.left = 0
+        outRect.right = 0
     }
 }

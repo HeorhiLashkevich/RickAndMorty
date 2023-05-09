@@ -25,7 +25,9 @@ class CharactersViewModel(
     @OptIn(ExperimentalPagingApi::class)
     val flow = Pager(
         config = PagingConfig(
-            pageSize = COUNT_ITEM_CHARACTERS
+            pageSize = COUNT_ITEM_CHARACTERS,
+            initialLoadSize = 40,
+            prefetchDistance = 40
         ),
         remoteMediator = CharactersRemoteMediator(service, db)
     ) {

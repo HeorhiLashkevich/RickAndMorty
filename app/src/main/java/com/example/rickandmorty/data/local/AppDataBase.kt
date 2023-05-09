@@ -9,7 +9,7 @@ import com.example.rickandmorty.data.model.*
 
 @Database(
     entities = [CharactersEntity::class, EpisodeEntity::class, LocationsEntity::class, CharactersPageKey::class, LocationsPageKey::class, EpisodesPageKey::class],
-    version = 25
+    version = 26
 )
 @TypeConverters(TypeConverter::class)
 abstract class AppDataBase : RoomDatabase() {
