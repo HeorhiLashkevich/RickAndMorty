@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
@@ -93,7 +94,7 @@ class EpisodeDetailsFragment : Fragment() {
                         .commit()
                 }
                 layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL,    false)
             }
             (adapter as? EpisodeDetailsAdapter)?.setList(list)
         }
@@ -104,9 +105,11 @@ class EpisodeDetailsFragment : Fragment() {
     private fun addItemDecoration() {
         val itemMargin = RecyclerMargin()
         val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
+        val dividerItemDecoration2 = DividerItemDecoration(context, RecyclerView.HORIZONTAL)
         dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_drawable))
         binding.recyclerEpisode.run {
             addItemDecoration(dividerItemDecoration)
+            addItemDecoration(dividerItemDecoration2)
             addItemDecoration(itemMargin)
         }
     }

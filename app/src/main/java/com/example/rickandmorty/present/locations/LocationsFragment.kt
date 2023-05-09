@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
@@ -74,7 +75,7 @@ class LocationsFragment : Fragment() {
                         .commit()
                 }
                 layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL,    false)
             }
             (adapter as? LocationsPagingAdapter)?.submitData(list)
         }
@@ -85,10 +86,12 @@ class LocationsFragment : Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun addItemDecoration() {
         val itemMargin = RecyclerMargin()
+        val dividerItemDecoration2 = DividerItemDecoration(context, RecyclerView.HORIZONTAL)
         val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
         dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_drawable))
         binding.recyclerLocations.run {
             addItemDecoration(dividerItemDecoration)
+            addItemDecoration(dividerItemDecoration2)
             addItemDecoration(itemMargin)
         }
     }

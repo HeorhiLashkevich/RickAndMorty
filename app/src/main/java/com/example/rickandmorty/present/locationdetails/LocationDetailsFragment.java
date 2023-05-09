@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,7 +51,7 @@ public class LocationDetailsFragment extends Fragment implements LocationItemCli
         if (getArguments() != null) {
             locationId = getArguments().getInt(KEY_TO_LOCATION_DETAILS, 0);
         }
-        viewModel = new ViewModelProvider(this,locationDetailsModelProvider).get(LocationDetailsViewModel.class);
+        viewModel = new ViewModelProvider(this, locationDetailsModelProvider).get(LocationDetailsViewModel.class);
 
     }
 
@@ -60,7 +61,7 @@ public class LocationDetailsFragment extends Fragment implements LocationItemCli
         binding.locationsDetailsBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                    getParentFragmentManager().popBackStack();
+                getParentFragmentManager().popBackStack();
             }
 
         });
@@ -79,20 +80,23 @@ public class LocationDetailsFragment extends Fragment implements LocationItemCli
             public void onChanged(ArrayList<CharactersResult> charactersResults) {
                 if (charactersResults == null) {
                     binding.charactersFromLocation.setText("no characters");
-                } else  {
-                recyclerView = view.findViewById(R.id.recycler_characters_from_location);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                adapter = new LocationDetailsAdapter(charactersResults);
-                adapter.getViewClickedObservable().subscribe(view ->
-                        onItemClickListener(view.getId())
-                );
-                recyclerView.setAdapter(adapter);
-                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));}
-
+                } else {
+                    recyclerView = view.findViewById(R.id.recycler_characters_from_location);
+                    recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
+                    adapter = new LocationDetailsAdapter(charactersResults);
+                    adapter.getViewClickedObservable().subscribe(view ->
+                            onItemClickListener(view.getId())
+                    );
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                }
+                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
             }
-        });
+
+
+    });
         viewModel.getCharactersIds(locationId);
-    }
+}
 
     @Nullable
     @Override

@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.rickandmort.R;
@@ -128,11 +129,14 @@ public class CharactersDetailsFragment extends Fragment implements CharactersIte
             @Override
             public void onChanged(ArrayList<EpisodesResult> episodesResults) {
                 recyclerView = view.findViewById(R.id.episodes_from_character_recycler);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2, GridLayoutManager.VERTICAL, false));
+
                 adapter = new CharactersDetailsAdapter(episodesResults);
                 adapter.getViewClickedObservable().subscribe(view -> onItemClickListener(view.getId()));
                 recyclerView.setAdapter(adapter);
                 recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
+
             }
         });
         viewModel.getIdsEpisodes(characterId);
