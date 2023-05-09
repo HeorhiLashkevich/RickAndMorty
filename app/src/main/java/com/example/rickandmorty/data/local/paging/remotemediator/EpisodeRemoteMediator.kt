@@ -57,7 +57,7 @@ class EpisodeRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
                 }
                 episodes?.forEach {
                     it.page = loadKey
-                    keyDao.insertOrReplace(PageKey(it.id.toLong(), pageInfo?.next))
+                    keyDao.insertOrReplace(PageKey(it.id, pageInfo?.next))
                 }
                 episodes?.let { episodeDao.insertAll(it) }
             }

@@ -16,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentLocationsBinding
 import com.example.rickandmorty.App
-import com.example.rickandmorty.KEY_TO_LOCATION_DETAILS
+import com.example.rickandmorty.utils.KEY_TO_LOCATION_DETAILS
 import com.example.rickandmorty.data.model.LocationsEntity
-import com.example.rickandmorty.data.remove.service.model.LocationsResult
 import com.example.rickandmorty.utils.RecyclerMargin
 import com.example.rickandmorty.present.locationdetails.LocationDetailsFragment
 import kotlinx.coroutines.flow.collectLatest

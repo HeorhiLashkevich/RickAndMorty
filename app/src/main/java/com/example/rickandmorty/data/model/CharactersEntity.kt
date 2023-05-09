@@ -12,7 +12,7 @@ import com.example.rickandmorty.data.local.TypeConverter
 @Entity(tableName = "characters")
 data class  CharactersEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long? = 0,
+    val id: Int? = 0,
     @ColumnInfo(name = "created")
     val created: String,
     @ColumnInfo(name = "episode")

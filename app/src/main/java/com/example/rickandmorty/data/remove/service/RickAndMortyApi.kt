@@ -1,15 +1,13 @@
 package com.example.rickandmorty.data.remove.service
 
 
-import com.example.rickandmorty.COUNT_ITEM_CHARACTERS
-import com.example.rickandmorty.COUNT_ITEM_LOCATIONS
+import com.example.rickandmorty.utils.COUNT_ITEM_CHARACTERS
 import com.example.rickandmorty.api.*
 import com.example.rickandmorty.data.model.CharactersEntity
 import com.example.rickandmorty.data.model.EpisodeEntity
 import com.example.rickandmorty.data.model.LocationsEntity
 import com.example.rickandmorty.data.model.PagedResponse
 import com.example.rickandmorty.data.remove.service.model.EpisodesResult
-import com.example.rickandmorty.data.remove.service.model.Locations
 import com.example.rickandmorty.data.remove.service.model.LocationsResult
 import io.reactivex.Observable
 import retrofit2.Response
@@ -27,9 +25,10 @@ interface RickAndMortyApi {
     @GET("character")
     suspend fun getCharacters(
         @Query("limit") limit: Int? = COUNT_ITEM_CHARACTERS,
-        @Query("page") page: Int? = 0
+        @Query("page") page: Int? = 0,
 
-    ): Response<PagedResponse<CharactersEntity>>
+
+        ): Response<PagedResponse<CharactersEntity>>
 
     @GET("character")
     suspend fun getSearchedCharactersByName(

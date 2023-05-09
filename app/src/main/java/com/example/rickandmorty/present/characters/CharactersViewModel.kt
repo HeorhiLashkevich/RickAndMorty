@@ -8,11 +8,10 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.example.rickandmorty.COUNT_ITEM_CHARACTERS
+import com.example.rickandmorty.utils.COUNT_ITEM_CHARACTERS
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.data.local.AppDataBase
-import com.example.rickandmorty.data.local.paging.datasource.CharactersDataSource
-import com.example.rickandmorty.data.remove.mediator.CharactersRemoteMediator
+import com.example.rickandmorty.data.local.paging.remotemediator.CharactersRemoteMediator
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 
 

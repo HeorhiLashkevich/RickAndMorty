@@ -1,9 +1,9 @@
 package com.example.rickandmorty.present.characterdetails;
 
-import static com.example.rickandmorty.ConstansKt.EPISODE_DETAILS_TAG;
-import static com.example.rickandmorty.ConstansKt.KEY_TO_CHARACTER_DETAILS;
-import static com.example.rickandmorty.ConstansKt.KEY_TO_EPISODE_DETAILS;
-import static com.example.rickandmorty.ConstansKt.KEY_TO_LOCATION_DETAILS;
+import static com.example.rickandmorty.utils.ConstansKt.EPISODE_DETAILS_TAG;
+import static com.example.rickandmorty.utils.ConstansKt.KEY_TO_CHARACTER_DETAILS;
+import static com.example.rickandmorty.utils.ConstansKt.KEY_TO_EPISODE_DETAILS;
+import static com.example.rickandmorty.utils.ConstansKt.KEY_TO_LOCATION_DETAILS;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

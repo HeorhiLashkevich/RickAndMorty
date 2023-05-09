@@ -57,7 +57,7 @@ class LocationsRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase)
                 }
                 locations?.forEach {
                     it.page = loadKey
-                    keyDao.insertOrReplace(PageKey(it.id.toLong(), pageInfo?.next))
+                    keyDao.insertOrReplace(PageKey(it.id, pageInfo?.next))
                 }
                 locations?.let { locationsDao.insertAll(it) }
             }

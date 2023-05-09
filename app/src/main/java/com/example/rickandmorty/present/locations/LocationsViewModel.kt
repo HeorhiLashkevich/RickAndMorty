@@ -6,9 +6,8 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.example.rickandmorty.COUNT_ITEM_LOCATIONS
+import com.example.rickandmorty.utils.COUNT_ITEM_LOCATIONS
 import com.example.rickandmorty.data.local.AppDataBase
-import com.example.rickandmorty.data.local.paging.datasource.LocationsDataStore
 import com.example.rickandmorty.data.local.paging.remotemediator.LocationsRemoteMediator
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 

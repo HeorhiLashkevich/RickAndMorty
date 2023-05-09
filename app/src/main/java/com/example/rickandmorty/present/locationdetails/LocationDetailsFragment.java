@@ -1,8 +1,8 @@
 package com.example.rickandmorty.present.locationdetails;
 
-import static com.example.rickandmorty.ConstansKt.CHARACTER_DETAILS_TAG;
-import static com.example.rickandmorty.ConstansKt.KEY_TO_CHARACTER_DETAILS;
-import static com.example.rickandmorty.ConstansKt.KEY_TO_LOCATION_DETAILS;
+import static com.example.rickandmorty.utils.ConstansKt.CHARACTER_DETAILS_TAG;
+import static com.example.rickandmorty.utils.ConstansKt.KEY_TO_CHARACTER_DETAILS;
+import static com.example.rickandmorty.utils.ConstansKt.KEY_TO_LOCATION_DETAILS;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

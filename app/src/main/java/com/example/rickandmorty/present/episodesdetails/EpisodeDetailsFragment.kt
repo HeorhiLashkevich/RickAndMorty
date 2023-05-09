@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
 import com.example.rickandmorty.App
-import com.example.rickandmorty.CHARACTER_DETAILS_TAG
-import com.example.rickandmorty.KEY_TO_CHARACTER_DETAILS
-import com.example.rickandmorty.KEY_TO_EPISODE_DETAILS
+import com.example.rickandmorty.utils.CHARACTER_DETAILS_TAG
+import com.example.rickandmorty.utils.KEY_TO_CHARACTER_DETAILS
+import com.example.rickandmorty.utils.KEY_TO_EPISODE_DETAILS
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.utils.RecyclerMargin
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment

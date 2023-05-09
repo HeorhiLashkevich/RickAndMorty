@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "pageKey")
 data class PageKey(
-    @PrimaryKey val id: Long?,
+    @PrimaryKey val id: Int?,
     val nextPageUrl: String?
 )
