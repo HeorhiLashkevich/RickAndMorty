@@ -24,12 +24,14 @@
         android:theme="@style/Theme.RickAndmort"
         tools:targetApi="31">
         <activity
-            android:name="com.example.rickandmorty.ui.SplashActivity"
+            android:name="com.example.rickandmorty.ui.MainActivity"
+
             android:exported="false">
 
         </activity>
         <activity
-            android:name="com.example.rickandmorty.ui.MainActivity"
+            android:name="com.example.rickandmorty.ui.SplashActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

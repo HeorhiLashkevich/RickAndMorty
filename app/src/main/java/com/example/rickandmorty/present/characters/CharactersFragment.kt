@@ -35,6 +35,7 @@ class CharactersFragment() : Fragment() {
 
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,12 +52,14 @@ class CharactersFragment() : Fragment() {
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 initAdapter(it)
+//                binding.recyclerCharacters.adapter?.withLo
             }
         }
 //        binding.toCharacterSearch.setOnClickListener {

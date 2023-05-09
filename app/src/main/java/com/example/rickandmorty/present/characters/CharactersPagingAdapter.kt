@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.example.rickandmort.databinding.ItemCharactersBinding
-import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.data.local.paging.datasource.CharactersDiffUtil
 import com.example.rickandmorty.data.model.CharactersEntity
 
@@ -22,9 +21,10 @@ class CharactersPagingAdapter(
     }
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
-
+        holder.setIsRecyclable(false)
         getItem(position)?.let { id ->
             holder.bind(id)
+
             holder.itemView.setOnClickListener {
                 onCharacterClick(id.id!!.toInt())
             }

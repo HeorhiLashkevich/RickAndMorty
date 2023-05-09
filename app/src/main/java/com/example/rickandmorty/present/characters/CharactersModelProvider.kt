@@ -1,7 +1,6 @@
 package com.example.rickandmorty.present.characters
 
 import com.example.rickandmorty.data.local.AppDataBase
-import com.example.rickandmorty.data.local.paging.datasource.CharactersDataSource
 import com.example.rickandmorty.data.remove.service.RickAndMortyApi
 import com.example.rickandmorty.ui.base.BaseViewModelFactory
 import javax.inject.Inject
