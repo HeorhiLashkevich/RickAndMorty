@@ -12,6 +12,7 @@ import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.local.paging.datasource.EpisodesDataSource
 import com.example.rickandmorty.data.local.paging.remotemediator.EpisodeRemoteMediator
 import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import com.example.rickandmorty.utils.COUNT_EPISODES_LOAD_SIZE
 import javax.inject.Inject
 
 
@@ -24,8 +25,8 @@ class EpisodesViewModel @Inject constructor(
     @OptIn(ExperimentalPagingApi::class)
     val flow = Pager(
         PagingConfig(pageSize = COUNT_ITEM_EPISODES
-            ,  initialLoadSize = 20,
-            prefetchDistance = 20
+            ,  initialLoadSize = COUNT_EPISODES_LOAD_SIZE,
+            prefetchDistance = COUNT_EPISODES_LOAD_SIZE
 
         ),
         remoteMediator = EpisodeRemoteMediator(service, db)

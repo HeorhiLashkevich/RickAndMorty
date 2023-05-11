@@ -28,7 +28,6 @@ import javax.inject.Inject
 class EpisodesFragment : Fragment() {
 
     private lateinit var binding: FragmentEpisodesBinding
-//    private val viewModel: EpisodesViewModel by viewModels()
     @Inject
     lateinit var viewModelProvider: EpisodesModelProvider
     private lateinit var viewModel: EpisodesViewModel

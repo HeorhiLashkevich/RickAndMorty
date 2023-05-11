@@ -6,6 +6,7 @@ const val KEY_TO_LOCATION_DETAILS = "locationId"
 const val KEY_TO_EPISODE_DETAILS = "episodeId"
 const val BASE_URL = "https://rickandmortyapi.com/api/"
 const val COUNT_ITEM_EPISODES = 10
+const val COUNT_EPISODES_LOAD_SIZE = 20
 const val COUNT_ITEM_CHARACTERS = 20
 const val COUNT_ITEM_LOCATIONS = 18
 const val EPISODE_DETAILS_TAG = "episodeDetailsTag"

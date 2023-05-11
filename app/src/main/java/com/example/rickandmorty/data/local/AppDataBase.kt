@@ -11,16 +11,13 @@ import com.example.rickandmorty.data.model.*
 
 @Database(
     entities = [RemoteKeys::class, CharactersEntity::class, EpisodeEntity::class, LocationsEntity::class],
-    version = 44
+    version = 46
 )
 @TypeConverters(TypeConverter::class)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun getCharactersDao(): CharactersDao
     abstract fun getEpisodesDao(): EpisodesDao
     abstract fun getLocationsDao(): LocationsDao
-//    abstract fun getCharactersPageKeyDao(): CharactersPageKeyDao
-//    abstract fun getLocationsPageKeyDao(): LocationsPageKeyDao
-//    abstract fun getEpisodesPageKeyDao(): EpisodesPageKeyDao
     abstract fun getRemoteKeyDao(): RemoteKeysDao
 
 

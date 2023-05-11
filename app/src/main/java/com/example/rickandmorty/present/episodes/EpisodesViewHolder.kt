@@ -13,8 +13,8 @@ class EpisodesViewHolder
     fun bind(item: EpisodeEntity) {
         binding.run {
             episodeName.text = item.name
-            episodeNumber.text = item.code
-            episodeDateRelease.text = item.airDate
+            episodeNumber.text = item.episode
+            episodeDateRelease.text = item.air_date
         }
 
     }
