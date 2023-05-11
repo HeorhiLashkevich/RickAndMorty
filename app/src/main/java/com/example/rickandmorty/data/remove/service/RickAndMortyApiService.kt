@@ -15,6 +15,20 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RickAndMortyApiService {
+//    @GET("character/?{q}")
+//    suspend fun searchByName(
+////        @Query("name") query: String,
+//        @Query("page") page: Int,
+//        @Query("per_page") itemsPerPage: Int
+//    ): CharacterSearchResponse
+    @GET("character/")
+    suspend fun searchByName(
+//        @Query("name") query: String,
+        @Query("page") page: Int,
+//        @Query("per_page") itemsPerPage: Int
+    ): Response<PagedResponse<CharactersEntity>>
+
+
 
     @GET("character/{id}")
     fun getCharacter(
@@ -65,7 +79,7 @@ interface RickAndMortyApiService {
     @GET("episode")
     suspend fun getEpisodes(
 //        @Query("limit") limit: Int? = COUNT_ITEM_EPISODES,
-        @Query("page") page: Int? = 0
+        @Query("page") page: Int
     ): Response<PagedResponse<EpisodeEntity>>
 
     @GET("episode/{id}")

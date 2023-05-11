@@ -23,7 +23,7 @@ class EpisodesPagingAdapter(
         getItem(position)?.let { id ->
             holder.bind(id)
             holder.itemView.setOnClickListener {
-                onClick(id.id)
+                onClick(id.id.toInt())
             }
         }
 

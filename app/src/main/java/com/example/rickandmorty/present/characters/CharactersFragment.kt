@@ -10,19 +10,15 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentCharactersBinding
 import com.example.rickandmorty.App
 import com.example.rickandmorty.utils.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.data.model.CharactersEntity
-import com.example.rickandmorty.data.repository.CharRepo
 import com.example.rickandmorty.utils.RecyclerMargin
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment
 import kotlinx.coroutines.flow.collectLatest
@@ -62,7 +58,6 @@ class CharactersFragment() : Fragment() {
         lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 initAdapter(it)
-//                binding.recyclerCharacters.adapter?.withLo
             }
 
         }
@@ -79,14 +74,10 @@ class CharactersFragment() : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query!= null){
                     binding.recyclerCharacters.scrollToPosition(0)
-//                    viewModel.
                 }
-
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
-
                 return true
             }
 

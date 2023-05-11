@@ -27,7 +27,7 @@ class LocationsPagingAdapter(
         getItem(position)?.let { id ->
             holder.bind(id)
             holder.itemView.setOnClickListener {
-                onLocationClick(id.id)
+                onLocationClick(id.id.toInt())
             }
         }
     }

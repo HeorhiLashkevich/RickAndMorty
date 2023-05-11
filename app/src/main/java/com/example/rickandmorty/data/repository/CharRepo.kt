@@ -11,4 +11,7 @@ interface CharRepo {
     suspend fun searchByName(query: String, count: Int, page: Int)
             : Flow<PagingData<CharactersEntity>>
 
+//    suspend fun getSearchResultStream(query: String): Flow<PagingData<CharactersEntity>>
+//    suspend fun getSearchResultStreamFromMediator(query: String): Flow<PagingData<CharactersEntity>>
+
 }

@@ -15,12 +15,12 @@ import com.google.gson.annotations.SerializedName
 //)
 @Entity(tableName = "episodes")
 data class EpisodeEntity(
-    @PrimaryKey val id: Int,
+    @PrimaryKey val id: Long,
     val name: String,
     @SerializedName("air_date") val airDate: String,
     @SerializedName("code", alternate = ["episode"]) val code: String,
     val characters: List<String>,
-    var page: Int?
+//    var page: Int?
 )
 
 //data class Episodes(

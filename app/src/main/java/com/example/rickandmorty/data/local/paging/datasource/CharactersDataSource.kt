@@ -2,42 +2,48 @@ package com.example.rickandmorty.data.local.paging.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.rickandmorty.api.CharactersResult
-import com.example.rickandmorty.data.repository.CharactersRepository
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
+import com.example.rickandmorty.data.model.CharactersEntity
+import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
-@Suppress("UNCHECKED_CAST")
-class CharactersDataSource @AssistedInject constructor(
-    private val repository: CharactersRepository,
-//    @Assisted private val query: String
-) : PagingSource<Int, CharactersResult>(
-) {
+class CharactersDataSource @Inject constructor(
+    private val service: RickAndMortyApiService,
+//    private val query: String
+) : PagingSource<Int, CharactersEntity>() {
 
-    override fun getRefreshKey(state: PagingState<Int, CharactersResult>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
-            val anchorPage = state.closestPageToPosition(anchorPosition)
-            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharactersEntity> {
+        val position = params.key ?: 1
+//        val apiQuery = query
+        return try {
+//            val response = service.searchByName(apiQuery, position, params.loadSize)
+            val response = service.searchByName(position)
+            val repos = response.body()!!.results
+            val nextKey = if (repos.isEmpty()) {
+                null
+            } else {
+                position + (params.loadSize / 20)
+            }
+            LoadResult.Page(
+                data = repos,
+                prevKey = if (position == 1) null else position - 1,
+                nextKey = nextKey
+            )
+        } catch (exception: IOException) {
+            return LoadResult.Error(exception)
+        } catch (exception: HttpException) {
+            return LoadResult.Error(exception)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharactersResult> {
-
-        return try {
-            val key = params.key ?: 1
-            val response = repository.getCharacters(params.loadSize, key)
-//            val response = repository.getSearchedCharactersByName(query, params.loadSize, key)
-            val nextKey = key + 1
-            LoadResult.Page(
-                data = response.body()?.results as ArrayList<CharactersResult>,
-                prevKey = null,
-                nextKey = nextKey
-
-            )
-        } catch (e: java.lang.Exception) {
-            LoadResult.Error(e)
+    override fun getRefreshKey(state: PagingState<Int, CharactersEntity>): Int? {
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 
 }
+
+

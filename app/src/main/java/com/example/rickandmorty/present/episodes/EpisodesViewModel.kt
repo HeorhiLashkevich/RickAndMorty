@@ -24,8 +24,8 @@ class EpisodesViewModel @Inject constructor(
     @OptIn(ExperimentalPagingApi::class)
     val flow = Pager(
         PagingConfig(pageSize = COUNT_ITEM_EPISODES
-            ,  initialLoadSize = 40,
-            prefetchDistance = 40
+            ,  initialLoadSize = 20,
+            prefetchDistance = 20
 
         ),
         remoteMediator = EpisodeRemoteMediator(service, db)

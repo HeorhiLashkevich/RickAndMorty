@@ -12,7 +12,7 @@ import com.example.rickandmorty.data.local.TypeConverter
 @Entity(tableName = "characters")
 data class  CharactersEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = 0,
+    val id: Long = 0,
     @ColumnInfo(name = "created")
     val created: String,
     @ColumnInfo(name = "episode")
@@ -38,7 +38,7 @@ data class  CharactersEntity(
     val type: String,
     @ColumnInfo(name = "url")
     val url: String,
-    @ColumnInfo(name = "page")
-    var page: Int?
+//    @ColumnInfo(name = "page")
+//    var page: Int?
 )
 

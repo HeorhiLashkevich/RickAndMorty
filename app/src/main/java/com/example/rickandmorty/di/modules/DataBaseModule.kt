@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.local.dao.*
+import com.example.rickandmorty.data.local.dao.RemoteKeysDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -42,23 +43,8 @@ object DataBaseModule {
     }
 
     @Provides
-    fun provideCharactersPageKeyDao(database: AppDataBase): CharactersPageKeyDao {
-        return database.getCharactersPageKeyDao()
-    }
-
-    @Provides
-    fun provideEpisodesPageKeyDao(database: AppDataBase): EpisodesPageKeyDao {
-        return database.getEpisodesPageKeyDao()
-    }
-
-    @Provides
-    fun provideLocationsPageKeyDao(database: AppDataBase): LocationsPageKeyDao {
-        return database.getLocationsPageKeyDao()
+    fun provideRemoteKeyDao(database: AppDataBase): RemoteKeysDao {
+        return database.getRemoteKeyDao()
     }
 }
-
-//    @Provides
-//    fun provideRemoteKeyDao(database: AppDataBase): RemoteKeysDao {
-//        return database.getRemoteKeyDao()
-//    }
 //}
