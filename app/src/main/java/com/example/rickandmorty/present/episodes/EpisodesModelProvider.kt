@@ -2,14 +2,14 @@ package com.example.rickandmorty.present.episodes
 
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.local.paging.datasource.EpisodesDataSource
-import com.example.rickandmorty.data.remove.service.RickAndMortyApi
+import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
 import com.example.rickandmorty.ui.base.BaseViewModelFactory
 import javax.inject.Inject
 
 class EpisodesModelProvider @Inject constructor(
 
     private val dataSource: EpisodesDataSource,
-    private val api: RickAndMortyApi,
+    private val api: RickAndMortyApiService,
     private val dataBase: AppDataBase
 
 

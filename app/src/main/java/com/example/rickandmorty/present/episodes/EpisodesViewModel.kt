@@ -11,12 +11,12 @@ import com.example.rickandmorty.utils.COUNT_ITEM_EPISODES
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.local.paging.datasource.EpisodesDataSource
 import com.example.rickandmorty.data.local.paging.remotemediator.EpisodeRemoteMediator
-import com.example.rickandmorty.data.remove.service.RickAndMortyApi
+import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
 import javax.inject.Inject
 
 
 class EpisodesViewModel @Inject constructor(
-    service: RickAndMortyApi,
+    service: RickAndMortyApiService,
     private val db: AppDataBase,
     private val dataSource: EpisodesDataSource
 ) : ViewModel() {

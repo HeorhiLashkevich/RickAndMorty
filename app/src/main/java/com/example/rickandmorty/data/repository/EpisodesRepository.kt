@@ -3,13 +3,13 @@ package com.example.rickandmorty.data.repository
 
 import com.example.rickandmorty.data.model.EpisodeEntity
 import com.example.rickandmorty.data.model.PagedResponse
-import com.example.rickandmorty.data.remove.service.RickAndMortyApi
+import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
 
 import retrofit2.Response
 import javax.inject.Inject
 
 class EpisodesRepository @Inject constructor(
-    private val api: RickAndMortyApi,
+    private val api: RickAndMortyApiService,
 ) {
     suspend fun getEpisodes(page: Int): Response<PagedResponse<EpisodeEntity>> {
         return api.getEpisodes(page = page)

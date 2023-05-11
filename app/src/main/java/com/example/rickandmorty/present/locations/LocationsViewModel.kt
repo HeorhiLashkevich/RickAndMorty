@@ -10,13 +10,13 @@ import com.example.rickandmorty.utils.COUNT_ITEM_LOCATIONS
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.local.paging.datasource.LocationsDataStore
 import com.example.rickandmorty.data.local.paging.remotemediator.LocationsRemoteMediator
-import com.example.rickandmorty.data.remove.service.RickAndMortyApi
+import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
 
 
 class LocationsViewModel(
     private val dataSource: LocationsDataStore,
    private val db: AppDataBase,
-   private  val api: RickAndMortyApi
+   private  val api: RickAndMortyApiService
 ) : ViewModel() {
 
     @OptIn(ExperimentalPagingApi::class)

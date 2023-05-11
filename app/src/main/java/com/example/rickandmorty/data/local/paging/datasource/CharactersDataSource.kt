@@ -4,11 +4,14 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.data.repository.CharactersRepository
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
-class CharactersDataSource @Inject constructor(
-    private val repository: CharactersRepository
+class CharactersDataSource @AssistedInject constructor(
+    private val repository: CharactersRepository,
+//    @Assisted private val query: String
 ) : PagingSource<Int, CharactersResult>(
 ) {
 
@@ -24,6 +27,7 @@ class CharactersDataSource @Inject constructor(
         return try {
             val key = params.key ?: 1
             val response = repository.getCharacters(params.loadSize, key)
+//            val response = repository.getSearchedCharactersByName(query, params.loadSize, key)
             val nextKey = key + 1
             LoadResult.Page(
                 data = response.body()?.results as ArrayList<CharactersResult>,

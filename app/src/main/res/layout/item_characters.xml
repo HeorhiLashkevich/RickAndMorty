@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/const_character_species"
-        android:layout_width="@dimen/dp_50"
+        android:layout_width="@dimen/dp_54"
         android:layout_height="@dimen/dp_36"
         android:text="@string/species"
         app:layout_constraintStart_toStartOf="parent"

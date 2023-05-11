@@ -8,12 +8,11 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.model.LocationsEntity
-import com.example.rickandmorty.data.model.CharactersPageKey
 import com.example.rickandmorty.data.model.LocationsPageKey
-import com.example.rickandmorty.data.remove.service.RickAndMortyApi
+import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
 
 @OptIn(ExperimentalPagingApi::class)
-class LocationsRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
+class LocationsRemoteMediator(val service: RickAndMortyApiService, val db: AppDataBase) :
     RemoteMediator<Int, LocationsEntity>() {
     private val locationsDao = db.getLocationsDao()
     private val keyDao = db.getLocationsPageKeyDao()

@@ -1,7 +1,6 @@
 package com.example.rickandmorty.data.remove.service
 
 
-import com.example.rickandmorty.utils.COUNT_ITEM_CHARACTERS
 import com.example.rickandmorty.api.*
 import com.example.rickandmorty.data.model.CharactersEntity
 import com.example.rickandmorty.data.model.EpisodeEntity
@@ -15,7 +14,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface RickAndMortyApi {
+interface RickAndMortyApiService {
 
     @GET("character/{id}")
     fun getCharacter(
@@ -26,14 +25,13 @@ interface RickAndMortyApi {
     suspend fun getCharacters(
 //        @Query("limit") limit: Int? = COUNT_ITEM_CHARACTERS,
         @Query("page") page: Int? = 0,
-
-
         ): Response<PagedResponse<CharactersEntity>>
 
-    @GET("character")
+    @GET("character/?{q}")
     suspend fun getSearchedCharactersByName(
-        @Query("q") query: String? = null,
-    ): Response<ArrayList<CharactersResult>>
+        @Query("q") query: String?,
+        @Query("page") page: Int? = 0,
+    ): Response<PagedResponse<CharactersEntity>>
 
     @GET("character/{id}")
     suspend fun getMultiCharacters(

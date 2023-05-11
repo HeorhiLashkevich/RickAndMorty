@@ -6,12 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.api.CharactersResult
 
 import com.example.rickandmorty.data.remove.service.model.EpisodesResult
-import com.example.rickandmorty.data.remove.service.RickAndMortyApi
+import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EpisodeDetailsViewModel(
-    private val api: RickAndMortyApi
+    private val api: RickAndMortyApiService
 ) : ViewModel() {
 
     var characters = MutableLiveData<ArrayList<CharactersResult>>()

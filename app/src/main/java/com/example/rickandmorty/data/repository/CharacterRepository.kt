@@ -1,25 +1,21 @@
 package com.example.rickandmorty.data.repository
 
-import com.example.rickandmorty.api.Characters
-import com.example.rickandmorty.api.CharactersResult
 import com.example.rickandmorty.data.model.CharactersEntity
-import com.example.rickandmorty.data.model.EpisodeEntity
 import com.example.rickandmorty.data.model.PagedResponse
-import com.example.rickandmorty.data.remove.service.RickAndMortyApi
-import com.example.rickandmorty.di.modules.DataBaseModule
+import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
 
 
 import retrofit2.Response
 import javax.inject.Inject
 
 class CharactersRepository @Inject constructor(
-    private val api: RickAndMortyApi,
+    private val api: RickAndMortyApiService,
 //   private val dataBaseModule: DataBaseModule
 //    private val charactersDao: CharactersDao
 ) {
 
     suspend fun getCharacters(count: Int, page: Int): Response<PagedResponse<CharactersEntity>> {
-        return api.getCharacters( page = page)
+        return api.getCharacters(page = page)
     }
 
     suspend fun insertCharacter(list: List<CharactersEntity>) {
@@ -31,10 +27,13 @@ class CharactersRepository @Inject constructor(
 //        return CharactersDataBaseRepisitory.getAll()
 //    }
 
-    suspend fun getSearchedCharactersByName(name: String): Response<ArrayList<CharactersResult>> {
-        return api.getSearchedCharactersByName(name)
+    suspend fun getSearchedCharactersByName(
+        query: String,
+        count: Int,
+        page: Int
+    ): Response<PagedResponse<CharactersEntity>> {
+        return api.getSearchedCharactersByName(query, page)
     }
-
 
 
 //    suspend fun searchByName(name: String) {

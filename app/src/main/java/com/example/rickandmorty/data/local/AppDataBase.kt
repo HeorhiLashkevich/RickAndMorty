@@ -5,11 +5,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.rickandmorty.data.local.dao.*
 import com.example.rickandmorty.data.model.*
+import com.example.rickandmorty.data.repository.CharRepo
 
 
 @Database(
     entities = [CharactersEntity::class, EpisodeEntity::class, LocationsEntity::class, CharactersPageKey::class, LocationsPageKey::class, EpisodesPageKey::class],
-    version = 26
+    version = 27
 )
 @TypeConverters(TypeConverter::class)
 abstract class AppDataBase : RoomDatabase() {
@@ -19,6 +20,7 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun getCharactersPageKeyDao(): CharactersPageKeyDao
     abstract fun getLocationsPageKeyDao(): LocationsPageKeyDao
     abstract fun getEpisodesPageKeyDao(): EpisodesPageKeyDao
+
 
 //    abstract fun getRemoteKeyDao(): RemoteKeysDao
 

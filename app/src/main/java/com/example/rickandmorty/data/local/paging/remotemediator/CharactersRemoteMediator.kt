@@ -9,13 +9,20 @@ import androidx.room.withTransaction
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.model.CharactersEntity
 import com.example.rickandmorty.data.model.CharactersPageKey
-import com.example.rickandmorty.data.remove.service.RickAndMortyApi
+import com.example.rickandmorty.data.model.PagedResponse
+import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import retrofit2.Response
 
 @OptIn(ExperimentalPagingApi::class)
-class CharactersRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
+class CharactersRemoteMediator(
+    private val service: RickAndMortyApiService,
+    private val db: AppDataBase,
+//    @Assisted private val query: String
+) :
     RemoteMediator<Int, CharactersEntity>() {
     private val characterDao = db.getCharactersDao()
     private val keyDao = db.getCharactersPageKeyDao()
+    private lateinit var response: Response<PagedResponse<CharactersEntity>>
 
     override suspend fun load(
         loadType: LoadType,
@@ -45,21 +52,26 @@ class CharactersRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase
                     nextPageQuery?.toInt()
                 }
             }
-
-            val response = service.getCharacters(loadKey ?: 1)
+//            if (query.length == 0) {
+                response = service.getCharacters(loadKey ?: 1)
+//            } else {
+//
+//                response = service.getSearchedCharactersByName(query, loadKey ?: 1)
+//            }
+//
             val resBody = response.body()
             val pageInfo = resBody?.pageInfo
-            val episodes = resBody?.results
+            val characters = resBody?.results
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     characterDao.clearAll()
                     keyDao.clearAll()
                 }
-                episodes?.forEach {
+                characters?.forEach {
                     it.page = loadKey
                     keyDao.insertOrReplace(CharactersPageKey(it.id, pageInfo?.next))
                 }
-                episodes?.let { characterDao.insertAll(it) }
+                characters?.let { characterDao.insertAll(it) }
             }
 
             MediatorResult.Success(
