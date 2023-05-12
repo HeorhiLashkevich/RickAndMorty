@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodesBinding
@@ -28,6 +27,7 @@ import javax.inject.Inject
 class EpisodesFragment : Fragment() {
 
     private lateinit var binding: FragmentEpisodesBinding
+
     @Inject
     lateinit var viewModelProvider: EpisodesModelProvider
     private lateinit var viewModel: EpisodesViewModel
@@ -52,7 +52,9 @@ class EpisodesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
-            viewModel.flow.collectLatest(::initAdapter)
+            viewModel.searchEpisodes().collectLatest {
+                initAdapter(it)
+            }
         }
     }
 
@@ -71,7 +73,7 @@ class EpisodesFragment : Fragment() {
                         .commit()
                 }
                 layoutManager =
-                    GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL,    false)
+                    GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             }
             (adapter as? EpisodesPagingAdapter)?.submitData(list)
         }

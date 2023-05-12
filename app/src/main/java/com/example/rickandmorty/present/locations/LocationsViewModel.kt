@@ -2,33 +2,41 @@ package com.example.rickandmorty.present.locations
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.ExperimentalPagingApi
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
+import androidx.paging.*
 import com.example.rickandmorty.utils.COUNT_ITEM_LOCATIONS
 import com.example.rickandmorty.data.local.AppDataBase
-import com.example.rickandmorty.data.local.paging.datasource.LocationsDataStore
 import com.example.rickandmorty.data.local.paging.remotemediator.LocationsRemoteMediator
+import com.example.rickandmorty.data.model.EpisodeEntity
+import com.example.rickandmorty.data.model.LocationsEntity
 import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import com.example.rickandmorty.data.repository.EpisodesRepository
+import com.example.rickandmorty.data.repository.LocationsRepository
+import com.example.rickandmorty.utils.COUNT_LOCATIONS_LOAD_SIZE
+import kotlinx.coroutines.flow.Flow
 
 
 class LocationsViewModel(
-    private val dataSource: LocationsDataStore,
-   private val db: AppDataBase,
-   private  val api: RickAndMortyApiService
+    private val repo: LocationsRepository,
+    private val db: AppDataBase,
+    private val api: RickAndMortyApiService
 ) : ViewModel() {
 
-    @OptIn(ExperimentalPagingApi::class)
-    val flow = Pager(
-        PagingConfig(pageSize = COUNT_ITEM_LOCATIONS,
-            initialLoadSize = 40,
-            prefetchDistance = 40
-        ),
-        remoteMediator = LocationsRemoteMediator(api, db)
-    ) {
-        db.getLocationsDao().pagingSource()
+    suspend fun searchLocations(): Flow<PagingData<LocationsEntity>> {
+        return repo.searchByLocationName().cachedIn(viewModelScope)
+    }
 
-//        dataSource
-    }.flow.cachedIn(viewModelScope)
+
+//    @OptIn(ExperimentalPagingApi::class)
+//    val flow = Pager(
+//        PagingConfig(
+//            pageSize = COUNT_ITEM_LOCATIONS,
+//            initialLoadSize = COUNT_LOCATIONS_LOAD_SIZE,
+//            prefetchDistance = COUNT_LOCATIONS_LOAD_SIZE
+//        ),
+//        remoteMediator = LocationsRemoteMediator(api, db)
+//    ) {
+//        db.getLocationsDao().pagingSource()
+//
+////        dataSource
+//    }.flow.cachedIn(viewModelScope)
 }

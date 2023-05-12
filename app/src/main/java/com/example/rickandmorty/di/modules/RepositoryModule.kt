@@ -1,8 +1,7 @@
 package com.example.rickandmorty.di.modules
 
 
-import com.example.rickandmorty.data.repository.CharRepo
-import com.example.rickandmorty.data.repository.CharRepoImpl
+import com.example.rickandmorty.data.repository.*
 import dagger.Binds
 import dagger.Module
 
@@ -13,6 +12,16 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindCharacterRepository(
-        charRepoImpl: CharRepoImpl
-    ): CharRepo
+        charRepoImpl: CharacterRepositoryImpl
+    ): CharacterRepository
+
+    @Binds
+    abstract fun bindEpisodesRepository(
+        episodesRepositoryImpl: EpisodesRepositoryImpl
+    ): EpisodesRepository
+
+    @Binds
+    abstract fun bindLocationsRepository(
+        locationsRepositoryImpl: LocationsRepositoryImpl
+    ): LocationsRepository
 }

@@ -4,25 +4,34 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
+import androidx.room.util.query
 import androidx.room.withTransaction
 import com.example.rickandmorty.data.local.AppDataBase
+import com.example.rickandmorty.data.mapper.toCharactersEntity
 import com.example.rickandmorty.data.model.RemoteKeys
 import com.example.rickandmorty.data.model.CharactersEntity
 import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import com.example.rickandmorty.data.remove.service.model.CharactersResult
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import retrofit2.HttpException
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
-class CharactersRemoteMediator(
-//    private val query: String,
+class CharactersRemoteMediator @AssistedInject constructor(
     private val service: RickAndMortyApiService,
-    private val repoDatabase: AppDataBase
+    private val repoDatabase: AppDataBase,
+    @Assisted private val name: String?
 ) : RemoteMediator<Int, CharactersEntity>() {
     override suspend fun initialize(): InitializeAction {
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, CharactersEntity>): MediatorResult {
 
+    override suspend fun load(
+        loadType: LoadType,
+        state: PagingState<Int, CharactersEntity>
+    ): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -42,13 +51,11 @@ class CharactersRemoteMediator(
                 nextKey
             }
         }
-
 //        val apiQuery = query
-
         try {
 //            val apiResponse = service.searchByName (apiQuery, page, state.config.pageSize)
-//            val apiResponse = service.searchByName ( page, state.config.pageSize)
-            val apiResponse = service.getCharacters ( page = page)
+            val apiResponse = service.searchByName(name, page)
+//            val apiResponse = service.getCharacters(page = page)
 
             val chars = apiResponse.body()?.results
             val endOfPaginationReached = chars?.isEmpty()
@@ -61,13 +68,16 @@ class CharactersRemoteMediator(
                 val prevKey = if (page == 1) null else page - 1
                 val nextKey = if (endOfPaginationReached == true) null else page + 1
                 val keys = chars?.map {
-                    RemoteKeys(repoId = it.id, prevKey = prevKey, nextKey = nextKey)
+                    RemoteKeys(repoId = it.id.toLong(), prevKey = prevKey, nextKey = nextKey)
                 }
                 if (keys != null) {
-                    repoDatabase.getRemoteKeyDao(). insertAll(keys)
+                    repoDatabase.getRemoteKeyDao().insertAll(keys)
                 }
                 if (chars != null) {
-                    repoDatabase.getCharactersDao().insertAll(chars)
+                    val charactersEntity = chars.map {
+                        it.toCharactersEntity()
+                    }
+                    repoDatabase.getCharactersDao().insertAll(charactersEntity)
                 }
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached == true)
@@ -82,14 +92,14 @@ class CharactersRemoteMediator(
 
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { chars ->
-                repoDatabase.getRemoteKeyDao().remoteKeysRepoId(chars.id)
+                repoDatabase.getRemoteKeyDao().remoteKeysRepoId(chars.id.toLong())
             }
     }
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, CharactersEntity>): RemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { chars ->
-                repoDatabase.getRemoteKeyDao().remoteKeysRepoId(chars.id)
+                repoDatabase.getRemoteKeyDao().remoteKeysRepoId(chars.id.toLong())
             }
     }
 
@@ -98,10 +108,14 @@ class CharactersRemoteMediator(
     ): RemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { charsId ->
-                repoDatabase.getRemoteKeyDao().remoteKeysRepoId(charsId)
+                repoDatabase.getRemoteKeyDao().remoteKeysRepoId(charsId.toLong())
             }
         }
     }
+//    @AssistedFactory
+//    interface Factory {
+//        fun create(name: String?): CharactersRemoteMediator
+//    }
 }
 
 

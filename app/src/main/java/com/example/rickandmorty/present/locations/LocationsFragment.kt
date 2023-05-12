@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentLocationsBinding
@@ -28,6 +27,7 @@ import javax.inject.Inject
 class LocationsFragment : Fragment() {
 
     private lateinit var binding: FragmentLocationsBinding
+
     @Inject
     lateinit var viewModelProvider: LocationsModelProvider
     private lateinit var viewModel: LocationsViewModel
@@ -51,21 +51,21 @@ class LocationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
-            viewModel.flow.collectLatest {
-                setList(it)
+            viewModel.searchLocations().collectLatest {
+                initAdapter(it)
             }
         }
 
     }
 
-    private suspend fun setList(list: PagingData<LocationsEntity>) {
+    private suspend fun initAdapter(list: PagingData<LocationsEntity>) {
         binding.recyclerLocations.run {
             addItemDecoration()
             val locationDetailsFragment =
                 LocationDetailsFragment()
 
             if (adapter == null) {
-                adapter = LocationsPagingAdapter{
+                adapter = LocationsPagingAdapter {
                     val bundle = Bundle()
                     bundle.putInt(KEY_TO_LOCATION_DETAILS, it)
                     locationDetailsFragment.arguments = bundle
@@ -75,7 +75,7 @@ class LocationsFragment : Fragment() {
                         .commit()
                 }
                 layoutManager =
-                    GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL,    false)
+                    GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             }
             (adapter as? LocationsPagingAdapter)?.submitData(list)
         }

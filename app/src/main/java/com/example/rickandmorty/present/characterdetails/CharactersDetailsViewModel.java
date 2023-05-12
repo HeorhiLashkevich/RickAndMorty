@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.rickandmorty.api.CharactersResult;
+import com.example.rickandmorty.data.remove.service.model.CharactersResult;
 import com.example.rickandmorty.data.remove.service.model.EpisodesResult;
 import com.example.rickandmorty.data.remove.service.RickAndMortyApiService;
 

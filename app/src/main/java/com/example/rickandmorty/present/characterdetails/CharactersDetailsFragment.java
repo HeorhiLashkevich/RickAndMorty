@@ -20,14 +20,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.rickandmort.R;
 import com.example.rickandmort.databinding.FragmentCharacterDetailsBinding;
 import com.example.rickandmorty.App;
 import com.example.rickandmorty.present.episodesdetails.EpisodeDetailsFragment;
 import com.example.rickandmorty.present.locationdetails.LocationDetailsFragment;
-import com.example.rickandmorty.api.CharactersResult;
+import com.example.rickandmorty.data.remove.service.model.CharactersResult;
 import com.example.rickandmorty.data.remove.service.model.EpisodesResult;
 import com.example.rickandmorty.utils.CharactersItemClickListener;
 

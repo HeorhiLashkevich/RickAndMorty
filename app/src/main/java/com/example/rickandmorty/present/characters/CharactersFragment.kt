@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
+import androidx.paging.map
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,7 @@ import com.example.rickandmort.databinding.FragmentCharactersBinding
 import com.example.rickandmorty.App
 import com.example.rickandmorty.utils.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.data.model.CharactersEntity
+import com.example.rickandmorty.data.remove.service.model.CharactersResult
 import com.example.rickandmorty.utils.RecyclerMargin
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment
 import kotlinx.coroutines.flow.collectLatest
@@ -56,11 +58,20 @@ class CharactersFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            viewModel.flow.collectLatest {
+
+            viewModel.getCharactersByName().collectLatest {
                 initAdapter(it)
             }
+//            viewModel.flow.collectLatest {
+//                    initAdapter(it)
+//                }
+//            }
+//            viewModel .collectLatest {
+//                initAdapter(it)
+//            }
+//            viewModel.getCharactersByName()
 
-        }
+
 //        binding.toCharacterSearch.setOnClickListener {
 //            parentFragmentManager.beginTransaction()
 //                .replace(R.id.container, CharactersSearchFragment())
@@ -69,20 +80,26 @@ class CharactersFragment() : Fragment() {
 //        }
 
 
-        binding.characterSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query!= null){
-                    binding.recyclerCharacters.scrollToPosition(0)
-                }
-                return true
-            }
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
+//        binding.characterSearch.run {
+//
+//            setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+//                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+//                override fun onQueryTextSubmit(query: String?): Boolean {
+//                    if (query != null) {
+//                        viewModel.searchText = query
+//                    }
+//                    return true
+//                }
+//
+//                override fun onQueryTextChange(newText: String?): Boolean {
+//                    viewModel.searchText = newText!!
+//
+//                    return false
+//                }
+//
+//            })
+//        }
 
-        })
-    }
 //
 //    private suspend fun filterFirsOfSecondName(query: String?) {
 //        if (query != null) {
@@ -95,50 +112,47 @@ class CharactersFragment() : Fragment() {
 ////        }
 //
 
+        }
+    }
 
+    private suspend fun initAdapter(list: PagingData<CharactersResult>) {
+        binding.recyclerCharacters.run {
+            val charactersDetailsFragment =
+                CharactersDetailsFragment()
+            addItemDecoration()
+            if (adapter == null) {
+                adapter = CharactersPagingAdapter {
+                    val bundle = Bundle()
+                    bundle.putInt(KEY_TO_CHARACTER_DETAILS, it)
+                    charactersDetailsFragment.arguments = bundle
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.container, charactersDetailsFragment)
+                        .addToBackStack("")
+                        .commit()
+                }
 
-private suspend fun initAdapter(list: PagingData<CharactersEntity>) {
-    binding.recyclerCharacters.run {
-        val charactersDetailsFragment =
-            CharactersDetailsFragment()
-        addItemDecoration()
-        if (adapter == null) {
-            adapter = CharactersPagingAdapter {
-                val bundle = Bundle()
-                bundle.putInt(KEY_TO_CHARACTER_DETAILS, it)
-                charactersDetailsFragment.arguments = bundle
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.container, charactersDetailsFragment)
-                    .addToBackStack("")
-                    .commit()
+                layoutManager =
+                    GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             }
-
-            layoutManager =
-                GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            (adapter as? CharactersPagingAdapter)?.submitData(list)
         }
 
-//            binding.swipeRefreshCharacters.setOnRefreshListener { adapter.refresh() }
-        (adapter as? CharactersPagingAdapter)?.submitData(list)
     }
-//        binding.swipeCharacters.setOnRefreshListener {
-//            CharactersPagingAdapter().refresh()
-//        }
-}
 
 
-@SuppressLint("UseCompatLoadingForDrawables")
-private fun addItemDecoration() {
-    val itemMargin = RecyclerMargin()
-    val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
-    val dividerItemDecoration2 = DividerItemDecoration(context, RecyclerView.HORIZONTAL)
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun addItemDecoration() {
+        val itemMargin = RecyclerMargin()
+        val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
+        val dividerItemDecoration2 = DividerItemDecoration(context, RecyclerView.HORIZONTAL)
 //        setProgressBarAccordingToLoadState()
-    dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_drawable))
-    binding.recyclerCharacters.run {
-        addItemDecoration(dividerItemDecoration)
-        addItemDecoration(itemMargin)
-        addItemDecoration(dividerItemDecoration2)
+        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_drawable))
+        binding.recyclerCharacters.run {
+            addItemDecoration(dividerItemDecoration)
+            addItemDecoration(itemMargin)
+            addItemDecoration(dividerItemDecoration2)
+        }
     }
-}
 
 }
 

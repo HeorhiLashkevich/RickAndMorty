@@ -1,6 +1,4 @@
-package com.example.rickandmorty.api
-
-import com.google.gson.annotations.SerializedName
+package com.example.rickandmorty.data.remove.service.model
 
 data class Characters(
     val info: Info,

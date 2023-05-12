@@ -6,6 +6,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.rickandmorty.data.local.AppDataBase
+import com.example.rickandmorty.data.mapper.toEpisodesEntity
 import com.example.rickandmorty.data.model.RemoteKeys
 import com.example.rickandmorty.data.model.EpisodeEntity
 import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
@@ -58,21 +59,23 @@ class EpisodeRemoteMediator(
             val episodes = apiResponse.body()?.results
             val endOfPaginationReached = episodes?.isEmpty()
             repoDatabase.withTransaction {
-                // clear all tables in the database
                 if (loadType == LoadType.REFRESH) {
                     repoDatabase.getRemoteKeyDao().clearRemoteKeys()
-                    repoDatabase.getCharactersDao().clearAll()
+                    repoDatabase.getEpisodesDao().clearAll()
                 }
                 val prevKey = if (page == 1) null else page - 1
                 val nextKey = if (endOfPaginationReached == true) null else page + 1
                 val keys = episodes?.map {
-                    RemoteKeys(repoId = it.id, prevKey = prevKey, nextKey = nextKey)
+                    RemoteKeys(repoId = it.id.toLong(), prevKey = prevKey, nextKey = nextKey)
                 }
                 if (keys != null) {
                     repoDatabase.getRemoteKeyDao().insertAll(keys)
                 }
                 if (episodes != null) {
-                    repoDatabase.getEpisodesDao().insertAll(episodes)
+                    val episodesEntity = episodes.map {
+                        it.toEpisodesEntity()
+                    }
+                    repoDatabase.getEpisodesDao().insertAll(episodesEntity)
                 }
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached == true)

@@ -18,4 +18,6 @@ data class EpisodesResult(
     val id: Int,
     val name: String,
     val url: String
-)
+) {
+
+}

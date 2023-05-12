@@ -6,6 +6,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.rickandmorty.data.local.AppDataBase
+import com.example.rickandmorty.data.mapper.toLocationsEntity
 import com.example.rickandmorty.data.model.RemoteKeys
 import com.example.rickandmorty.data.model.LocationsEntity
 import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
@@ -46,8 +47,6 @@ class LocationsRemoteMediator(val service: RickAndMortyApiService, val db: AppDa
             }
         }
 
-//        val apiQuery = query
-
         try {
 //            val apiResponse = service.searchByName (apiQuery, page, state.config.pageSize)
 //            val apiResponse = service.searchByName ( page, state.config.pageSize)
@@ -56,7 +55,6 @@ class LocationsRemoteMediator(val service: RickAndMortyApiService, val db: AppDa
             val locations = apiResponse.body()?.results
             val endOfPaginationReached = locations?.isEmpty()
             db.withTransaction {
-                // clear all tables in the database
                 if (loadType == LoadType.REFRESH) {
                     db.getRemoteKeyDao().clearRemoteKeys()
                     db.getLocationsDao().clearAll()
@@ -64,13 +62,16 @@ class LocationsRemoteMediator(val service: RickAndMortyApiService, val db: AppDa
                 val prevKey = if (page == 1) null else page - 1
                 val nextKey = if (endOfPaginationReached == true) null else page + 1
                 val keys = locations?.map {
-                    RemoteKeys(repoId = it.id, prevKey = prevKey, nextKey = nextKey)
+                    RemoteKeys(repoId = it.id.toLong(), prevKey = prevKey, nextKey = nextKey)
                 }
                 if (keys != null) {
                     db.getRemoteKeyDao().insertAll(keys)
                 }
                 if (locations != null) {
-                    db.getLocationsDao().insertAll(locations)
+                    val locationsEntity = locations.map {
+                        it.toLocationsEntity()
+                    }
+                    db.getLocationsDao().insertAll(locationsEntity)
                 }
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached == true)

@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
@@ -18,7 +17,7 @@ import com.example.rickandmorty.App
 import com.example.rickandmorty.utils.CHARACTER_DETAILS_TAG
 import com.example.rickandmorty.utils.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.utils.KEY_TO_EPISODE_DETAILS
-import com.example.rickandmorty.api.CharactersResult
+import com.example.rickandmorty.data.remove.service.model.CharactersResult
 import com.example.rickandmorty.utils.RecyclerMargin
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment
 import javax.inject.Inject

@@ -3,37 +3,39 @@ package com.example.rickandmorty.present.episodes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.ExperimentalPagingApi
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import com.example.rickandmorty.utils.COUNT_ITEM_EPISODES
+import androidx.paging.*
 import com.example.rickandmorty.data.local.AppDataBase
-import com.example.rickandmorty.data.local.paging.datasource.EpisodesDataSource
-import com.example.rickandmorty.data.local.paging.remotemediator.EpisodeRemoteMediator
+import com.example.rickandmorty.data.model.EpisodeEntity
 import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import com.example.rickandmorty.data.repository.EpisodesRepository
 import com.example.rickandmorty.utils.COUNT_EPISODES_LOAD_SIZE
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
 class EpisodesViewModel @Inject constructor(
-    service: RickAndMortyApiService,
+    private val repo: EpisodesRepository,
+    private val service: RickAndMortyApiService,
     private val db: AppDataBase,
-    private val dataSource: EpisodesDataSource
+//    private val dataSource: EpisodesDataSource
 ) : ViewModel() {
 
-    @OptIn(ExperimentalPagingApi::class)
-    val flow = Pager(
-        PagingConfig(pageSize = COUNT_ITEM_EPISODES
-            ,  initialLoadSize = COUNT_EPISODES_LOAD_SIZE,
-            prefetchDistance = COUNT_EPISODES_LOAD_SIZE
+    suspend fun searchEpisodes(): Flow<PagingData<EpisodeEntity>> {
+        return repo.searchByEpisodeName().cachedIn(viewModelScope)
+    }
 
-        ),
-        remoteMediator = EpisodeRemoteMediator(service, db)
-    ) {
-        db.getEpisodesDao().pagingSource()
-//        dataSource
-    }.flow.cachedIn(viewModelScope)
+//    @OptIn(ExperimentalPagingApi::class)
+//    val flow = Pager(
+//        PagingConfig(
+//            pageSize = COUNT_ITEM_EPISODES, initialLoadSize = COUNT_EPISODES_LOAD_SIZE,
+//            prefetchDistance = COUNT_EPISODES_LOAD_SIZE
+//
+//        ),
+//        remoteMediator = EpisodeRemoteMediator(service, db)
+//    ) {
+//        db.getEpisodesDao().pagingSource()
+////        dataSource
+//    }.flow.cachedIn(viewModelScope)
 
 
 }

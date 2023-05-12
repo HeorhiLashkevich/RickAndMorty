@@ -1,11 +1,11 @@
 package com.example.rickandmorty.data.remove.service
 
 
-import com.example.rickandmorty.api.*
 import com.example.rickandmorty.data.model.CharactersEntity
 import com.example.rickandmorty.data.model.EpisodeEntity
 import com.example.rickandmorty.data.model.LocationsEntity
 import com.example.rickandmorty.data.model.PagedResponse
+import com.example.rickandmorty.data.remove.service.model.CharactersResult
 import com.example.rickandmorty.data.remove.service.model.EpisodesResult
 import com.example.rickandmorty.data.remove.service.model.LocationsResult
 import io.reactivex.Observable
@@ -21,14 +21,18 @@ interface RickAndMortyApiService {
 //        @Query("page") page: Int,
 //        @Query("per_page") itemsPerPage: Int
 //    ): CharacterSearchResponse
+//    @GET("character/?name")
+//    suspend fun searchByName(
+//        @Query("query") query: String,
+//        @Query("page") page: Int,
+////        @Query("per_page") itemsPerPage: Int
+//    ): Response<PagedResponse<CharactersEntity>>
     @GET("character/")
     suspend fun searchByName(
-//        @Query("name") query: String,
+        @Query("name") name: String?,
         @Query("page") page: Int,
 //        @Query("per_page") itemsPerPage: Int
-    ): Response<PagedResponse<CharactersEntity>>
-
-
+    ): Response<PagedResponse<CharactersResult>>
 
     @GET("character/{id}")
     fun getCharacter(
@@ -38,7 +42,7 @@ interface RickAndMortyApiService {
     @GET("character")
     suspend fun getCharacters(
 //        @Query("limit") limit: Int? = COUNT_ITEM_CHARACTERS,
-        @Query("page") page: Int? = 0,
+        @Query("page") page: Int,
         ): Response<PagedResponse<CharactersEntity>>
 
     @GET("character/?{q}")
@@ -80,7 +84,7 @@ interface RickAndMortyApiService {
     suspend fun getEpisodes(
 //        @Query("limit") limit: Int? = COUNT_ITEM_EPISODES,
         @Query("page") page: Int
-    ): Response<PagedResponse<EpisodeEntity>>
+    ): Response<PagedResponse<EpisodesResult>>
 
     @GET("episode/{id}")
     suspend fun getEpisode(
@@ -100,7 +104,7 @@ interface RickAndMortyApiService {
     suspend fun getLocations(
 //        @Query("limit") limit: Int? = COUNT_ITEM_LOCATIONS,
         @Query("page") page: Int? = 0
-    ): Response<PagedResponse<LocationsEntity>>
+    ): Response<PagedResponse<LocationsResult>>
 
 
     @GET("location/{id}")
