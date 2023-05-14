@@ -12,11 +12,10 @@ import kotlinx.coroutines.flow.Flow
 
 class LocationsViewModel(
     private val repo: LocationsRepository,
-    private val db: AppDataBase,
-    private val api: RickAndMortyApi
+
 ) : ViewModel() {
 
-    suspend fun searchLocations(): Flow<PagingData<LocationsEntity>> {
+     fun searchLocations(): Flow<PagingData<LocationsEntity>> {
         return repo.searchByLocationName().cachedIn(viewModelScope)
     }
 

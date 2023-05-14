@@ -44,7 +44,6 @@ public class CharactersDetailsFragment extends Fragment implements CharactersIte
 
     @Inject
     CharactersDetailsModelProvider charactersDetailsModelProvider;
-//    BaseViewModelFactory viewModelFactory;
      private CharactersDetailsViewModel viewModel;
     private FragmentCharacterDetailsBinding binding;
     private int characterId;

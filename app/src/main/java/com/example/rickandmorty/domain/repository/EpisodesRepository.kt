@@ -5,7 +5,7 @@ import com.example.rickandmorty.data.model.EpisodeEntity
 import kotlinx.coroutines.flow.Flow
 
 interface EpisodesRepository {
-    suspend fun searchByEpisodeName()
+     fun searchByEpisodeName()
             : Flow<PagingData<EpisodeEntity>>
 
 }

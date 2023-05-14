@@ -18,7 +18,7 @@ class EpisodesViewModel @Inject constructor(
     private val db: AppDataBase,
 ) : ViewModel() {
 
-    suspend fun searchEpisodes(): Flow<PagingData<EpisodeEntity>> {
+     fun searchEpisodes(): Flow<PagingData<EpisodeEntity>> {
         return repo.searchByEpisodeName().cachedIn(viewModelScope)
     }
 

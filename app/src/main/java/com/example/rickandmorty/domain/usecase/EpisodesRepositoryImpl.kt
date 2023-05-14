@@ -21,7 +21,7 @@ class EpisodesRepositoryImpl @Inject constructor(
     private val dataBase: AppDataBase,
 ) : EpisodesRepository {
     @OptIn(ExperimentalPagingApi::class)
-    override suspend fun searchByEpisodeName(
+    override  fun searchByEpisodeName(
     ): Flow<PagingData<EpisodeEntity>> {
         return Pager(
             PagingConfig(

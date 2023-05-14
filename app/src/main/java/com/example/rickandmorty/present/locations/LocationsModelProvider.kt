@@ -13,7 +13,7 @@ class LocationsModelProvider @Inject constructor(
 ) :
     BaseViewModelFactory<LocationsViewModel>(LocationsViewModel::class.java) {
     override fun createViewModel(): LocationsViewModel {
-        return LocationsViewModel(repository, dataBase, api)
+        return LocationsViewModel(repository)
     }
 
 }

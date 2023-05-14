@@ -19,7 +19,7 @@ class LocationsRepositoryImpl @Inject constructor(
     private val dataBase: AppDataBase,
 ) : LocationsRepository {
     @OptIn(ExperimentalPagingApi::class)
-    override suspend fun searchByLocationName(
+    override  fun searchByLocationName(
     ): Flow<PagingData<LocationsEntity>> {
         return Pager(
             PagingConfig(

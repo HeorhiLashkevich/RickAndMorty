@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocationsRepository {
 
-    suspend fun searchByLocationName()
+     fun searchByLocationName()
             : Flow<PagingData<LocationsEntity>>
 }
