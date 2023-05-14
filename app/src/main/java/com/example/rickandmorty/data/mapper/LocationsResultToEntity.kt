@@ -1,7 +1,7 @@
 package com.example.rickandmorty.data.mapper
 
 import com.example.rickandmorty.data.model.LocationsEntity
-import com.example.rickandmorty.data.remove.service.model.LocationsResult
+import com.example.rickandmorty.domain.model.LocationsResult
 
 fun LocationsResult.toLocationsEntity(): LocationsEntity {
     return LocationsEntity(

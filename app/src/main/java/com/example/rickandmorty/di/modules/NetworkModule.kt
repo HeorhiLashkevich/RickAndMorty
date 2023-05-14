@@ -2,7 +2,7 @@ package com.example.rickandmorty.di.modules
 
 import android.util.Log
 import com.example.rickandmorty.utils.BASE_URL
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import com.example.rickandmorty.data.api.RickAndMortyApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -19,14 +19,14 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun getRickAndMortyApi(): RickAndMortyApiService {
+    fun getRickAndMortyApi(): RickAndMortyApi {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(getOkHttpClient())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
-        return retrofit.create((RickAndMortyApiService::class.java))
+        return retrofit.create((RickAndMortyApi::class.java))
     }
 
     @Singleton

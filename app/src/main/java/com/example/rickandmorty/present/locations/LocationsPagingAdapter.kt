@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.example.rickandmort.databinding.ItemLocationsBinding
-import com.example.rickandmorty.data.remove.service.model.LocationsResult
 import com.example.rickandmorty.data.local.paging.datasource.LocationsDiffUtil
 import com.example.rickandmorty.data.model.LocationsEntity
 

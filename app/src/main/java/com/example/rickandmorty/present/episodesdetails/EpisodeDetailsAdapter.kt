@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.databinding.ItemCharactersBinding
-import com.example.rickandmorty.data.remove.service.model.CharactersResult
+import com.example.rickandmorty.domain.model.CharactersResult
 
 class EpisodeDetailsAdapter(
     private val onClick: (id: Int) -> Unit

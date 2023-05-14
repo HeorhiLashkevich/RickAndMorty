@@ -14,4 +14,7 @@ const val COUNT_ITEM_LOCATIONS = 20
 const val EPISODE_DETAILS_TAG = "episodeDetailsTag"
 const val LOCATION_DETAILS_TAG = "locationDetailsTag"
 const val CHARACTER_DETAILS_TAG = "characterDetailsTag"
+const val CHARACTERS_TAG = "characterTag"
+const val EPISODES_TAG = "episodesTag"
+const val LOCATIONS_TAG = "locationsTag"
  const val CHARACTERS_STARTING_PAGE_INDEX = 1

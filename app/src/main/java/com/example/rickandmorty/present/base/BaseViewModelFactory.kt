@@ -1,8 +1,7 @@
-package com.example.rickandmorty.ui.base
+package com.example.rickandmorty.present.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.rickandmorty.present.characterdetails.CharactersDetailsViewModel
 
 abstract class BaseViewModelFactory<T : ViewModel>(private val classVM: Class<T>) :
     ViewModelProvider.Factory {

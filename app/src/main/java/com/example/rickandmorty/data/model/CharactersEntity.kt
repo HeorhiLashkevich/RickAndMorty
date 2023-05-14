@@ -5,9 +5,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.rickandmorty.data.remove.service.model.CharactersResult
-import com.example.rickandmorty.data.remove.service.model.Location
-import com.example.rickandmorty.data.remove.service.model.Origin
+import com.example.rickandmorty.domain.model.Location
+import com.example.rickandmorty.domain.model.Origin
 import com.example.rickandmorty.data.local.TypeConverter
 
 

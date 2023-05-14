@@ -1,11 +1,11 @@
 package com.example.rickandmorty.present.characterdetails
 
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
-import com.example.rickandmorty.ui.base.BaseViewModelFactory
+import com.example.rickandmorty.data.api.RickAndMortyApi
+import com.example.rickandmorty.present.base.BaseViewModelFactory
 import javax.inject.Inject
 
 class CharactersDetailsModelProvider @Inject constructor(
-    private val api: RickAndMortyApiService
+    private val api: RickAndMortyApi
 ) :
     BaseViewModelFactory<CharactersDetailsViewModel>(
         CharactersDetailsViewModel::class.java) {

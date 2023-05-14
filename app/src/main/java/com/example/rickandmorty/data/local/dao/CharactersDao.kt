@@ -9,10 +9,11 @@ interface CharactersDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(characters: List<CharactersEntity>)
 
-        @Query("SELECT * FROM characters WHERE name LIKE :query ")
-    fun pagingSource(query: String?): PagingSource<Int, CharactersEntity>
+//    @Query("SELECT * FROM characters WHERE name LIKE '%' :query")
+    @Query("SELECT * FROM characters")
+     fun pagingSource(): PagingSource<Int, CharactersEntity>
 
-    @Query("DELETE FROM characters ")
+    @Query("DELETE FROM characters")
     suspend fun clearAll()
 
 

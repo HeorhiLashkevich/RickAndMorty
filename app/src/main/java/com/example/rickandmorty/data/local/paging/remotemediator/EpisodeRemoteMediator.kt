@@ -9,7 +9,7 @@ import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.mapper.toEpisodesEntity
 import com.example.rickandmorty.data.model.RemoteKeys
 import com.example.rickandmorty.data.model.EpisodeEntity
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import com.example.rickandmorty.data.api.RickAndMortyApi
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -17,8 +17,8 @@ import java.io.IOException
 @OptIn(ExperimentalPagingApi::class)
 class EpisodeRemoteMediator(
 //    private val query: String,
-    private val service: RickAndMortyApiService,
-    private val repoDatabase: AppDataBase
+    private val service: RickAndMortyApi,
+    private val db: AppDataBase
 ) : RemoteMediator<Int, EpisodeEntity>() {
     override suspend fun initialize(): InitializeAction {
         return InitializeAction.LAUNCH_INITIAL_REFRESH
@@ -58,24 +58,24 @@ class EpisodeRemoteMediator(
 
             val episodes = apiResponse.body()?.results
             val endOfPaginationReached = episodes?.isEmpty()
-            repoDatabase.withTransaction {
+            db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    repoDatabase.getRemoteKeyDao().clearRemoteKeys()
-                    repoDatabase.getEpisodesDao().clearAll()
+                    db.getRemoteKeyDao().clearRemoteKeys()
+                    db.getEpisodesDao().clearAll()
                 }
                 val prevKey = if (page == 1) null else page - 1
                 val nextKey = if (endOfPaginationReached == true) null else page + 1
                 val keys = episodes?.map {
-                    RemoteKeys(repoId = it.id.toLong(), prevKey = prevKey, nextKey = nextKey)
+                    RemoteKeys(repoId = it.id, prevKey = prevKey, nextKey = nextKey)
                 }
                 if (keys != null) {
-                    repoDatabase.getRemoteKeyDao().insertAll(keys)
+                    db.getRemoteKeyDao().insertAll(keys)
                 }
                 if (episodes != null) {
                     val episodesEntity = episodes.map {
                         it.toEpisodesEntity()
                     }
-                    repoDatabase.getEpisodesDao().insertAll(episodesEntity)
+                    db.getEpisodesDao().insertAll(episodesEntity)
                 }
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached == true)
@@ -90,14 +90,14 @@ class EpisodeRemoteMediator(
 
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { episodes ->
-                repoDatabase.getRemoteKeyDao().remoteKeysRepoId(episodes.id)
+                db.getRemoteKeyDao().remoteKeysRepoId(episodes.id)
             }
     }
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, EpisodeEntity>): RemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { episodes ->
-                repoDatabase.getRemoteKeyDao().remoteKeysRepoId(episodes.id)
+                db.getRemoteKeyDao().remoteKeysRepoId(episodes.id)
             }
     }
 
@@ -106,7 +106,7 @@ class EpisodeRemoteMediator(
     ): RemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { episodesId ->
-                repoDatabase.getRemoteKeyDao().remoteKeysRepoId(episodesId)
+                db.getRemoteKeyDao().remoteKeysRepoId(episodesId)
             }
         }
     }

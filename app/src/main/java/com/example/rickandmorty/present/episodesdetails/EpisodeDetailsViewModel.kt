@@ -3,15 +3,15 @@ package com.example.rickandmorty.present.episodesdetails
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.rickandmorty.data.remove.service.model.CharactersResult
+import com.example.rickandmorty.domain.model.CharactersResult
 
 import com.example.rickandmorty.data.remove.service.model.EpisodesResult
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import com.example.rickandmorty.data.api.RickAndMortyApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EpisodeDetailsViewModel(
-    private val api: RickAndMortyApiService
+    private val api: RickAndMortyApi
 ) : ViewModel() {
 
     var characters = MutableLiveData<ArrayList<CharactersResult>>()

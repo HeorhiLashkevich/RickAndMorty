@@ -6,18 +6,16 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.model.EpisodeEntity
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
-import com.example.rickandmorty.data.repository.EpisodesRepository
-import com.example.rickandmorty.utils.COUNT_EPISODES_LOAD_SIZE
+import com.example.rickandmorty.data.api.RickAndMortyApi
+import com.example.rickandmorty.domain.repository.EpisodesRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
 class EpisodesViewModel @Inject constructor(
     private val repo: EpisodesRepository,
-    private val service: RickAndMortyApiService,
+    private val service: RickAndMortyApi,
     private val db: AppDataBase,
-//    private val dataSource: EpisodesDataSource
 ) : ViewModel() {
 
     suspend fun searchEpisodes(): Flow<PagingData<EpisodeEntity>> {

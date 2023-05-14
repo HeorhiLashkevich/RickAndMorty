@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui
+package com.example.rickandmorty.present
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,9 @@ import com.example.rickandmort.R
 import com.example.rickandmorty.present.characters.CharactersFragment
 import com.example.rickandmorty.present.episodes.EpisodesFragment
 import com.example.rickandmorty.present.locations.LocationsFragment
+import com.example.rickandmorty.utils.CHARACTERS_TAG
+import com.example.rickandmorty.utils.EPISODES_TAG
+import com.example.rickandmorty.utils.LOCATIONS_TAG
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -17,21 +20,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        CharactersDataBaseModule.initDataBase(this)
-        loadFragment(CharactersFragment())
+        loadFragment(CharactersFragment(),CHARACTERS_TAG )
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_characters -> {
-                    loadFragment(CharactersFragment())
+                    loadFragment(CharactersFragment(),CHARACTERS_TAG)
                     true
                 }
                 R.id.nav_episodes -> {
-                    loadFragment(EpisodesFragment())
+                    loadFragment(EpisodesFragment(), EPISODES_TAG)
                     true
                 }
                 R.id.nav_locations -> {
-                    loadFragment(LocationsFragment())
+                    loadFragment(LocationsFragment(),LOCATIONS_TAG)
                     true
                 }
                 else -> {
@@ -41,10 +43,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment, backStack: String) {
         supportFragmentManager.beginTransaction()
             .add(R.id.container, fragment)
-            .addToBackStack("")
+            .addToBackStack(backStack)
             .commit()
     }
 }

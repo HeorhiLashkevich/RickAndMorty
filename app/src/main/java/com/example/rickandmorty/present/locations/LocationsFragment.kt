@@ -20,6 +20,7 @@ import com.example.rickandmorty.utils.KEY_TO_LOCATION_DETAILS
 import com.example.rickandmorty.data.model.LocationsEntity
 import com.example.rickandmorty.utils.RecyclerMargin
 import com.example.rickandmorty.present.locationdetails.LocationDetailsFragment
+import com.example.rickandmorty.utils.LOCATIONS_TAG
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -71,7 +72,7 @@ class LocationsFragment : Fragment() {
                     locationDetailsFragment.arguments = bundle
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.container, locationDetailsFragment)
-                        .addToBackStack("")
+                        .addToBackStack(LOCATIONS_TAG)
                         .commit()
                 }
                 layoutManager =

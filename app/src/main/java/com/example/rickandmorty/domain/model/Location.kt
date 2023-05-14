@@ -1,4 +1,5 @@
-package com.example.rickandmorty.data.remove.service.model
+
+package com.example.rickandmorty.domain.model
 
 data class Locations(
     val info: Info,

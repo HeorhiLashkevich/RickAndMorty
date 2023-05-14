@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.rickandmorty.data.remove.service.model.CharactersResult;
+import com.example.rickandmorty.domain.model.CharactersResult;
 import com.example.rickandmorty.data.remove.service.model.EpisodesResult;
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService;
+import com.example.rickandmorty.data.api.RickAndMortyApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +21,10 @@ import kotlin.text.StringsKt;
 
 
 public class CharactersDetailsViewModel extends ViewModel {
-    private final RickAndMortyApiService api;
+    private final RickAndMortyApi api;
 
     @Inject
-    CharactersDetailsViewModel(RickAndMortyApiService api) {
+    CharactersDetailsViewModel(RickAndMortyApi api) {
         this.api = api;
     }
         private MutableLiveData<CharactersResult> character;

@@ -1,15 +1,14 @@
 package com.example.rickandmorty.present.episodes
 
 import com.example.rickandmorty.data.local.AppDataBase
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
-import com.example.rickandmorty.data.repository.EpisodesRepository
-import com.example.rickandmorty.ui.base.BaseViewModelFactory
+import com.example.rickandmorty.data.api.RickAndMortyApi
+import com.example.rickandmorty.domain.repository.EpisodesRepository
+import com.example.rickandmorty.present.base.BaseViewModelFactory
 import javax.inject.Inject
 
 class EpisodesModelProvider @Inject constructor(
     private val repo: EpisodesRepository,
-//    private val dataSource: EpisodesDataSource,
-    private val api: RickAndMortyApiService,
+    private val api: RickAndMortyApi,
     private val dataBase: AppDataBase
 
 

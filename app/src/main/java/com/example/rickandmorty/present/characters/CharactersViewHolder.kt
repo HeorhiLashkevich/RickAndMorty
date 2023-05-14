@@ -1,12 +1,8 @@
 package com.example.rickandmorty.present.characters
 
-import android.R.attr.author
-import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.rickandmort.databinding.ItemCharactersBinding
 import com.example.rickandmorty.data.model.CharactersEntity
-import com.example.rickandmorty.data.remove.service.model.CharactersResult
 import com.squareup.picasso.Picasso
 
 
@@ -15,7 +11,7 @@ class CharactersViewHolder(
 
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: CharactersResult) {
+    fun bind(item: CharactersEntity) {
         binding.run {
             characterName.text = item.name
             characterSpecies.text = item.species

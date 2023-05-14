@@ -3,7 +3,6 @@ package com.example.rickandmorty.present.locations
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.databinding.ItemLocationsBinding
 import com.example.rickandmorty.data.model.LocationsEntity
-import com.example.rickandmorty.data.remove.service.model.LocationsResult
 
 class LocationsViewHolder(
     private val binding: ItemLocationsBinding

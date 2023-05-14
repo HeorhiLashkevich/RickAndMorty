@@ -1,4 +1,4 @@
-package com.example.rickandmorty.data.remove.service.model
+package com.example.rickandmorty.domain.model
 
 data class Characters(
     val info: Info,
@@ -20,10 +20,10 @@ data class Origin(
     val url: String
 )
 data class CharactersResult(
+    val id: Int,
     val created: String,
     val episode: List<String>,
     val gender: String,
-    val id: Int,
     val image: String,
     val location: Location,
     val name: String,

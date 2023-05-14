@@ -3,22 +3,17 @@ package com.example.rickandmorty.present.locations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
-import com.example.rickandmorty.utils.COUNT_ITEM_LOCATIONS
 import com.example.rickandmorty.data.local.AppDataBase
-import com.example.rickandmorty.data.local.paging.remotemediator.LocationsRemoteMediator
-import com.example.rickandmorty.data.model.EpisodeEntity
 import com.example.rickandmorty.data.model.LocationsEntity
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
-import com.example.rickandmorty.data.repository.EpisodesRepository
-import com.example.rickandmorty.data.repository.LocationsRepository
-import com.example.rickandmorty.utils.COUNT_LOCATIONS_LOAD_SIZE
+import com.example.rickandmorty.data.api.RickAndMortyApi
+import com.example.rickandmorty.domain.repository.LocationsRepository
 import kotlinx.coroutines.flow.Flow
 
 
 class LocationsViewModel(
     private val repo: LocationsRepository,
     private val db: AppDataBase,
-    private val api: RickAndMortyApiService
+    private val api: RickAndMortyApi
 ) : ViewModel() {
 
     suspend fun searchLocations(): Flow<PagingData<LocationsEntity>> {

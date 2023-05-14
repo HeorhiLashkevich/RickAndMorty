@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.R
 import com.example.rickandmort.databinding.FragmentEpisodeDetailsBinding
 import com.example.rickandmorty.App
-import com.example.rickandmorty.utils.CHARACTER_DETAILS_TAG
-import com.example.rickandmorty.utils.KEY_TO_CHARACTER_DETAILS
-import com.example.rickandmorty.utils.KEY_TO_EPISODE_DETAILS
-import com.example.rickandmorty.data.remove.service.model.CharactersResult
-import com.example.rickandmorty.utils.RecyclerMargin
+import com.example.rickandmorty.domain.model.CharactersResult
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment
+import com.example.rickandmorty.utils.*
+import kotlinx.coroutines.CoroutineExceptionHandler
 import javax.inject.Inject
 
 
@@ -57,12 +55,17 @@ class EpisodeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
+            throwable.printStackTrace()
+        }
+        viewModel.getEpisode(episodeId)
         viewModel.characters.observe(viewLifecycleOwner) {
             initAdapter(it)
         }
         binding.episodeDetailsBackButton.setOnClickListener {
           parentFragmentManager.popBackStack()
+
+
         }
 
         viewModel.episode.observe(viewLifecycleOwner) {
@@ -74,7 +77,7 @@ class EpisodeDetailsFragment : Fragment() {
                 episodeUrl.text = it.url
             }
         }
-        viewModel.getEpisode(episodeId)
+
     }
 
     private fun initAdapter(list: ArrayList<CharactersResult>) {

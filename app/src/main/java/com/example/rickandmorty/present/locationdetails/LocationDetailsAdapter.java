@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rickandmort.R;
-import com.example.rickandmorty.data.remove.service.model.CharactersResult;
+import com.example.rickandmorty.domain.model.CharactersResult;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package com.example.rickandmorty.present.episodesdetails
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmort.databinding.ItemCharactersBinding
-import com.example.rickandmorty.data.remove.service.model.CharactersResult
+import com.example.rickandmorty.domain.model.CharactersResult
 import com.squareup.picasso.Picasso
 
 class EpisodeDetailsViewHolder(

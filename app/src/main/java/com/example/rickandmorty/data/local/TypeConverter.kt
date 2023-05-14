@@ -1,8 +1,8 @@
 package com.example.rickandmorty.data.local
 
 import androidx.room.TypeConverter
-import com.example.rickandmorty.data.remove.service.model.Location
-import com.example.rickandmorty.data.remove.service.model.Origin
+import com.example.rickandmorty.domain.model.Location
+import com.example.rickandmorty.domain.model.Origin
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type

@@ -1,5 +1,7 @@
 package com.example.rickandmorty.present.characterdetails;
 
+import static com.example.rickandmorty.utils.ConstansKt.CHARACTERS_TAG;
+import static com.example.rickandmorty.utils.ConstansKt.CHARACTER_DETAILS_TAG;
 import static com.example.rickandmorty.utils.ConstansKt.EPISODE_DETAILS_TAG;
 import static com.example.rickandmorty.utils.ConstansKt.KEY_TO_CHARACTER_DETAILS;
 import static com.example.rickandmorty.utils.ConstansKt.KEY_TO_EPISODE_DETAILS;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -26,7 +29,7 @@ import com.example.rickandmort.databinding.FragmentCharacterDetailsBinding;
 import com.example.rickandmorty.App;
 import com.example.rickandmorty.present.episodesdetails.EpisodeDetailsFragment;
 import com.example.rickandmorty.present.locationdetails.LocationDetailsFragment;
-import com.example.rickandmorty.data.remove.service.model.CharactersResult;
+import com.example.rickandmorty.domain.model.CharactersResult;
 import com.example.rickandmorty.data.remove.service.model.EpisodesResult;
 import com.example.rickandmorty.utils.CharactersItemClickListener;
 
@@ -86,6 +89,7 @@ public class CharactersDetailsFragment extends Fragment implements CharactersIte
         public void onClick(View arg0) {
             if (getParentFragmentManager().getBackStackEntryCount() != 0) {
                 getParentFragmentManager().popBackStack();
+
             }
         }
 

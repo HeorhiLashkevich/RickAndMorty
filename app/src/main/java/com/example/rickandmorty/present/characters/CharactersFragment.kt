@@ -6,12 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
-import androidx.paging.map
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,9 +19,9 @@ import com.example.rickandmort.databinding.FragmentCharactersBinding
 import com.example.rickandmorty.App
 import com.example.rickandmorty.utils.KEY_TO_CHARACTER_DETAILS
 import com.example.rickandmorty.data.model.CharactersEntity
-import com.example.rickandmorty.data.remove.service.model.CharactersResult
 import com.example.rickandmorty.utils.RecyclerMargin
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment
+
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -57,65 +56,43 @@ class CharactersFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
 
-            viewModel.getCharactersByName().collectLatest {
-                initAdapter(it)
-            }
-//            viewModel.flow.collectLatest {
-//                    initAdapter(it)
-//                }
-//            }
-//            viewModel .collectLatest {
+//
+//        lifecycleScope.launch {
+//            viewModel.getCharactersByName().collectLatest {
 //                initAdapter(it)
 //            }
-//            viewModel.getCharactersByName()
-
-
-//        binding.toCharacterSearch.setOnClickListener {
-//            parentFragmentManager.beginTransaction()
-//                .replace(R.id.container, CharactersSearchFragment())
-//                .addToBackStack("")
-//                .commit()
 //        }
-
-
-//        binding.characterSearch.run {
-//
-//            setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-//                androidx.appcompat.widget.SearchView.OnQueryTextListener {
-//                override fun onQueryTextSubmit(query: String?): Boolean {
-//                    if (query != null) {
-//                        viewModel.searchText = query
-//                    }
-//                    return true
-//                }
-//
-//                override fun onQueryTextChange(newText: String?): Boolean {
-//                    viewModel.searchText = newText!!
-//
-//                    return false
-//                }
-//
-//            })
-//        }
-
-//
-//    private suspend fun filterFirsOfSecondName(query: String?) {
-//        if (query != null) {
-//            viewModel.getBySearchedName(query)
-////            initAdapter(viewModel.listOfCharacters.value as PagingData<CharactersResult>)
-//
-//        }
-////        if (viewModel.listOfCharacters.value?.results!!.isNotEmpty()) {
-////
-////        }
-//
-
+        lifecycleScope.launch {
+            viewModel.getCharacters().collectLatest {
+                initAdapter(it)
+            }
         }
     }
 
-    private suspend fun initAdapter(list: PagingData<CharactersResult>) {
+//        binding.apply {
+//            characterSearchButton.setOnClickListener {
+//                val input = characterSearch.text.toString()
+//                viewModel.setSearchTerm(input)
+//            }
+//        }
+
+//        binding.characterSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String): Boolean {
+//                if (newText.isNotBlank()) {
+//                    viewModel.setSearchTerm(newText)
+//                }
+//                return false
+//            }
+//        })
+//    }
+
+
+    private suspend fun initAdapter(list: PagingData<CharactersEntity>) {
         binding.recyclerCharacters.run {
             val charactersDetailsFragment =
                 CharactersDetailsFragment()

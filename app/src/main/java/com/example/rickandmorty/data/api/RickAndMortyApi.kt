@@ -1,38 +1,25 @@
-package com.example.rickandmorty.data.remove.service
+package com.example.rickandmorty.data.api
 
 
 import com.example.rickandmorty.data.model.CharactersEntity
-import com.example.rickandmorty.data.model.EpisodeEntity
-import com.example.rickandmorty.data.model.LocationsEntity
 import com.example.rickandmorty.data.model.PagedResponse
-import com.example.rickandmorty.data.remove.service.model.CharactersResult
+import com.example.rickandmorty.domain.model.CharactersResult
 import com.example.rickandmorty.data.remove.service.model.EpisodesResult
-import com.example.rickandmorty.data.remove.service.model.LocationsResult
+import com.example.rickandmorty.domain.model.LocationsResult
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface RickAndMortyApiService {
-//    @GET("character/?{q}")
-//    suspend fun searchByName(
-////        @Query("name") query: String,
-//        @Query("page") page: Int,
-//        @Query("per_page") itemsPerPage: Int
-//    ): CharacterSearchResponse
-//    @GET("character/?name")
-//    suspend fun searchByName(
-//        @Query("query") query: String,
-//        @Query("page") page: Int,
-////        @Query("per_page") itemsPerPage: Int
-//    ): Response<PagedResponse<CharactersEntity>>
+interface RickAndMortyApi {
+
     @GET("character/")
     suspend fun searchByName(
         @Query("name") name: String?,
         @Query("page") page: Int,
 //        @Query("per_page") itemsPerPage: Int
-    ): Response<PagedResponse<CharactersResult>>
+    ): Response<PagedResponse<CharactersEntity>>
 
     @GET("character/{id}")
     fun getCharacter(
@@ -43,7 +30,7 @@ interface RickAndMortyApiService {
     suspend fun getCharacters(
 //        @Query("limit") limit: Int? = COUNT_ITEM_CHARACTERS,
         @Query("page") page: Int,
-        ): Response<PagedResponse<CharactersEntity>>
+        ): Response<PagedResponse<CharactersResult>>
 
     @GET("character/?{q}")
     suspend fun getSearchedCharactersByName(

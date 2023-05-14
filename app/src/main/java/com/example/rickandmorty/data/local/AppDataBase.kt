@@ -11,7 +11,7 @@ import com.example.rickandmorty.data.model.*
 
 @Database(
     entities = [RemoteKeys::class, CharactersEntity::class, EpisodeEntity::class, LocationsEntity::class],
-    version = 53
+    version = 55
 )
 @TypeConverters(TypeConverter::class)
 abstract class AppDataBase : RoomDatabase() {

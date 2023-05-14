@@ -1,47 +1,43 @@
-package com.example.rickandmorty.data.repository
+package com.example.rickandmorty.domain.usecase
 
 import androidx.paging.*
 import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.local.paging.remotemediator.CharactersRemoteMediator
 import com.example.rickandmorty.data.model.CharactersEntity
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
-import com.example.rickandmorty.data.remove.service.model.CharactersResult
-import com.example.rickandmorty.utils.COUNT_CHARACTERS_LOAD_SIZE
+import com.example.rickandmorty.data.api.RickAndMortyApi
+import com.example.rickandmorty.domain.repository.CharacterRepository
 import com.example.rickandmorty.utils.COUNT_ITEM_CHARACTERS
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CharacterRepositoryImpl @Inject constructor(
-    private val service: RickAndMortyApiService,
+    private val service: RickAndMortyApi,
     private val dataBase: AppDataBase,
 
-) : CharacterRepository {
+    ) : CharacterRepository {
 
+//    @OptIn(ExperimentalPagingApi::class)
+//    override  fun searchByName(name: String?): Flow<PagingData<CharactersEntity>> {
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = COUNT_ITEM_CHARACTERS,
+//                initialLoadSize = COUNT_CHARACTERS_LOAD_SIZE,
+//            ),
+//            remoteMediator = CharactersRemoteMediator(service,dataBase, name = name),
+//            pagingSourceFactory = { dataBase.getCharactersDao().pagingSource(name) }
+//        )
+//            .flow
+////            .map { it as PagingData<CharactersResult> }
+//    }
     @OptIn(ExperimentalPagingApi::class)
-    override suspend fun searchByName(name: String?): Flow<PagingData<CharactersResult>> {
+    override   fun getCharacters(): Flow<PagingData<CharactersEntity>> {
         return Pager(
             config = PagingConfig(
                 pageSize = COUNT_ITEM_CHARACTERS,
-                initialLoadSize = COUNT_CHARACTERS_LOAD_SIZE,
-                prefetchDistance = COUNT_CHARACTERS_LOAD_SIZE
+
             ),
-            remoteMediator = CharactersRemoteMediator(service,dataBase, name = name),
-            pagingSourceFactory = { dataBase.getCharactersDao().pagingSource(name) }
-        )
-            .flow
-            .map { it as PagingData<CharactersResult> }
-    }
-    @OptIn(ExperimentalPagingApi::class)
-    override suspend fun getCharacters(): Flow<PagingData<CharactersEntity>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = COUNT_ITEM_CHARACTERS,
-                initialLoadSize = COUNT_CHARACTERS_LOAD_SIZE,
-                prefetchDistance = COUNT_CHARACTERS_LOAD_SIZE
-            ),
-            remoteMediator = CharactersRemoteMediator(service,dataBase,""),
-            pagingSourceFactory = { dataBase.getCharactersDao().pagingSource("") }
+            remoteMediator = CharactersRemoteMediator(service,dataBase,),
+            pagingSourceFactory = { dataBase.getCharactersDao().pagingSource() }
         )
             .flow
     }

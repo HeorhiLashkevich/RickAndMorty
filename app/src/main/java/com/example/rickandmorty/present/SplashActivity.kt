@@ -1,12 +1,9 @@
-package com.example.rickandmorty.ui
+package com.example.rickandmorty.present
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.PersistableBundle
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rickandmort.R
 

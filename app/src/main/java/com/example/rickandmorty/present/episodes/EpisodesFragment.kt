@@ -19,6 +19,7 @@ import com.example.rickandmorty.App
 import com.example.rickandmorty.utils.KEY_TO_EPISODE_DETAILS
 import com.example.rickandmorty.data.model.EpisodeEntity
 import com.example.rickandmorty.present.episodesdetails.EpisodeDetailsFragment
+import com.example.rickandmorty.utils.EPISODES_TAG
 import com.example.rickandmorty.utils.RecyclerMargin
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -61,15 +62,16 @@ class EpisodesFragment : Fragment() {
     private suspend fun initAdapter(list: PagingData<EpisodeEntity>) {
         binding.recyclerEpisodes.run {
             addItemDecoration()
+            val episodeDetailsFragment = EpisodeDetailsFragment()
+
             if (adapter == null) {
                 adapter = EpisodesPagingAdapter {
                     val bundle = Bundle()
                     bundle.putInt(KEY_TO_EPISODE_DETAILS, it)
-                    val episodeDetailsFragment = EpisodeDetailsFragment()
                     episodeDetailsFragment.arguments = bundle
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.container, episodeDetailsFragment)
-                        .addToBackStack("")
+                        .addToBackStack(EPISODES_TAG)
                         .commit()
                 }
                 layoutManager =

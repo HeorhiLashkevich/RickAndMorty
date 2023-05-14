@@ -4,8 +4,8 @@
 //import androidx.paging.PagingState
 //import com.example.rickandmorty.data.model.CharactersEntity
 //import com.example.rickandmorty.data.model.EpisodeEntity
-//import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
-//import com.example.rickandmorty.data.repository.EpisodesRepository
+//import com.example.rickandmorty.data.api.RickAndMortyApiService
+//import com.example.rickandmorty.domain.repository.EpisodesRepository
 //import retrofit2.HttpException
 //import java.io.IOException
 //import javax.inject.Inject

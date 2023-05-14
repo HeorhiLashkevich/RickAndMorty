@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.rickandmorty.data.remove.service.model.CharactersResult;
-import com.example.rickandmorty.data.remove.service.model.LocationsResult;
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService;
+import com.example.rickandmorty.domain.model.CharactersResult;
+import com.example.rickandmorty.domain.model.LocationsResult;
+import com.example.rickandmorty.data.api.RickAndMortyApi;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +19,9 @@ import io.reactivex.schedulers.Schedulers;
 import kotlin.text.StringsKt;
 
 public class LocationDetailsViewModel extends ViewModel {
-     private final RickAndMortyApiService api;
+     private final RickAndMortyApi api;
      @Inject
-    LocationDetailsViewModel(RickAndMortyApiService api){
+    LocationDetailsViewModel(RickAndMortyApi api){
          this.api = api;
      }
     private MutableLiveData<LocationsResult> currentLocation;

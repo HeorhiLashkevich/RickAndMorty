@@ -9,12 +9,12 @@ import com.example.rickandmorty.data.local.AppDataBase
 import com.example.rickandmorty.data.mapper.toLocationsEntity
 import com.example.rickandmorty.data.model.RemoteKeys
 import com.example.rickandmorty.data.model.LocationsEntity
-import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+import com.example.rickandmorty.data.api.RickAndMortyApi
 import retrofit2.HttpException
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
-class LocationsRemoteMediator(val service: RickAndMortyApiService, val db: AppDataBase) :
+class LocationsRemoteMediator(val service: RickAndMortyApi, val db: AppDataBase) :
     RemoteMediator<Int, LocationsEntity>() {
     //    private val locationsDao = db.getLocationsDao()
 //    private val keyDao = db.getLocationsPageKeyDao()
@@ -62,7 +62,7 @@ class LocationsRemoteMediator(val service: RickAndMortyApiService, val db: AppDa
                 val prevKey = if (page == 1) null else page - 1
                 val nextKey = if (endOfPaginationReached == true) null else page + 1
                 val keys = locations?.map {
-                    RemoteKeys(repoId = it.id.toLong(), prevKey = prevKey, nextKey = nextKey)
+                    RemoteKeys(repoId = it.id, prevKey = prevKey, nextKey = nextKey)
                 }
                 if (keys != null) {
                     db.getRemoteKeyDao().insertAll(keys)

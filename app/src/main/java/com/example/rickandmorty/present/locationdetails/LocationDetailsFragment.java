@@ -24,8 +24,8 @@ import com.example.rickandmort.R;
 import com.example.rickandmort.databinding.FragmentLocationDetailsBinding;
 import com.example.rickandmorty.App;
 import com.example.rickandmorty.utils.LocationItemClickListener;
-import com.example.rickandmorty.data.remove.service.model.CharactersResult;
-import com.example.rickandmorty.data.remove.service.model.LocationsResult;
+import com.example.rickandmorty.domain.model.CharactersResult;
+import com.example.rickandmorty.domain.model.LocationsResult;
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment;
 
 import java.util.ArrayList;
@@ -93,9 +93,9 @@ public class LocationDetailsFragment extends Fragment implements LocationItemCli
             }
 
 
-    });
+        });
         viewModel.getCharactersIds(locationId);
-}
+    }
 
     @Nullable
     @Override

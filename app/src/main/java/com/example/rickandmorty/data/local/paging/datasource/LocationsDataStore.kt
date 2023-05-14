@@ -3,7 +3,7 @@
 //import androidx.paging.PagingSource
 //import androidx.paging.PagingState
 //import com.example.rickandmorty.data.model.LocationsEntity
-//import com.example.rickandmorty.data.remove.service.RickAndMortyApiService
+//import com.example.rickandmorty.data.api.RickAndMortyApiService
 //import retrofit2.HttpException
 //import java.io.IOException
 //import javax.inject.Inject
