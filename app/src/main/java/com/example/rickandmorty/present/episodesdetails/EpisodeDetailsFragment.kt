@@ -17,7 +17,6 @@ import com.example.rickandmorty.App
 import com.example.rickandmorty.domain.model.CharactersResult
 import com.example.rickandmorty.present.characterdetails.CharactersDetailsFragment
 import com.example.rickandmorty.utils.*
-import kotlinx.coroutines.CoroutineExceptionHandler
 import javax.inject.Inject
 
 
@@ -55,18 +54,14 @@ class EpisodeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
-            throwable.printStackTrace()
-        }
+
         viewModel.getEpisode(episodeId)
         viewModel.characters.observe(viewLifecycleOwner) {
             initAdapter(it)
         }
         binding.episodeDetailsBackButton.setOnClickListener {
           parentFragmentManager.popBackStack()
-
-
-        }
+                    }
 
         viewModel.episode.observe(viewLifecycleOwner) {
             binding.run {
